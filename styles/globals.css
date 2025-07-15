@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poetsen+One&display=swap");
+@import "tailwindcss";
+ 
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #070806;
+}
+.header_section {
+  max-width: 1660px;
+  margin: 0 auto;
+}
+.header_section img {
+  width: 170px;
+}
+.navbar_link a {
+  font-size: 16px;
+}
+.navbar_link p,
+li {
+  font-size: 16px;
+}
+.btn {
+  justify-content: center;
+  overflow: visible;
+  padding: 10px 24px;
+  position: relative;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.4s;
+  font-weight: 600;
+}
+.btn.btn-second {
+  border: none;
+  color: #231f20;
+}
+.hero-section {
+  padding-top: clamp(60px, 8vw, 100px);
+  padding-bottom: clamp(60px, 8vw, 100px);
+  transition: all 0.9s;
+}
+.hero-section h1 {
+  font-size: clamp(2.25rem, 5vw + 1rem, 60px);
+  color: #48e0d3;
+  font-weight: 600;
+  line-height: clamp(3.25rem, 5vw + 1rem, 75px);
+}
+.hero-section p {
+  color: #c6c7c6;
+  font-weight: 400;
+  line-height: 25px;
+  font-size: 16px;
+}
+.privateAnonymous h2,
+.sMSVerificationReady h2,
+.instantAccess h2,
+.howWorks h2,
+.contact h2,
+.burnerPhoneNumberEmailPlans h2 {
+  font-size: clamp(2.25rem, 5vw + 1rem, 60px);
+  line-height: clamp(3.25rem, 5vw + 1rem, 75px);
+}
+.howWorks p {
+  font-size: 16px;
+  padding: 0px 60px 0px 0px;
+  line-height: 29px;
+}
+.contact p,
+.frequently-faq p,
+.burnerPhoneNumberEmailPlans p {
+  font-size: 16px;
+  line-height: 29px;
+}
+.span_month h2 span {
+  font-size: 12px;
+}
+.policy_contact p {
+  font-size: 18px;
+  margin: 18px 0px;
+}
+.policy_contact h4 {
+  font-size: 20px;
+  margin: 18px 0px;
+  font-weight: bold;
+}
