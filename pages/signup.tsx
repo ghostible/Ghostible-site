@@ -56,11 +56,11 @@ export default function Signup() {
           onChange={e => setPassword(e.target.value)}
           required
         />
-        <button className="w-full bg-white text-black py-3 rounded font-bold hover:bg-gray-200 transition">
+        <button className="w-full bg-teal-400 text-black font-semibold py-3 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
           Create Account
         </button>
         <p className="text-center text-sm">
-            Already have an account? <Link href="/login" className="text-blue-400 hover:underline">Login</Link>
+            Already have an account? <Link href="/login" className="text-teal-400 hover:underline">Login</Link>
         </p>
       </form>
     </div>

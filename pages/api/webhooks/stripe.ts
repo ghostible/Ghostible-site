@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const metadata = session.metadata || {}
     const userId = metadata.user_id
     const feature = metadata.feature
-    const plan = metadata.plan // 'weekly' or 'monthly'
+    const plan = metadata.plan
 
     console.log('🔎 Metadata received:', metadata)
 

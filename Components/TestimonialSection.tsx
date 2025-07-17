@@ -26,34 +26,34 @@ const testimonials = [
       "As an IT manager, security is a top priority for me. Saasta`&quot;`s robust security measures and compliance standards give me peace of mind knowing that our data is safe and protected.",
     name: "David Johnson",
     role: "Marketing Director, Sparkle Brands",
-    avatar: "/avatars/user2.png",
+    avatar: "/hg0aUaY4Of4GIn6vPMX0EH65V5o.avif",
   },
   {
     quote:
       "Saasta has transformed the way our marketing team operates. Its collaborative features and real-time updates have improved communication and coordination.",
     name: "Sarah Miller",
     role: "Marketing Director at Digital Agency",
-    avatar: "/avatars/user3.png",
+    avatar: "/hg0aUaY4Of4GIn6vPMX0EH65V5o.avif",
   },
   {
     quote:
       "I`&quot;`ve tried many tools, but Saasta stands out for its simplicity and effectiveness. Our projects have never been smoother!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/avatars/user4.png",
+    avatar: "/hg0aUaY4Of4GIn6vPMX0EH65V5o.avif",
   },
   // More duplicates for testing
   {
     quote: "Simple and effective!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/avatars/user4.png",
+    avatar: "/hg0aUaY4Of4GIn6vPMX0EH65V5o.avif",
   },
   {
     quote: "We love Saasta!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/avatars/user4.png",
+    avatar: "/hg0aUaY4Of4GIn6vPMX0EH65V5o.avif",
   },
 ];
 

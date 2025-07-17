@@ -1,5 +1,5 @@
 // import { useEffect, useState } from 'react'
-// import Link from 'next/link'
+import Link from 'next/link'
 // import Image from "next/image";
 
 export default function HeroSection() {
@@ -14,9 +14,9 @@ export default function HeroSection() {
           Get started instantly — no account required.
         </p>
         <div className="mt-6">
-          <button className="bg-teal-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
+          <Link href="/tempnumber" className="bg-teal-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
             Get Started
-          </button>
+          </Link>
         </div>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <p>✅ No signup for temp mail required</p>

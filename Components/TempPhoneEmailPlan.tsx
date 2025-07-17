@@ -47,7 +47,7 @@ export default function TempPhoneEmailPlan({ plans, currentPlan, handleSubscribe
                 <li className="flex items-center gap-3"><Check className='text-teal-300' size={20} /> Chat Support</li>
               </ul>
             </div>
-            <Link href="/temp-mail" className="mt-8 inline-block border border-white text-white px-6 py-3 rounded-full text-center hover:bg-white hover:text-black transition">Get Started</Link>
+            <Link href="/temp-mail" className="mt-8 inline-block border border-white text-white px-6 py-3 rounded-full text-center hover:bg-white hover:text-black transition cursor-pointer">Get Started</Link>
           </div>
 
           {/* Stripe Plans */}
@@ -85,7 +85,7 @@ export default function TempPhoneEmailPlan({ plans, currentPlan, handleSubscribe
                 </div>
                 <button
                   onClick={() => handleSubscribe(plan.id, interval)}
-                  className={`mt-8 inline-block px-6 py-3 rounded-full text-center font-medium transition ${isCurrent ? 'border border-white text-white cursor-not-allowed' : 'bg-teal-400 text-black hover:bg-teal-300'}`}
+                  className={`mt-8 inline-block px-6 py-3 rounded-full text-center font-medium transition ${isCurrent ? 'border border-white text-white cursor-not-allowed' : 'bg-teal-400 text-black hover:bg-teal-300 cursor-pointer'}`}
                   disabled={isCurrent}
                 >
                   {isCurrent ? 'Current Plan' : 'Get Started'}

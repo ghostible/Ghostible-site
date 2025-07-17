@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabaseClient';
 import { useEffect, useState } from 'react';
-import TempPhoneEmailPlan from '@/Components/TempPhoneEmailPlan';
+import TempPhoneEmailPlan from '@/components/TempPhoneEmailPlan';
 
 type Plan = {
   id: string;
