@@ -1,120 +1,132 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+"use client";
+import { useEffect, useState, useCallback } from 'react';
+import axios from 'axios';
+import Image from "next/image";
+import Link from 'next/link';
 
-const TempMailPage: React.FC = ({ }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
-  const [messages, setMessages] = useState([])
-  const [selectedMessage, setSelectedMessage] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+// ✅ Type for message structure from mail.tm
+type Message = {
+  id: string;
+  subject: string;
+  from: { address: string };
+  text?: string;
+  html?: string;
+};
 
-  useEffect(() => {
-    const init = async () => {
-      const saved = localStorage.getItem('tempMailAccount')
-      if (saved) {
-        const parsed = JSON.parse(saved)
-        setEmail(parsed.email)
-        setPassword(parsed.password)
-        const newToken = await getToken(parsed.email, parsed.password)
-        if (newToken) {
-          setToken(newToken)
-          setLoading(false)
-          return
-        }
-      }
-      await createTempAccount()
-    }
-    init()
-  }, [])
+const TempMailPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [, setPassword] = useState(''); // password value not needed
+  const [token, setToken] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const createTempAccount = async () => {
-    try {
-      const domainRes = await axios.get('https://api.mail.tm/domains')
-      const domain = domainRes.data['hydra:member'][0].domain
-      const random = Math.random().toString(36).substring(2, 10)
-      const newEmail = `${random}@${domain}`
-      const newPassword = 'Ghostible123'
-
-      await axios.post('https://api.mail.tm/accounts', {
-        address: newEmail,
-        password: newPassword,
-      })
-
-      const newToken = await getToken(newEmail, newPassword)
-
-      const account = { email: newEmail, password: newPassword, token: newToken }
-      localStorage.setItem('tempMailAccount', JSON.stringify(account))
-
-      setEmail(newEmail)
-      setPassword(newPassword)
-      setToken(newToken)
-      setLoading(false)
-    } catch (err) {
-      console.error('Error creating temp email', err)
-    }
-  }
-
-  const getToken = async (email: string, password: string) => {
+  const getToken = async (email: string, password: string): Promise<string | null> => {
     try {
       const tokenRes = await axios.post('https://api.mail.tm/token', {
         address: email,
         password,
-      })
-      return tokenRes.data.token
+      });
+      return tokenRes.data.token;
     } catch {
-      return null
+      return null;
     }
-  }
+  };
 
-  const fetchInbox = async () => {
+  const createTempAccount = useCallback(async () => {
+    try {
+      const domainRes = await axios.get('https://api.mail.tm/domains');
+      const domain = domainRes.data['hydra:member'][0].domain;
+      const random = Math.random().toString(36).substring(2, 10);
+      const newEmail = `${random}@${domain}`;
+      const newPassword = 'Ghostible123';
+
+      await axios.post('https://api.mail.tm/accounts', {
+        address: newEmail,
+        password: newPassword,
+      });
+
+      const newToken = await getToken(newEmail, newPassword);
+
+      const account = { email: newEmail, password: newPassword, token: newToken };
+      localStorage.setItem('tempMailAccount', JSON.stringify(account));
+
+      setEmail(newEmail);
+      setPassword(newPassword);
+      setToken(newToken || '');
+      setLoading(false);
+    } catch (err) {
+      console.error('Error creating temp email', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    const init = async () => {
+      const saved = localStorage.getItem('tempMailAccount');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setEmail(parsed.email);
+        setPassword(parsed.password);
+        const newToken = await getToken(parsed.email, parsed.password);
+        if (newToken) {
+          setToken(newToken);
+          setLoading(false);
+          return;
+        }
+      }
+      await createTempAccount();
+    };
+    init();
+  }, [createTempAccount]);
+
+  const fetchInbox = useCallback(async () => {
     try {
       const res = await axios.get('https://api.mail.tm/messages', {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      setMessages(res.data['hydra:member'])
+      });
+      setMessages(res.data['hydra:member']);
     } catch (err) {
-      console.error('Inbox fetch error', err)
+      console.error('Inbox fetch error', err);
     }
-  }
+  }, [token]);
 
   useEffect(() => {
-    if (!token) return
-    fetchInbox()
-    const interval = setInterval(fetchInbox, 3000)
-    return () => clearInterval(interval)
-  }, [token])
+    if (!token) return;
+    fetchInbox();
+    const interval = setInterval(fetchInbox, 3000);
+    return () => clearInterval(interval);
+  }, [token, fetchInbox]);
 
   const loadFullMessage = async (id: string) => {
     try {
       const res = await axios.get(`https://api.mail.tm/messages/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
-      })
-      setSelectedMessage(res.data)
+      });
+      setSelectedMessage(res.data);
     } catch (err) {
-      console.error('Fetch full message error', err)
+      console.error('Fetch full message error', err);
     }
-  }
+  };
 
   const handleChangeEmail = () => {
-    localStorage.removeItem('tempMailAccount')
-    window.location.reload()
-  }
+    localStorage.removeItem('tempMailAccount');
+    window.location.reload();
+  };
 
   return (
-    <div className="bg-[#f5f7fa] min-h-screen py-8 px-4 text-black">
+    <div className="bg-[#070806] min-h-screen py-8 px-4 text-black">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-center mb-6">📧 Temp Mail</h1>
+        <h1 className="text-2xl font-bold text-center mb-6"><Image className="m-auto" src="/Ghost_temp.png" alt="imagetext" width={500} height={500} /></h1>
 
         {/* Show current email and controls */}
         {!loading && !selectedMessage && (
           <div className="text-center mb-4">
-            <p className="text-lg font-mono">
-              Your Temp Email: <span className="text-green-600">{email}</span>
+            <p className="text-lg font-mono mt-4 mb-6 text-gray-300">
+              Your Temp Email: <span className="text-teal-300">{email}</span>
             </p>
             <button
               onClick={handleChangeEmail}
-              className="mt-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              className="bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2"
             >
               Change Email
             </button>
@@ -123,20 +135,20 @@ const TempMailPage: React.FC = ({ }) => {
 
         {/* Inbox or Message Viewer */}
         {selectedMessage ? (
-          <div className="bg-white p-6 rounded shadow">
+          <div className=" p-6 bg-[#111313] border  h-full border-[#383838] rounded-md">
             <button
               onClick={() => setSelectedMessage(null)}
-              className="mb-4 text-sm text-blue-600 hover:underline"
+              className="mb-4 text-sm text-teal-300 hover:underline"
             >
               ← Back to Inbox
             </button>
-            <h2 className="text-xl font-bold mb-2">{selectedMessage.subject}</h2>
-            <p className="text-sm text-gray-600 mb-4">
+            <h2 className="text-xl font-bold mb-2 text-gray-300">{selectedMessage.subject}</h2>
+            <p className="text-sm text-gray-300 mb-4">
               From: {selectedMessage.from?.address}
             </p>
             {selectedMessage.html ? (
               <div
-                className="prose max-w-full"
+                className="prose max-w-full text-gray-300"
                 dangerouslySetInnerHTML={{ __html: selectedMessage.html }}
               />
             ) : (
@@ -144,19 +156,19 @@ const TempMailPage: React.FC = ({ }) => {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded shadow overflow-x-auto">
+          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-8">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-800 text-white">
                 <tr>
-                  <th className="px-4 py-2">Sender</th>
-                  <th className="px-4 py-2">Subject</th>
-                  <th className="px-4 py-2 text-center">View</th>
+                  <th className="px-4 py-2 bg-teal-400">Sender</th>
+                  <th className="px-4 py-2 bg-teal-400">Subject</th>
+                  <th className="px-4 py-2 bg-teal-400 text-center">View</th>
                 </tr>
               </thead>
               <tbody>
                 {messages.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="text-center py-16">
+                    <td colSpan={3} className="text-center py-16 ">
                       <div className="flex flex-col items-center text-gray-500">
                         <svg
                           className="w-12 h-12 mb-2"
@@ -177,17 +189,17 @@ const TempMailPage: React.FC = ({ }) => {
                     </td>
                   </tr>
                 ) : (
-                  messages.map((msg: any) => (
+                  messages.map((msg) => (
                     <tr
                       key={msg.id}
-                      className="border-b border-gray-200 hover:bg-gray-50"
+                      className="border-gray-200 hover:bg-gray-50"
                     >
-                      <td className="px-4 py-2">{msg.from?.address}</td>
-                      <td className="px-4 py-2">{msg.subject}</td>
-                      <td className="px-4 py-2 text-center">
+                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.from?.address}</td>
+                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.subject}</td>
+                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-center">
                         <button
                           onClick={() => loadFullMessage(msg.id)}
-                          className="text-blue-600 hover:underline"
+                          className="text-teal-300 hover:underline"
                         >
                           View
                         </button>
@@ -204,17 +216,17 @@ const TempMailPage: React.FC = ({ }) => {
         {!selectedMessage && (
           <div className="text-center mt-6">
             <p className="mb-2">Want to unlock burner phone numbers?</p>
-            <a
-              href="/login"
-              className="inline-block bg-black text-white px-5 py-2 rounded hover:bg-gray-800"
+            <Link
+              href="/tempnumber"
+              className="bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition"
             >
               Upgrade Now
-            </a>
+            </Link>
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default TempMailPage;

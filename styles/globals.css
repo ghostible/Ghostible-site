@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poetsen+One&display=swap");
 @import "tailwindcss";
  
+:root {
+  --custom-width: 1600px;
+}
+
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Inter Placeholder", sans-serif;
   background-color: #070806;
 }
 .header_section {
@@ -54,8 +58,7 @@ li {
 .sMSVerificationReady h2,
 .instantAccess h2,
 .howWorks h2,
-.contact h2,
-.burnerPhoneNumberEmailPlans h2 {
+.contact h2 {
   font-size: clamp(2.25rem, 5vw + 1rem, 60px);
   line-height: clamp(3.25rem, 5vw + 1rem, 75px);
 }

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+// import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function FeatureSection() {

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import FAQSection from "./Components/FAQSection";
+// import { useEffect, useState } from 'react'
+// import axios from 'axios'
+import FAQSection from "@/Components/FAQSection";
 
 const ContactPage: React.FC = ({ }) => {
     return (
@@ -10,7 +10,7 @@ const ContactPage: React.FC = ({ }) => {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h2>
               <p className="text-gray-300 mb-10">
-                Need assistance or have questions? Don't hesitate to reach out to us.
+                Need assistance or have questions? Don&apos;t hesitate to reach out to us.
                 Our dedicated team is here to help.
               </p>
             </div>

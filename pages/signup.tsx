@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Signup() {
   const [email, setEmail] = useState('')
@@ -59,7 +60,7 @@ export default function Signup() {
           Create Account
         </button>
         <p className="text-center text-sm">
-            Already have an account? <a href="/login" className="text-blue-400 hover:underline">Login</a>
+            Already have an account? <Link href="/login" className="text-blue-400 hover:underline">Login</Link>
         </p>
       </form>
     </div>

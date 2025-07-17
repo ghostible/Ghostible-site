@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import type { Swiper as SwiperClass } from "swiper";
+import Image from "next/image";
 
 // ✅ Declare the custom property on window
 declare global {
@@ -22,7 +23,7 @@ const testimonials = [
   },
   {
     quote:
-      "As an IT manager, security is a top priority for me. Saasta's robust security measures and compliance standards give me peace of mind knowing that our data is safe and protected.",
+      "As an IT manager, security is a top priority for me. Saasta`&quot;`s robust security measures and compliance standards give me peace of mind knowing that our data is safe and protected.",
     name: "David Johnson",
     role: "Marketing Director, Sparkle Brands",
     avatar: "/avatars/user2.png",
@@ -36,7 +37,7 @@ const testimonials = [
   },
   {
     quote:
-      "I've tried many tools, but Saasta stands out for its simplicity and effectiveness. Our projects have never been smoother!",
+      "I`&quot;`ve tried many tools, but Saasta stands out for its simplicity and effectiveness. Our projects have never been smoother!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
     avatar: "/avatars/user4.png",
@@ -103,13 +104,13 @@ export default function TestimonialSection() {
                   window?.testimonialSwiper?.autoplay?.start()
                 }
               >
-                <p className="text-sm text-gray-300 mb-4">"{item.quote}"</p>
+                <p className="text-sm text-gray-300 mb-4">{item.quote}</p>
                 <div className="flex items-center space-x-3 mt-auto">
-                  <img
+                  <Image
                     src={item.avatar}
                     alt={item.name}
                     className="w-10 h-10 rounded-full object-cover"
-                  />
+                  width={50} height={50} />
                   <div>
                     <p className="font-semibold text-white text-sm">
                       {item.name}

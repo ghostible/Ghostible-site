@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -40,10 +41,10 @@ export default function Login() {
           Login
         </button>
         <p className="text-center mt-2 text-sm">
-            <a href="/signup" className="text-blue-400 hover:underline">Sign up</a>
+            <Link href="/signup" className="text-blue-400 hover:underline">Sign up</Link>
         </p>
         <p className="text-center mt-2 text-sm">
-            <a href="/forgot-password" className="text-blue-400 hover:underline">Forgot Password?</a>
+            <Link href="/forgot-password" className="text-blue-400 hover:underline">Forgot Password?</Link>
         </p>
 
       </form>

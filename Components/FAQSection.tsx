@@ -30,26 +30,32 @@ const faqs = [
 ];
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(0);
-
-//   const toggleFAQ = (index) => {
-//     setOpenIndex(openIndex === index ? null : index);
-//   };
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className=" text-white px-6 py-20 frequently-faq">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12" data-aos="fade-up" data-aos-duration="3000">
+    <section className="text-white px-6 py-20 frequently-faq">
+      <div className="max-w-4xl mx-auto">
+        <h2
+          className="text-3xl md:text-5xl font-bold text-center mb-12"
+          data-aos="fade-up"
+          data-aos-duration="3000"
+        >
           Frequently Asked Questions (FAQs)
         </h2>
 
-        <div className="space-y-4" data-aos="fade-up" data-aos-duration="3000">
+        <div
+          className="space-y-4"
+          data-aos="fade-up"
+          data-aos-duration="3000"
+        >
           {faqs.map((faq, index) => (
             <div
               key={index}
               className="border border-gray-700 rounded-lg overflow-hidden"
             >
-              <button className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
+              <button
+                className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 <span>{faq.question}</span>
                 <span className="text-2xl">{openIndex === index ? "−" : "+"}</span>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
 
@@ -10,7 +10,8 @@ export default function ResetPassword() {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { data, error } = await supabase.auth.updateUser({ password })
+    //const { data, error } = await supabase.auth.updateUser({ password })
+    const { error } = await supabase.auth.updateUser({ password })
     if (error) return setError(error.message)
     setSuccess('Password updated! Redirecting to login...')
     setTimeout(() => router.push('/login'), 2000)
