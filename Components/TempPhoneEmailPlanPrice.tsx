@@ -1,5 +1,5 @@
-import { CircleCheck } from "lucide-react";
-import Link from "next/link";
+// import { CircleCheck } from "lucide-react";
+// import Link from "next/link";
 import AllPlan from "./AllPlan";
 
 export default function TempPhoneEmailPlanPrice() {

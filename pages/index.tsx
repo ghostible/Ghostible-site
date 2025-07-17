@@ -1,5 +1,5 @@
 import HeroSection from "@/Components/HeroSection"
-import FeatureSection from "@/Components/FeatureSection"
+// import FeatureSection from "@/Components/FeatureSection"
 import HowWork from "@/Components/HowWork"
 import InstantAccess from "@/Components/InstantAccess"
 import PrivateAnonymous from "@/Components/PrivateAnonymous"

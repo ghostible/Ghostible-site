@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 export default function TemBannerSection() {
   return (
     <div>
@@ -23,7 +24,7 @@ export default function TemBannerSection() {
             <p className="text-white text-lg mb-8">
               Your privacy is important.
               <span className="font-semibold">Receive SMS online</span> using
-              the world's most popular temporary phone number platform.
+              the world`&quot;`s most popular temporary phone number platform.
             </p>
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 ">
               <select className="px-4 py-2 border rounded w-60 text-white bg-black">
@@ -42,11 +43,7 @@ export default function TemBannerSection() {
           <div
             className="md:w-3xl mt-12 md:mt-0"
           >
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/054/613/382/small_2x/3d-hand-holding-smartphone-displaying-verified-badge-icon-png.png"
-              className="w-full"
-              alt="Google"
-            />
+            <Image src="https://static.vecteezy.com/system/resources/thumbnails/054/613/382/small_2x/3d-hand-holding-smartphone-displaying-verified-badge-icon-png.png" alt="Google" width={600} height={600} className="w-full" />
           </div>
         </div>
       </section>
