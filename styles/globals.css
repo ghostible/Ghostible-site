@@ -9,11 +9,11 @@ body {
   background-color: #070806;
   overflow-x: hidden;
 }
-.w-container{
+.w-container {
   max-width: 1660px;
 }
-.bg-color{
-     backdrop-filter: blur(10px);
+.bg-color {
+  backdrop-filter: blur(10px);
   background-color: rgba(7, 8, 6, 0.6);
 }
 .header_section img {

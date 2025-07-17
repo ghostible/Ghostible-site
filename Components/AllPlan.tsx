@@ -16,20 +16,20 @@ export default function AllPlan() {
                 </p>
               </div>
               <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                Awesome value <span className="text-gray-300"> for money.</span>
+                Awesome value <span className="text-teal-300"> for money.</span>
               </p>
               <ul className="text-left space-y-2 text-white sm:px-8">
                 <li className="flex  gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
                     <strong className="text-teal-300">1</strong>
-                    <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-teal-300"> Non-VOIP Number</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Register for </span>
+                    <span className="text-teal-300">Register for </span>
                     <strong className="text-teal-300">
                       any online platform
                     </strong>
@@ -38,22 +38,22 @@ export default function AllPlan() {
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300"> Works in</span>
+                    <span className="text-teal-300"> Works in</span>
                     <strong className="text-teal-300"> all countries</strong>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Get</span>
+                    <span className="text-teal-300">Get</span>
                     <strong className="text-teal-300"> instant</strong>
-                    <span className="text-gray-300"> SMS 24/7</span>
+                    <span className="text-teal-300"> SMS 24/7</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Receive unlimited </span>
+                    <span className="text-teal-300">Receive unlimited </span>
                     <strong className="text-teal-300">SMS verifications</strong>
                   </span>
                 </li>
@@ -74,20 +74,20 @@ export default function AllPlan() {
                 </p>
               </div>
               <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                Awesome value <span className="text-gray-300"> for money.</span>
+                Awesome value <span className="text-teal-300"> for money.</span>
               </p>
               <ul className="text-left space-y-2 text-white sm:px-8">
                 <li className="flex  gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
                     <strong className="text-teal-300">1</strong>
-                    <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-teal-300"> Non-VOIP Number</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Register for </span>
+                    <span className="text-teal-300">Register for </span>
                     <strong className="text-teal-300">
                       any online platform
                     </strong>
@@ -96,22 +96,22 @@ export default function AllPlan() {
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300"> Works in</span>
+                    <span className="text-teal-300"> Works in</span>
                     <strong className="text-teal-300"> all countries</strong>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Get</span>
+                    <span className="text-teal-300">Get</span>
                     <strong className="text-teal-300"> instant</strong>
-                    <span className="text-gray-300"> SMS 24/7</span>
+                    <span className="text-teal-300"> SMS 24/7</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Receive unlimited </span>
+                    <span className="text-teal-300">Receive unlimited </span>
                     <strong className="text-teal-300">SMS verifications</strong>
                   </span>
                 </li>
@@ -132,20 +132,20 @@ export default function AllPlan() {
                 </p>
               </div>
               <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                Awesome value <span className="text-gray-300"> for money.</span>
+                Awesome value <span className="text-teal-300"> for money.</span>
               </p>
               <ul className="text-left space-y-2 text-white sm:px-8">
                 <li className="flex  gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
                     <strong className="text-teal-300">1</strong>
-                    <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-teal-300"> Non-VOIP Number</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Register for </span>
+                    <span className="text-teal-300">Register for </span>
                     <strong className="text-teal-300">
                       any online platform
                     </strong>
@@ -154,22 +154,22 @@ export default function AllPlan() {
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300"> Works in</span>
+                    <span className="text-teal-300"> Works in</span>
                     <strong className="text-teal-300"> all countries</strong>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Get</span>
+                    <span className="text-teal-300">Get</span>
                     <strong className="text-teal-300"> instant</strong>
-                    <span className="text-gray-300"> SMS 24/7</span>
+                    <span className="text-teal-300"> SMS 24/7</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Receive unlimited </span>
+                    <span className="text-teal-300">Receive unlimited </span>
                     <strong className="text-teal-300">SMS verifications</strong>
                   </span>
                 </li>
@@ -192,20 +192,20 @@ export default function AllPlan() {
                 </p>
               </div>
               <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                Awesome value <span className="text-gray-300"> for money.</span>
+                Awesome value <span className="text-teal-300"> for money.</span>
               </p>
               <ul className="text-left space-y-2 text-white sm:px-8">
                 <li className="flex  gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
                     <strong className="text-teal-300">1</strong>
-                    <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-teal-300"> Non-VOIP Number</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Register for </span>
+                    <span className="text-teal-300">Register for </span>
                     <strong className="text-teal-300">
                       any online platform
                     </strong>
@@ -214,22 +214,22 @@ export default function AllPlan() {
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300"> Works in</span>
+                    <span className="text-teal-300"> Works in</span>
                     <strong className="text-teal-300"> all countries</strong>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Get</span>
+                    <span className="text-teal-300">Get</span>
                     <strong className="text-teal-300"> instant</strong>
-                    <span className="text-gray-300"> SMS 24/7</span>
+                    <span className="text-teal-300"> SMS 24/7</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Receive unlimited </span>
+                    <span className="text-teal-300">Receive unlimited </span>
                     <strong className="text-teal-300">SMS verifications</strong>
                   </span>
                 </li>
@@ -250,20 +250,20 @@ export default function AllPlan() {
                 </p>
               </div>
               <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                Awesome value <span className="text-gray-300"> for money.</span>
+                Awesome value <span className="text-teal-300"> for money.</span>
               </p>
               <ul className="text-left space-y-2 text-white sm:px-8">
                 <li className="flex  gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
                     <strong className="text-teal-300">1</strong>
-                    <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-teal-300"> Non-VOIP Number</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Register for </span>
+                    <span className="text-teal-300">Register for </span>
                     <strong className="text-teal-300">
                       any online platform
                     </strong>
@@ -272,22 +272,22 @@ export default function AllPlan() {
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300"> Works in</span>
+                    <span className="text-teal-300"> Works in</span>
                     <strong className="text-teal-300"> all countries</strong>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Get</span>
+                    <span className="text-teal-300">Get</span>
                     <strong className="text-teal-300"> instant</strong>
-                    <span className="text-gray-300"> SMS 24/7</span>
+                    <span className="text-teal-300"> SMS 24/7</span>
                   </span>
                 </li>
                 <li className="flex py-1 gap-3">
                   <CircleCheck className="text-teal-300" size={20} />
                   <span>
-                    <span className="text-gray-300">Receive unlimited </span>
+                    <span className="text-teal-300">Receive unlimited </span>
                     <strong className="text-teal-300">SMS verifications</strong>
                   </span>
                 </li>
