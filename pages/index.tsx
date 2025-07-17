@@ -32,7 +32,7 @@ const Home = ({ plans }: { plans: Plan[] }) => {
   return (
     <>
       <HeroSection />
-      <FeatureSection />
+      {/* <FeatureSection /> */}
       <InstantAccess />
       <PrivateAnonymous />
       <SMSVerificationReady />

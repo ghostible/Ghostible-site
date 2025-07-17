@@ -6,24 +6,25 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-black text-white px-6 py-10">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-800 pb-10">
+        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[#1e2939] pb-10">
           <div>
-            <Link href="/" className="hover:text-white"><Image src="/ghostible-logo.avif" alt="Logo" width={180} height={80} /></Link>
-            <p className="text-sm text-gray-300 mb-4">
-              Experience financial transformation like never before with Fintec.
+            <Link href="/" className="hover:text-white"><Image src="/ghostible-logo.png" alt="Logo" width={180} height={80} /></Link>
+            <p className="text-[16px] text-gray-300 mb-8 mt-8">
+              Experience fin ancial transformation like never before with Fintec.
             </p>
             <div className="flex space-x-3">
-              <button className="bg-gray-800 p-2 rounded-full text-lime-400 hover:bg-lime-500 hover:text-black">
+              <button className="bg-gray-800 p-2 rounded-full text-[#46edd5] hover:bg-[#00d5be] cursor-pointer hover:text-black">
                 <Link2 size={16} />
               </button>
-              <button className="bg-gray-800 p-2 rounded-full text-lime-400 hover:bg-lime-500 hover:text-black">
+              <button className="bg-gray-800 p-2 rounded-full text-[#46edd5] hover:bg-[#00d5be] cursor-pointer hover:text-black">
                 <X size={16} />
               </button>
-              <button className="bg-gray-800 p-2 rounded-full text-lime-400 hover:bg-lime-500 hover:text-black">
+              <button className="bg-gray-800 p-2 rounded-full text-[#46edd5] hover:bg-[#00d5be] cursor-pointer hover:text-black">
                 <Facebook size={16} />
               </button>
             </div>
           </div>
+            <div></div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Page</h3>
             <ul className="space-y-2 text-sm text-gray-300">
@@ -58,7 +59,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="max-w-screen-xl mx-auto mt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 space-y-2 md:space-y-0">
+        <div className="max-w-screen-xl mx-auto mt-6 flex flex-col md:flex-row justify-between items-center text-sm text-white space-y-2 md:space-y-0">
           <p>© 2025 tanjim. All rights reserved.</p>
           <div className="flex space-x-4">
             <Link href="/privacy-policy" className="hover:text-white">

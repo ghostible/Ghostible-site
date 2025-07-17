@@ -22,16 +22,16 @@ export default function TempPhoneEmailPlan({ plans, currentPlan, handleSubscribe
 
   return (
     <>
-      <section className="text-white px-6 py-3 md:py-20 burnerPhoneNumberEmailPlans">
+      <section className="text-white px-6 py-3 md:py-20 burnerPhoneNumberEmailPlans mt-10">
         <div className="text-center mb-12">
-          <div className="inline-block bg-[#1d1e1f] text-lime-400 font-semibold px-3 py-1 rounded-full mb-4">
+          <div className="inline-block bg-[#1d1e1f] text-[#46edd5] font-semibold px-3 py-1 rounded-full mb-4">
             * PRICING
           </div>
           <h2 className="text-4xl md:text-5xl font-medium text-teal-300">
             Burner Phone<br />Number/Email Plans
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
           {/* Static Free Plan */}
           <div className="bg-[#111111] p-8 rounded-xl flex flex-col justify-between">
             <div>
@@ -58,7 +58,7 @@ export default function TempPhoneEmailPlan({ plans, currentPlan, handleSubscribe
             const isCurrent = currentPlan === interval;
 
             return (
-              <div key={plan.id} className={`p-8 rounded-xl flex flex-col justify-between ${interval === 'week' ? 'bg-gradient-to-b from-[#1f2d22] to-[#111111]' : 'bg-[#111111]'}`}>
+              <div key={plan.id} className={`p-8 rounded-xl flex flex-col justify-between ${interval === 'week' ? 'bg-gradient-to-b from-[#1f2d22] to-[#111111] card-affter' : 'bg-[#111111]'}`}>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">{product?.name}</h3>
                   <p className="text-gray-400 mb-6">{interval === 'week' ? 'Unlimited SMS verification' : 'Unlimited SMS verification, Better Price'}</p>
@@ -85,7 +85,7 @@ export default function TempPhoneEmailPlan({ plans, currentPlan, handleSubscribe
                 </div>
                 <button
                   onClick={() => handleSubscribe(plan.id, interval)}
-                  className={`mt-8 inline-block px-6 py-3 rounded-full text-center font-medium transition ${isCurrent ? 'border border-white text-white cursor-not-allowed' : 'bg-teal-400 text-black hover:bg-teal-300'}`}
+                  className={`mt-28 inline-block px-6 py-3 rounded-full text-center font-medium transition ${isCurrent ? 'border border-white text-white cursor-not-allowed' : 'bg-teal-400 text-black hover:bg-teal-300'}`}
                   disabled={isCurrent}
                 >
                   {isCurrent ? 'Current Plan' : 'Get Started'}

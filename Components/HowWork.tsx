@@ -1,14 +1,12 @@
 import React from "react";
-import { UserRound } from "lucide-react";
-import { TicketSlash } from "lucide-react";
-
+import { UserRound,TicketSlash,FolderLock ,Spool ,UserRoundCheck ,RefreshCcwDot} from "lucide-react";
 export default function HowWorks() {
   return (
     <>
       <div>
         <section className=" text-white py-3 md:py-20 howWorks" data-aos="fade-up" data-aos-duration="3000">
           <div className="text-center mb-12">
-            <div className="inline-block bg-[#1d1e1f] text-lime-400 text-sm font-semibold px-3 py-1 rounded-full mb-4">
+            <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
               * HOW IT WORKS
             </div>
             <h2 className="text-4xl md:text-5xl font-medium text-teal-300">
@@ -18,7 +16,7 @@ export default function HowWorks() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <UserRound />
+                <UserRound className="text-[#48e0d3]" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Pick a Tool</h3>
@@ -30,7 +28,7 @@ export default function HowWorks() {
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <TicketSlash />
+                <TicketSlash className="text-[#48e0d3]"  />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Use Instantly</h3>
@@ -43,7 +41,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <UserRound />
+                <FolderLock className="text-[#48e0d3]" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Stay Private</h3>
@@ -55,7 +53,7 @@ export default function HowWorks() {
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <UserRound />
+                <Spool className="text-[#48e0d3]" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Add What You Need</h3>
@@ -69,7 +67,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <UserRound />
+                <UserRoundCheck className="text-[#48e0d3]" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Done. Vanish.</h3>
@@ -82,7 +80,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
-                <UserRound />
+                <RefreshCcwDot className="text-[#48e0d3]" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-5 md:mt-0 mt-6">Reuse or Rotate</h3>

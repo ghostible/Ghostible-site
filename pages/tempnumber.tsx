@@ -1,17 +1,23 @@
-import { useRouter } from 'next/router';
-import { supabase } from '@/utils/supabaseClient';
-import { useEffect, useState } from 'react';
-import TempPhoneEmailPlan from '@/Components/TempPhoneEmailPlan';
+import { useRouter } from "next/router";
+import { supabase } from "@/utils/supabaseClient";
+import { useEffect, useState } from "react";
+import TempPhoneEmailPlan from "@/Components/TempPhoneEmailPlan";
+import TemBannerSection from "@/Components/TemBannerSection";
+import TempPhoneEmailPlanPrice from "@/Components/TempPhoneEmailPlanPrice";
+import TempPhoneNumber from "@/Components/TempPhoneNumber";
+import FAQSection from "@/Components/FAQSection";
 
 type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: 'week' | 'month';
+    interval: "week" | "month";
   };
-  product: {
-    name: string;
-  } | string;
+  product:
+    | {
+        name: string;
+      }
+    | string;
 };
 
 interface TempphonePageProps {
@@ -32,12 +38,14 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
 
   useEffect(() => {
     const fetchUserPlan = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (user) {
         const { data, error } = await supabase
-          .from('profiles')
-          .select('plan')
-          .eq('id', user.id)
+          .from("profiles")
+          .select("plan")
+          .eq("id", user.id)
           .single();
 
         if (!error && data?.plan) setCurrentPlan(data.plan);
@@ -48,16 +56,18 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
   }, []);
 
   const handleSubscribe = async (priceId: string, plan: string) => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
-      router.push('/login');
+      router.push("/login");
       return;
     }
 
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: user.id, priceId, plan })
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user.id, priceId, plan }),
     });
 
     const { url } = await res.json();
@@ -65,10 +75,18 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
   };
 
   return (
-    <TempPhoneEmailPlan
-      plans={plans}
-      currentPlan={currentPlan}
-      handleSubscribe={handleSubscribe}
-    />
+    <>
+      <div className="w-full">
+        <TemBannerSection />
+        <TempPhoneEmailPlanPrice />
+        <TempPhoneEmailPlan
+          plans={plans}
+          currentPlan={currentPlan}
+          handleSubscribe={handleSubscribe}
+        />
+         <TempPhoneNumber/>
+          <FAQSection />
+      </div>
+    </>
   );
 }

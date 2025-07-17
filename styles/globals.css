@@ -1,27 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poetsen+One&display=swap");
 @import "tailwindcss";
- 
-:root {
-  --custom-width: 1600px;
-}
 
+:root {
+  --custom-font-sm: 16px;
+}
 body {
   font-family: "Inter", "Inter Placeholder", sans-serif;
   background-color: #070806;
+  overflow-x: hidden;
 }
-.header_section {
+.w-container{
   max-width: 1660px;
-  margin: 0 auto;
+}
+.bg-color{
+     backdrop-filter: blur(10px);
+  background-color: rgba(7, 8, 6, 0.6);
 }
 .header_section img {
   width: 170px;
 }
 .navbar_link a {
-  font-size: 16px;
+  font-size: var(--custom-font-sm);
 }
+
 .navbar_link p,
 li {
-  font-size: 16px;
+  font-size: var(--custom-font-sm);
 }
 .btn {
   justify-content: center;
@@ -39,8 +43,12 @@ li {
 }
 .hero-section {
   padding-top: clamp(60px, 8vw, 100px);
-  padding-bottom: clamp(60px, 8vw, 100px);
+  /* padding-bottom: clamp(60px, 8vw, 100px); */
   transition: all 0.9s;
+  background-image: url(/pkVckAy4hre6SOgAjgjXMYt9vc0.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
 }
 .hero-section h1 {
   font-size: clamp(2.25rem, 5vw + 1rem, 60px);
@@ -52,7 +60,7 @@ li {
   color: #c6c7c6;
   font-weight: 400;
   line-height: 25px;
-  font-size: 16px;
+  font-size: var(--custom-font-sm);
 }
 .privateAnonymous h2,
 .sMSVerificationReady h2,
@@ -63,14 +71,14 @@ li {
   line-height: clamp(3.25rem, 5vw + 1rem, 75px);
 }
 .howWorks p {
-  font-size: 16px;
+  font-size: var(--custom-font-sm);
   padding: 0px 60px 0px 0px;
   line-height: 29px;
 }
 .contact p,
 .frequently-faq p,
 .burnerPhoneNumberEmailPlans p {
-  font-size: 16px;
+  font-size: var(--custom-font-sm);
   line-height: 29px;
 }
 .span_month h2 span {
@@ -84,4 +92,27 @@ li {
   font-size: 20px;
   margin: 18px 0px;
   font-weight: bold;
+}
+.card-affter {
+  position: relative;
+  background: #0d0d0d;
+  border-radius: 16px;
+  color: white;
+  overflow: hidden;
+}
+.card-affter::before {
+  content: "";
+  background: linear-gradient(180deg, #a0e00d00, #a0e00d);
+  border-radius: 100%;
+  filter: blur(45px);
+  flex: none;
+  height: 76px;
+  left: calc(50.135869707409896% - 84.5945945945946% / 2);
+  position: absolute;
+  top: -70px;
+  width: 85%;
+}
+.text-sm {
+  font-size: 16px !important;
+  line-height: 26px !important;
 }

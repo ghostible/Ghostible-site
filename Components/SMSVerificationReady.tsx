@@ -9,7 +9,7 @@ export default function SMSVerificationReady() {
       <div className=" max-w-screen-xl mx-auto text-white px-6 py-5 md:py-16 lg:flex items-center justify-between gap-16">
        
         <div className="lg:w-1/2 mb-10 lg:mb-0">
-          <div className="inline-block bg-[#1d1e1f] text-lime-400 text-sm font-semibold px-3 py-1 rounded-full mb-4">
+          <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
             * FEATURES
           </div>
           <h2 className="text-4xl md:text-5xl font-medium text-teal-300 mb-4" data-aos="fade-up" data-aos-duration="3000">
@@ -22,27 +22,27 @@ export default function SMSVerificationReady() {
             <ul data-aos="fade-up">
               <li className="mt-3">
                 <p className="flex flex-wrap justify-center gap-3 align-center">
-                  <Check className="text-lime-400" size={20} /> SMS Verification
+                  <Check className="text-[#46edd5]" size={20} /> SMS Verification
                 </p>
               </li>
 
               <li className="mt-3">
                 <p className="flex flex-wrap justify-center gap-3 align-center">
-                  <Check className="text-lime-400" size={20} />
+                  <Check className="text-[#46edd5]" size={20} />
                   Anonymous Use
                 </p>
               </li>
 
               <li className="mt-3">
                 <p className="flex flex-wrap justify-center gap-3 align-center">
-                  <Check className="text-lime-400" size={20} />
+                  <Check className="text-[#46edd5]" size={20} />
                   Scam Protection
                 </p>
               </li>
 
               <li className="mt-3">
                 <p className="flex flex-wrap justify-center gap-3 align-center">
-                  <Check className="text-lime-400" size={20} />
+                  <Check className="text-[#46edd5]" size={20} />
                   Delete Whenever
                 </p>
               </li>
@@ -50,7 +50,7 @@ export default function SMSVerificationReady() {
           </div>
         </div>
          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center">
-          <Image src="/awDNqzGCeUlaMo4sOglKEKyp6O0.avif" alt="imagetext" width={1024} height={1024} />
+          <Image src="/awDNqzGCeUlaMo4sOglKEKyp6O0.png" alt="imagetext" width={535} height={460} />
         </div>
       </div>
     </div>
