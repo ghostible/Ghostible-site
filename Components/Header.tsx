@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient";
-// import { UserRound } from "lucide-react";
-
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -54,14 +52,15 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-black py-3 sticky top-0 right-0 left-0  w-full z-50 transition-transform duration-300 ${
+      className={`py-3 sticky top-0 right-0 left-0  w-full z-50 transition-transform duration-300 ${
         showHeader ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="relative py-4 px-6 md:px-10 border border-gray-800 rounded-full w-[var(--custom-width)] mx-auto mt-4 flex items-center justify-between">
+   <div className="w-container mx-auto px-3.5">
+       <div className="relative py-4 px-6 md:px-10 border border-gray-800 rounded-full mx-auto mt-4 flex items-center justify-between bg-color">
         <div className="flex items-center space-x-2">
-          <Link href="/" className="">
-            <Image src="/ghostible-logo.avif" alt="Logo" width={150} height={80} />
+          <Link href="/" className=" text-teal-400">
+            <Image src="/ghostible-logo.png" alt="Logo" width={150} height={80} />
           </Link>
           <nav className="hidden md:flex space-x-6 pl-10 text-sm navbar_link">
             <Link href="/" className="text-white hover:text-teal-400">Home</Link>
@@ -122,6 +121,7 @@ export default function Header() {
           </div>
         )}
       </div>
+   </div>
     </header>
   );
 }

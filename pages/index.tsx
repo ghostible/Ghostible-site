@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabaseClient';
 import { useEffect, useState } from 'react';
 import HeroSection from "@/components/HeroSection"
-import FeatureSection from "@/components/FeatureSection"
 import HowWork from "@/components/HowWork"
 import InstantAccess from "@/components/InstantAccess"
 import PrivateAnonymous from "@/components/PrivateAnonymous"
@@ -10,17 +9,25 @@ import SMSVerificationReady from "@/components/SMSVerificationReady"
 import TempEmailAddresses from "@/components/TempEmailAddresses"
 import FAQSection from "@/components/FAQSection"
 import TestimonialSection from "@/components/TestimonialSection"
-import TempPhoneEmailPlan from '@/components/TempPhoneEmailPlan'
+import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
+import AllPlan from "@/components/AllPlan";
 
 type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: 'week' | 'month';
+    interval: 'week' | 'month' | 'year';
+    interval_count: '1' | '3' | '6';
   };
   product: {
     name: string;
+    description: string;
+    marketing_features: marketing_features[];
   } | string;
+};
+
+type marketing_features = {
+  name: string;
 };
 
 interface TempphonePageProps {
@@ -77,13 +84,13 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
   return (
     <>
       <HeroSection />
-      <FeatureSection />
       <InstantAccess />
       <PrivateAnonymous />
       <SMSVerificationReady />
       <TempEmailAddresses />
       <HowWork />
-      <TempPhoneEmailPlan
+      <TempPhoneEmailPlan />
+      <AllPlan
         plans={plans}
         currentPlan={currentPlan}
         handleSubscribe={handleSubscribe}

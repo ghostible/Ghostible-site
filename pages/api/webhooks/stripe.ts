@@ -92,12 +92,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const phoneProvider = 'twilio'
 
       // 2. Calculate expiry
-      const expiresAt = new Date()
-      if (plan === 'week') {
-        expiresAt.setDate(expiresAt.getDate() + 7)
-      } else if (plan === 'month') {
-        expiresAt.setMonth(expiresAt.getMonth() + 1)
+      const expiresAt = new Date();
+      const [amountStr, unitRaw] = plan.split(' ')
+      const amount = parseInt(amountStr, 10)
+      const unit = unitRaw.toLowerCase()
+
+      if (unit === 'week' || unit === 'weeks') {
+        expiresAt.setDate(expiresAt.getDate() + amount * 7)
+      } else if (unit === 'month' || unit === 'months') {
+        expiresAt.setMonth(expiresAt.getMonth() + amount)
+      } else if (unit === 'year' || unit === 'years') {
+        expiresAt.setFullYear(expiresAt.getFullYear() + amount)
+      } else {
+        console.warn(`⚠️ Unknown plan duration: ${plan}`)
       }
+
 
       // 3. Update Supabase profile
       const { error } = await supabase

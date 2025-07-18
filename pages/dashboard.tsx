@@ -70,10 +70,10 @@ export default function Dashboard() {
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
           {/* 🔢 Burner Number Card */}
           <div className="bg-[#111313] border border-[#383838] rounded-xl p-6">
-            <h2 className="text-xl font-semibold mb-4">Your Burner Number</h2>
+            <h2 className="text-xl font-semibold mb-4">Ghostible Burner Number</h2>
             <p className="text-teal-300 font-mono text-lg">{profile.temp_number}</p>
             <p className="text-sm text-gray-400 mt-1">
-              Expires at: {new Date(profile.expires_at).toLocaleString()}
+              Expires at: {new Date(profile.expires_at).toLocaleDateString()}
             </p>
             <div className="mt-4 space-x-2">
               <button className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition cursor-pointer">
