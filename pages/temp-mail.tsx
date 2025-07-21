@@ -194,9 +194,9 @@ const TempMailPage: React.FC = () => {
                       key={msg.id}
                       className="border-gray-200 hover:bg-gray-50"
                     >
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.from?.address}</td>
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.subject}</td>
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-center">
+                      <td className="px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.from?.address}</td>
+                      <td className="px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.subject}</td>
+                      <td className="px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-center">
                         <button
                           onClick={() => loadFullMessage(msg.id)}
                           className="text-teal-300 hover:underline"
