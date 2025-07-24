@@ -31,7 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const sig = req.headers['stripe-signature'] as string
-
   let event: Stripe.Event
 
   try {
@@ -80,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // const number = await twilioClient.incomingPhoneNumbers.create({
       //   phoneNumber: availableNumbers[0].phoneNumber,
-      //   smsUrl: 'https://267f531da82e.ngrok-free.app/api/receive-sms',
+      //   smsUrl: 'http://www.ghostible.io/api/receive-sms',
       // })
       
       const number = await twilioClient.incomingPhoneNumbers.create({
@@ -90,6 +89,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const tempNumber = number.phoneNumber
       const phoneProvider = 'twilio'
+      const phoneSid = number.sid
+      const subscriptionId = session.subscription as string
 
       // 2. Calculate expiry
       const expiresAt = new Date();
@@ -114,8 +115,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .update({
           temp_number: tempNumber,
           phone_provider: phoneProvider,
+          phone_sid: phoneSid,
+          subscription_id: subscriptionId,
           plan: plan,
           expires_at: expiresAt.toISOString(),
+          plan_status: 'Active',
         })
         .eq('id', userId)
 

@@ -1,7 +1,10 @@
 // import React from 'react'
+import { useEffect, useState } from 'react'
 import { CircleCheck } from "lucide-react";
+import { supabase } from '@/utils/supabaseClient'
+//import useAuthRedirect from '@/hooks/useAuthRedirect'
 // import { Check } from 'lucide-react';
-// import Link from 'next/link'
+import Link from 'next/link'
 
 interface TempPhoneEmailPlanProps {
   plans: StripePlan[];
@@ -29,6 +32,33 @@ type marketing_features = {
 };
 
 export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPhoneEmailPlanProps) {
+
+  //const [upgrademessage, setupgrademessage] = useState('')
+  const [subscriptionId, setSubscriptionId] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchSubscription = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) return
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('subscription_id')
+        .eq('id', user.id)
+        .single()
+
+      if (error) {
+        console.error('Error fetching subscription ID:', error)
+      } else {
+        setSubscriptionId(data?.subscription_id || null)
+      }
+    }
+
+    fetchSubscription()
+  }, [])
 
   return (
     <>
@@ -89,10 +119,7 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                   </li>
                 </ul>
                 <div className="sm:px-8 my-7">
-                  <button className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition  border  bg-teal-400 text-black hover:bg-teal-300">
-                    Buy Now
-                  </button>
-                  {/* <Link href="/temp-mail" className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Get Started</Link> */}
+                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Buy Now</Link>
                 </div>
               </div>
               {plans
@@ -113,6 +140,8 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                   return getDays(a) - getDays(b);
                 })
                 .map((plan) => {
+                  
+                 
 
                   const price = (plan.unit_amount / 100).toFixed(2);
                   const count = Number(plan.recurring?.interval_count ?? 1);
@@ -120,8 +149,9 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                   const planLabel = `${count} ${unit}${count > 1 ? 's' : ''}`;
                   const product = typeof plan.product === 'string' ? null : plan.product;
                   const isActive = currentPlan === planLabel;
-
                   return (
+                     
+                     
                     <div key={plan.id} className="bg-[#111111] rounded-xl card-affter opacity-100">
                       <div>
                         <h3 className="text-lg font-medium mb-1 text-white p-8">
@@ -145,20 +175,21 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                         ))}
                       </ul>
                       <div className="sm:px-8 my-7">
-                        {isActive ? (
-                          <button
-                            disabled
-                            className="w-full px-6 py-3 rounded-md text-center font-medium bg-gray-700 text-white cursor-not-allowed">
-                            Current Plan
-                          </button>
+                        {subscriptionId ? (
+                          isActive ? (
+                            <button className="w-full px-6 py-3 rounded-md text-center font-medium bg-gray-700 text-white cursor-not-allowed" disabled>Current Plan</button>
+                          ) : (
+                            <button onClick={() => handleSubscribe(plan.id, planLabel)} className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Upgrade</button>
+                          )
                         ) : (
-                          <button
-                            onClick={() => handleSubscribe(plan.id, planLabel)}
-                            className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">
-                            Upgrade
-                          </button>
+                          <button onClick={() => handleSubscribe(plan.id, planLabel)} className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Buy Now</button>
                         )}
                       </div>
+                      {/* {upgrademessage && (
+                        <div className="text-teal-400 mt-4">
+                          <p className="text-sm">{upgrademessage}</p>
+                        </div>
+                      )} */}
                     </div>
                   );
                 })}

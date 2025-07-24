@@ -160,7 +160,7 @@ const TempMailPage: React.FC = () => {
   return (
     <div className="bg-[#070806] min-h-screen py-8 px-4 text-black">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-center mb-6"><Image className="m-auto" src="/Ghost_temp.png" alt="imagetext" width={500} height={500} /></h1>
+        <h1 className="text-2xl font-bold text-center mb-6"><Image className="m-auto" src="/Ghostible_temp_email.png" alt="imagetext" width={500} height={500} /></h1>
 
         {/* Show current email and controls */}
         {!loading && !selectedMessage && (

@@ -64,22 +64,79 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
     fetchUserPlan();
   }, []);
 
+  // const handleSubscribe = async (priceId: string, plan: string) => {
+  //   const { data: { user } } = await supabase.auth.getUser();
+  //   if (!user) {
+  //     router.push('/login');
+  //     return;
+  //   }
+
+  //   const res = await fetch('/api/checkout', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ userId: user.id, priceId, plan })
+  //   });
+
+  //   const { url } = await res.json();
+  //   window.location.href = url;
+  // };
+
   const handleSubscribe = async (priceId: string, plan: string) => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      router.push('/login');
-      return;
-    }
-
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: user.id, priceId, plan })
-    });
-
-    const { url } = await res.json();
-    window.location.href = url;
-  };
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+  
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+  
+      // Fetch the user's current subscription from Supabase
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("subscription_id")
+        .eq("id", user.id)
+        .single();
+  
+      if (error) {
+        console.error("Error fetching profile:", error);
+        return;
+      }
+  
+      if (profile?.subscription_id) {
+        // User already has a subscription, so this is an upgrade
+        const res = await fetch("/api/upgrade-subscription", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user.id,
+            planId: priceId,
+          }),
+        });
+  
+        const data = await res.json();
+        if (data.success) {
+          alert("Plan upgraded successfully.");
+        } else {
+          alert("Failed to upgrade plan.");
+        }
+  
+      } else {
+        // New purchase flow
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: user.id, priceId, plan }),
+        });
+  
+        const { url } = await res.json();
+        if (url) {
+          window.location.href = url;
+        } else {
+          alert("Failed to create checkout session.");
+        }
+      }
+    };
 
   return (
     <>

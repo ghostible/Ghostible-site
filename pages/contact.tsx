@@ -1,66 +1,84 @@
-// import { useEffect, useState } from 'react'
-// import axios from 'axios'
+import { useState } from 'react';
 import FAQSection from "@/components/FAQSection";
 
-const ContactPage: React.FC = ({ }) => {
-    return (
+const ContactPage: React.FC = () => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('Sending...');
+
+    const res = await fetch('/api/contactform', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+
+    if (res.ok) {
+      setStatus('Message successfully send!');
+      setForm({ name: '', email: '', message: '' });
+    } else {
+      setStatus('Failed to send message.');
+    }
+  };
+
+  return (
     <>
-      <section className=" text-white  px-6 py-5 md:py-16 md:px-20 contact">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h2>
-              <p className="text-gray-300 mb-10">
-                Need assistance or have questions? Don&apos;t hesitate to reach out to us.
-                Our dedicated team is here to help.
-              </p>
-            </div>
-            <div className="bg-zinc-900 p-6 md:p-10 rounded-lg space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input type="text" placeholder="Name" className="bg-gray-100 text-black p-3 rounded outline-none" />
-                <input type="email" placeholder="Email" className="bg-gray-100 text-black p-3 rounded outline-none" />
-              </div>
-              <textarea placeholder="Message" rows={6} className="bg-gray-100 text-black p-3 w-full rounded outline-none" defaultValue={""} />
-              <button className="w-full bg-teal-400 text-black font-semibold py-3 rounded hover:bg-teal-300 transition">
-                Sign Up
-              </button>
-            </div>
+      <section className="text-white px-6 py-5 md:py-16 md:px-20 contact">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h2>
+            <p className="text-gray-300 mb-10">Need assistance or have questions? Reach out to us.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto  mt-4 md:mt-28">
-            <div>
-              <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
-                <span className="text-black text-xl">✉️</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <p className="text-sm text-white mb-2">
-                Are you tired of juggling endless spreadsheets, emails, and sticky notes to manage your projects?
-              </p>
-              <p className="font-semibold text-white mt-5">tanjimislam27@gmail.com</p>
+          <form onSubmit={handleSubmit} className="bg-zinc-900 p-6 md:p-10 rounded-lg space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={form.name}
+                onChange={handleChange}
+                className="bg-gray-100 text-black p-3 rounded outline-none"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                className="bg-gray-100 text-black p-3 rounded outline-none"
+                required
+              />
             </div>
-            <div>
-              <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
-                <span className="text-black text-xl">💬</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Live Chat</h3>
-              <p className="text-sm text-white mb-2">
-                Are you tired of juggling endless spreadsheets, emails, and sticky notes to manage your projects?
-              </p>
-              <p className="font-semibold text-white mt-5">+1 (555) 000-0000</p>
-            </div>
-            <div>
-              <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
-                <span className="text-black text-xl">📞</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Phone</h3>
-              <p className="text-sm text-white mb-2">
-                Are you tired of juggling endless spreadsheets, emails, and sticky notes to manage your projects?
-              </p>
-              <p className="font-semibold text-white mt-5">123 Sample St, Sydney NSW 2000 AU</p>
-            </div>
-          </div>
+            <textarea
+              name="message"
+              rows={6}
+              placeholder="Message"
+              value={form.message}
+              onChange={handleChange}
+              className="bg-gray-100 text-black p-3 w-full rounded outline-none"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-teal-400 text-black font-semibold py-3 rounded hover:bg-teal-300 transition"
+            >
+              Send Message
+            </button>
+            {status && <p className="text-sm mt-2 text-white">{status}</p>}
+          </form>
+        </div>
+        {/* ... your contact blocks */}
       </section>
-      <FAQSection/>
+      <FAQSection />
     </>
   );
-}
+};
 
 export default ContactPage;
