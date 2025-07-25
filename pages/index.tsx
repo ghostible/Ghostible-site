@@ -64,23 +64,6 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
     fetchUserPlan();
   }, []);
 
-  // const handleSubscribe = async (priceId: string, plan: string) => {
-  //   const { data: { user } } = await supabase.auth.getUser();
-  //   if (!user) {
-  //     router.push('/login');
-  //     return;
-  //   }
-
-  //   const res = await fetch('/api/checkout', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ userId: user.id, priceId, plan })
-  //   });
-
-  //   const { url } = await res.json();
-  //   window.location.href = url;
-  // };
-
   const handleSubscribe = async (priceId: string, plan: string) => {
       const {
         data: { user },
