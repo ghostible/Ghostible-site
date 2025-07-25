@@ -12,8 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const transporter = nodemailer.createTransport({
-      host: 'sandbox.smtp.mailtrap.io',
-      port: 2525,
+      host: process.env.MAILTRAP_SMTP_HOST,
+      port: 587,
       auth: {
         user: process.env.MAILTRAP_SMTP_USER,
         pass: process.env.MAILTRAP_SMTP_PASS,
@@ -22,9 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await transporter.sendMail({
       from: '"Ghostible Contact" <team@ghostible.io>',
-      to: 'team@ghostible.io, tester1.webperfection@gmail.com',
+      to: 'team@ghostible.io',
       subject: `Support Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage : ${message}`,
     })
 
     return res.status(200).json({ success: true })
