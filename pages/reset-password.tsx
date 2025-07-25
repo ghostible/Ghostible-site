@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
 
@@ -10,7 +10,8 @@ export default function ResetPassword() {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { data, error } = await supabase.auth.updateUser({ password })
+    //const { data, error } = await supabase.auth.updateUser({ password })
+    const { error } = await supabase.auth.updateUser({ password })
     if (error) return setError(error.message)
     setSuccess('Password updated! Redirecting to login...')
     setTimeout(() => router.push('/login'), 2000)
@@ -19,7 +20,7 @@ export default function ResetPassword() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleUpdate} className="w-full max-w-md space-y-4">
-        <h2 className="text-2xl font-bold">Reset Password</h2>
+        <h2 className="text-teal-400 text-2xl font-bold">Reset Password</h2>
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
         <input
@@ -30,7 +31,7 @@ export default function ResetPassword() {
           onChange={e => setPassword(e.target.value)}
           required
         />
-        <button className="w-full bg-white text-black py-3 rounded font-bold hover:bg-gray-200 transition">
+        <button className="w-full bg-teal-400 text-black font-semibold py-3 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
           Update Password
         </button>
       </form>

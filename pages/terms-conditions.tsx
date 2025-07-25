@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+// import { useEffect, useState } from 'react'
+// import axios from 'axios'
 
 const TermsConditionsPage: React.FC = ({ }) => {
     return (
@@ -33,7 +33,7 @@ const TermsConditionsPage: React.FC = ({ }) => {
           <h2 className="text-5xl md:text-2xl font-semibold mb-2">2. Use License</h2>
           <p className="text-gray-300 mb-2">
             Permission is granted to temporarily download one copy of the materials (information or
-            software) on Saasta’s website for personal, non-commercial transitory viewing only.
+            software) on Saasta&apos;s website for personal, non-commercial transitory viewing only.
           </p>
           <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>Modify or copy materials</li>
@@ -45,7 +45,7 @@ const TermsConditionsPage: React.FC = ({ }) => {
         <section className="mb-8">
           <h2 className="text-5xl md:text-2xl font-semibold mb-2">3. Disclaimer</h2>
           <p className="text-gray-300">
-            The materials on Saasta’s website are provided "as is". Saasta makes no warranties and
+            The materials on Saasta&apos;s website are provided &quot;as is&quot;. Saasta makes no warranties and
             hereby disclaims all other warranties including merchantability, fitness for a particular
             purpose, or non-infringement.
           </p>
@@ -55,14 +55,14 @@ const TermsConditionsPage: React.FC = ({ }) => {
           <h2 className="text-5xl md:text-2xl font-semibold mb-2">4. Limitations</h2>
           <p className="text-gray-300">
             In no event shall Saasta or its suppliers be liable for any damages arising out of the
-            use or inability to use the materials on Saasta’s website.
+            use or inability to use the materials on Saasta&apos;s website.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-5xl md:text-2xl font-semibold mb-2">5. Revisions and Errata</h2>
           <p className="text-gray-300">
-            The materials appearing on Saasta’s website may include typographical or photographic
+            The materials appearing on Saasta&apos;s website may include typographical or photographic
             errors. Saasta does not warrant that any of the materials are accurate or current.
           </p>
         </section>

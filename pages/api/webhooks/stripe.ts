@@ -4,72 +4,123 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import twilio from 'twilio'
 
+// ⚠️ Ensure bodyParser is disabled
+export const config = {
+  api: { bodyParser: false }
+}
+
+// ✅ Initialize Stripe with correct API version
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-06-30.basil',
+  apiVersion: '2025-06-30.basil'
 })
 
+// ✅ Supabase & Twilio setup
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
-const twilioClient = twilio(process.env.TWILIO_SID!, process.env.TWILIO_AUTH!)
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID!,
+  process.env.TWILIO_AUTH_TOKEN!
+)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const sig = req.headers['stripe-signature'] as string
-  const buf = await buffer(req)
-
-  let event: Stripe.Event
-  try {
-    event = stripe.webhooks.constructEvent(buf.toString(), sig, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error('❌ Webhook signature verification failed:', err.message)
-      return res.status(400).send(`Webhook Error: ${err.message}`)
-    } else {
-      console.error('❌ Unknown webhook error:', err)
-      return res.status(400).send('Unknown webhook error')
-    }
+  if (req.method !== 'POST') {
+    return res.setHeader('Allow', 'POST').status(405).end('Method Not Allowed')
   }
 
-  console.log('✅ Webhook received:', event.type)
+  const sig = req.headers['stripe-signature'] as string
+  let event: Stripe.Event
 
-  if (event.type === 'payment_intent.succeeded') {
-    const paymentIntent = event.data.object as Stripe.PaymentIntent
+  try {
+    const buf = await buffer(req)
 
-    console.log('📦 Full PaymentIntent:', JSON.stringify(paymentIntent, null, 2))
+    // 🛑 DO NOT USE .toString() here!
+    event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!)
 
-    const metadata = paymentIntent.metadata || {}
+    console.log('✅ Event received:', event.type)
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error('❌ Webhook verification failed:', err.message)
+      return res.status(400).send(`Webhook Error: ${err.message}`)
+    }
+
+    console.error('❌ Unknown error during webhook verification')
+    return res.status(500).send('Unknown error')
+  }
+
+  // ✅ Process successful checkout
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session
+
+    const metadata = session.metadata || {}
     const userId = metadata.user_id
     const feature = metadata.feature
+    const plan = metadata.plan
 
-    if (!userId || feature !== 'temp_number') {
-      console.warn('⚠️ Missing user_id or unsupported feature in metadata:', metadata)
+    console.log('🔎 Metadata received:', metadata)
+
+    if (!userId || feature !== 'temp_number' || !plan) {
+      console.warn('⚠️ Missing or invalid metadata. Skipping.')
       return res.status(200).end()
     }
 
-    let tempNumber
     try {
+      // 1. Buy a real Twilio number
+      // const availableNumbers = await twilioClient
+      //   .availablePhoneNumbers('US')
+      //   .local.list({ smsEnabled: true, limit: 1 })
+
+      // if (availableNumbers.length === 0) {
+      //   console.error('❌ No available Twilio numbers')
+      //   return res.status(500).send('No numbers available')
+      // }
+
+      // const number = await twilioClient.incomingPhoneNumbers.create({
+      //   phoneNumber: availableNumbers[0].phoneNumber,
+      //   smsUrl: 'http://www.ghostible.io/api/receive-sms',
+      // })
+      
       const number = await twilioClient.incomingPhoneNumbers.create({
         phoneNumber: '+15005550006',
         smsUrl: 'https://yourdomain.com/api/receive-sms',
       })
-      tempNumber = number.phoneNumber
-      console.log('📲 Twilio number assigned:', tempNumber)
-    } catch (error) {
-      console.error('❌ Twilio error:', error)
-      return res.status(500).send('Twilio assignment failed')
-    }
 
-    try {
+      const tempNumber = number.phoneNumber
+      const phoneProvider = 'twilio'
+      const phoneSid = number.sid
+      const subscriptionId = session.subscription as string
+
+      // 2. Calculate expiry
+      const expiresAt = new Date();
+      const [amountStr, unitRaw] = plan.split(' ')
+      const amount = parseInt(amountStr, 10)
+      const unit = unitRaw.toLowerCase()
+
+      if (unit === 'week' || unit === 'weeks') {
+        expiresAt.setDate(expiresAt.getDate() + amount * 7)
+      } else if (unit === 'month' || unit === 'months') {
+        expiresAt.setMonth(expiresAt.getMonth() + amount)
+      } else if (unit === 'year' || unit === 'years') {
+        expiresAt.setFullYear(expiresAt.getFullYear() + amount)
+      } else {
+        console.warn(`⚠️ Unknown plan duration: ${plan}`)
+      }
+
+
+      // 3. Update Supabase profile
       const { error } = await supabase
         .from('profiles')
-        .update({ temp_number: tempNumber })
+        .update({
+          temp_number: tempNumber,
+          phone_provider: phoneProvider,
+          phone_sid: phoneSid,
+          subscription_id: subscriptionId,
+          plan: plan,
+          expires_at: expiresAt.toISOString(),
+          plan_status: 'Active',
+        })
         .eq('id', userId)
 
       if (error) {
@@ -78,11 +129,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       console.log(`✅ Supabase profile updated for user ${userId}`)
-    } catch (e) {
-      console.error('❌ Unexpected Supabase error:', e)
-      return res.status(500).send('Unexpected Supabase failure')
+
+    } catch (err) {
+      console.error('❌ Unexpected error:', err)
+      return res.status(500).send('Unexpected error')
     }
   }
 
-  res.status(200).send('Webhook handled')
+  return res.status(200).send('Webhook handled')
 }
