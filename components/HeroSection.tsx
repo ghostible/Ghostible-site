@@ -4,14 +4,13 @@ import Link from 'next/link'
 import { Check } from 'lucide-react';
 import FeatureSection from './FeatureSection';
 export default function HeroSection() {
-  console.log('process', process.env.NEXT_PUBLIC_SUPABASE_URL) 
   return (
    <>
     <section className="hero-section">
       <div className='flex items-center justify-center  px-4'>
         <div className=" text-center">
         <h1>
-          Burner Phone Numbers  <span className="text-white">& </span> Temporary <br></br> Emails <span  className="text-white">- Private. Fast. No Signup (1).</span>
+          Burner Phone Numbers  <span className="text-white">& </span> Temporary <br></br> Emails <span  className="text-white">- Private. Fast. No Signup.</span>
         </h1>
         <p className="mt-4 text-gray-300">
           Use disposable numbers and temp emails to protect your privacy online. <br />
