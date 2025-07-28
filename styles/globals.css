@@ -117,3 +117,10 @@ li {
   font-size: 16px !important;
   line-height: 26px !important;
 }
+.custom-select {
+  appearance: none; /* For most browsers */
+  -webkit-appearance: none; /* Safari */
+  -moz-appearance: none; /* Firefox */
+  background-size: 12px;
+  padding-right: 30px; /* space for arrow */
+}

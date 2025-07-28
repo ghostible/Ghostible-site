@@ -1,7 +1,4 @@
-// import { useEffect, useState } from 'react'
-// import axios from 'axios'
 import FAQSection from "@/Components/FAQSection";
-
 const ContactPage: React.FC = ({ }) => {
     return (
    <>
@@ -20,14 +17,14 @@ const ContactPage: React.FC = ({ }) => {
                 <input type="email" placeholder="Email" className="bg-gray-100 text-black p-3 rounded outline-none" />
               </div>
               <textarea placeholder="Message" rows={6} className="bg-gray-100 text-black p-3 w-full rounded outline-none" defaultValue={""} />
-              <button className="w-full bg-lime-400 text-black font-semibold py-3 rounded hover:bg-lime-500 transition">
+              <button className="w-full bg-teal-400 text-black font-semibold py-3 rounded hover:bg-teal-500 transition">
                 Sign Up
               </button>
             </div>
           </div>
              <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto  mt-4 md:mt-28">
                 <div>
-                  <div className="bg-lime-400 w-8 h-8 flex items-center justify-center rounded mb-4">
+                  <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
                     <span className="text-black text-xl">✉️</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Email</h3>
@@ -37,7 +34,7 @@ const ContactPage: React.FC = ({ }) => {
                   <p className="font-semibold text-white mt-5">tanjimislam27@gmail.com</p>
                 </div>
                 <div>
-                  <div className="bg-lime-400 w-8 h-8 flex items-center justify-center rounded mb-4">
+                  <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
                     <span className="text-black text-xl">💬</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Live Chat</h3>
@@ -47,7 +44,7 @@ const ContactPage: React.FC = ({ }) => {
                   <p className="font-semibold text-white mt-5">+1 (555) 000-0000</p>
                 </div>
                 <div>
-                  <div className="bg-lime-400 w-8 h-8 flex items-center justify-center rounded mb-4">
+                  <div className="bg-teal-400 w-8 h-8 flex items-center justify-center rounded mb-4">
                     <span className="text-black text-xl">📞</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">Phone</h3>

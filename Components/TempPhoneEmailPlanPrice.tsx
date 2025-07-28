@@ -23,7 +23,7 @@ export default function TempPhoneEmailPlanPrice() {
             </label>
             <select
               id="country"
-              className="px-4 py-2 border rounded w-60 text-white bg-[#111111]"
+              className="px-4 py-2 border rounded w-60 text-white bg-[#111111] custom-select"
             >
               <option>United States</option>
               <option>United Kingdom</option>
