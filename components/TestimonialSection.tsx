@@ -19,48 +19,54 @@ const testimonials = [
       "Saasta has been a game-changer for our team. Its intuitive interface and powerful features have helped us streamline our project management processes and boost productivity. Highly recommended!",
     name: "Michael Brown",
     role: "Project Manager at Global Innovations",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
     quote:
       "As an IT manager, security is a top priority for me. Saasta`&quot;`s robust security measures and compliance standards give me peace of mind knowing that our data is safe and protected.",
     name: "David Johnson",
     role: "Marketing Director, Sparkle Brands",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
     quote:
       "Saasta has transformed the way our marketing team operates. Its collaborative features and real-time updates have improved communication and coordination.",
     name: "Sarah Miller",
     role: "Marketing Director at Digital Agency",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
     quote:
       "I`&quot;`ve tried many tools, but Saasta stands out for its simplicity and effectiveness. Our projects have never been smoother!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   // More duplicates for testing
   {
     quote: "Simple and effective!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
     quote: "We love Saasta!",
     name: "Emily Johnson",
     role: "Founder of StartUpX",
-    avatar: "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
 ];
 
 export default function TestimonialSection() {
   return (
     <section
-      className="text-white px-4 py-20"
+      className="text-white px-4 md:py-10 py-6"
       data-aos="fade-up"
       data-aos-duration="3000"
     >
@@ -96,10 +102,8 @@ export default function TestimonialSection() {
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
               <div
-                className="bg-zinc-900 border h-full border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between cursor-pointer"
-                onMouseEnter={() =>
-                  window?.testimonialSwiper?.autoplay?.stop()
-                }
+                className="bg-zinc-900 border h-full border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between cursor-pointer md:max-h-96"
+                onMouseEnter={() => window?.testimonialSwiper?.autoplay?.stop()}
                 onMouseLeave={() =>
                   window?.testimonialSwiper?.autoplay?.start()
                 }
@@ -110,7 +114,9 @@ export default function TestimonialSection() {
                     src={item.avatar}
                     alt={item.name}
                     className="w-10 h-10 rounded-full object-cover"
-                    width={50} height={50} />
+                    width={50}
+                    height={50}
+                  />
                   <div>
                     <p className="font-semibold text-white text-sm">
                       {item.name}

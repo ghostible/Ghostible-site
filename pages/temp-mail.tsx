@@ -157,6 +157,18 @@ const TempMailPage: React.FC = () => {
     window.location.reload();
   };
 
+  const [copied, setCopied] = useState(false);
+  const handlecopyEmail = async () => {
+    
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <div className="bg-[#070806] min-h-screen py-8 px-4 text-black">
       <div className="max-w-4xl mx-auto">
@@ -171,9 +183,18 @@ const TempMailPage: React.FC = () => {
             <p className="text-lg font-mono mt-4 mb-6 text-gray-300">
               Expire in: {String(Math.floor(timeLeft / 60)).padStart(2, '0')}:{String(timeLeft % 60).padStart(2, '0')}
             </p>
-            <button onClick={handleChangeEmail}  className="bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
-              Change Email
-            </button>
+            <div className="m-auto gap-2.5 md:flex justify-center relative">
+              <button onClick={fetchInbox} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
+                Refresh Inbox
+              </button>
+              <button onClick={handleChangeEmail} className="inline-block bg-teal-400 md:ml-0 ml-2 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
+                Change Email
+              </button>
+              <button onClick={handlecopyEmail} className="inline-block md:ml-0 ml-2 bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
+                Copy Email
+              </button>
+              <div className='copy_right'>{copied && <span className="text-teal-400">Copy to Clipboard</span>}</div>
+            </div>
           </div>
         )}
 
@@ -197,7 +218,7 @@ const TempMailPage: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-8">
+          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-10">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-800 text-white">
                 <tr>
@@ -247,7 +268,7 @@ const TempMailPage: React.FC = () => {
           <div className="text-center mt-6">
             <p className="mb-2">Want to unlock burner phone numbers?</p>
             <Link href="/tempnumber" className="bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition">
-              Upgrade Now
+              Buy Temp Number
             </Link>
           </div>
         )}

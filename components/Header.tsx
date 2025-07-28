@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient";
+
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,9 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const pathname = usePathname();
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   // Check auth status
   useEffect(() => {
@@ -45,6 +49,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -112,7 +117,7 @@ export default function Header() {
               {isLoggedIn ? (
                 <>
                   <Link href="/dashboard" className={`block hover:text-teal-400 ${pathname === "/dashboard" ? "text-teal-400" : "text-white"}`}>My Account</Link>
-                  <button onClick={handleLogout} className="block text-white hover:text-red-400 mt-2">Logout</button>
+                  <button onClick={handleLogout} className=" text-white hover:text-red-400 mt-2">Logout</button>
                 </>
               ) : (
                 <>
