@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import TempEmailAddresses from "./TempEmailAddresses";
 
 export default function InstantAccess() {
   return (
