@@ -16,6 +16,7 @@ export default function TemBannerSection() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between sm:px-8 py-16 w-full lg:max-w-7xl mx-auto ">
             <div className="md:w-3xl space-y-6">
+              <Image src="/Ghostible_temp_email.png" alt="imagetext" width={400} height={400} />
               <h1 className="text-5xl md:text-5xl font-bold text-white leading-tight mb-8">
                 Temporary Phone
                 <br />

@@ -2,14 +2,13 @@
 import { useEffect, useState } from 'react'
 import { CircleCheck } from "lucide-react";
 import { supabase } from '@/utils/supabaseClient'
+import Link from 'next/link'
 //import useAuthRedirect from '@/hooks/useAuthRedirect'
 // import { Check } from 'lucide-react';
-import Link from 'next/link'
 
 interface TempPhoneEmailPlanProps {
   plans: StripePlan[];
   currentPlan: string | null;
-  //handleSubscribe: (priceId: string, plan: string) => Promise<void>;
   handleSubscribe: (priceId: string, planLabel: string) => Promise<void>;
 }
 
@@ -33,7 +32,6 @@ type marketing_features = {
 
 export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPhoneEmailPlanProps) {
 
-  //const [upgrademessage, setupgrademessage] = useState('')
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null)
 
   useEffect(() => {
@@ -119,7 +117,7 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                   </li>
                 </ul>
                 <div className="sm:px-8 my-7">
-                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Buy Now</Link>
+                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Try Now</Link>
                 </div>
               </div>
               {plans
@@ -141,8 +139,6 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                 })
                 .map((plan) => {
                   
-                 
-
                   const price = (plan.unit_amount / 100).toFixed(2);
                   const count = Number(plan.recurring?.interval_count ?? 1);
                   const unit = plan.recurring?.interval ?? 'month';
@@ -150,8 +146,7 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                   const product = typeof plan.product === 'string' ? null : plan.product;
                   const isActive = currentPlan === planLabel;
                   return (
-                     
-                     
+                
                     <div key={plan.id} className="bg-[#111111] rounded-xl card-affter opacity-100">
                       <div>
                         <h3 className="text-lg font-medium mb-1 text-white p-8">
@@ -185,11 +180,6 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                           <button onClick={() => handleSubscribe(plan.id, planLabel)} className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Buy Now</button>
                         )}
                       </div>
-                      {/* {upgrademessage && (
-                        <div className="text-teal-400 mt-4">
-                          <p className="text-sm">{upgrademessage}</p>
-                        </div>
-                      )} */}
                     </div>
                   );
                 })}

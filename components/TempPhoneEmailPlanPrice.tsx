@@ -25,18 +25,6 @@ export default function TempPhoneEmailPlanPrice() {
               <option>United States</option>
             </select>
           </div>
-
-          <div className="bg-[#111111] text-white text-sm font-medium py-6 px-4 inline-block rounded mb-12">
-            <button className="block text-center lg:w-5xl mx-auto py-3.5 bg-[#00d5be] rounded-md mb-3.5 lg:px-0 px-5">
-              NEED A CHEAPER ALTERNATIVE?
-            </button>{" "}
-            CircleCheck out the
-            <span className="underline font-bold cursor-pointer">
-              {" "}
-              cheapest USA numbers online{" "}
-            </span>
-            <span> — works on any platform, anywhere!</span>
-          </div>
         </section>
       </div>
     </>

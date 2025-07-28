@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient";
+
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,9 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const pathname = usePathname();
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   // Check auth status
   useEffect(() => {
@@ -45,6 +49,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

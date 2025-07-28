@@ -247,7 +247,7 @@ const TempMailPage: React.FC = () => {
           <div className="text-center mt-6">
             <p className="mb-2">Want to unlock burner phone numbers?</p>
             <Link href="/tempnumber" className="bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition">
-              Upgrade Now
+              Buy Temp Number
             </Link>
           </div>
         )}
