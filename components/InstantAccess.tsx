@@ -17,10 +17,7 @@ export default function InstantAccess() {
             No sign-up (temp mail only), no hassle. Get your burner phone number
             or temp email in seconds.
           </p>
-          <Link
-            href="#"
-            className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition"
-          >
+          <Link href="/temp-mail" className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition cursor-pointer">
             Get Started
           </Link>
         </div>

@@ -1,23 +1,31 @@
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { useEffect, useState } from "react";
-import TempPhoneEmailPlan from "@/Components/TempPhoneEmailPlan";
-import TemBannerSection from "@/Components/TemBannerSection";
-import TempPhoneEmailPlanPrice from "@/Components/TempPhoneEmailPlanPrice";
-import TempPhoneNumber from "@/Components/TempPhoneNumber";
-import FAQSection from "@/Components/FAQSection";
+// import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan";
+import TemBannerSection from "@/components/TemBannerSection";
+import TempPhoneEmailPlanPrice from "@/components/TempPhoneEmailPlanPrice";
+import TempPhoneNumber from "@/components/TempPhoneNumber";
+import FAQSection from "@/components/FAQSection";
+import AllPlan from "@/components/AllPlan";
 
 type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: "week" | "month";
+    interval: 'week' | 'month' | 'year';
+    interval_count: '1' | '3' | '6';
   };
   product:
     | {
         name: string;
+        description: string;
+        marketing_features: marketing_features[];
       }
     | string;
+};
+
+type marketing_features = {
+  name: string;
 };
 
 interface TempphonePageProps {
@@ -59,34 +67,66 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+
     if (!user) {
       router.push("/login");
       return;
     }
 
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.id, priceId, plan }),
-    });
+    // Fetch the user's current subscription from Supabase
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("subscription_id")
+      .eq("id", user.id)
+      .single();
 
-    const { url } = await res.json();
-    window.location.href = url;
+    if (error) {
+      console.error("Error fetching profile:", error);
+      return;
+    }
+
+    if (profile?.subscription_id) {
+      // User already has a subscription, so this is an upgrade
+      const res = await fetch("/api/upgrade-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.id,
+          planId: priceId,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Plan upgraded successfully.");
+      } else {
+        alert("Failed to upgrade plan.");
+      }
+
+    } else {
+      // New purchase flow
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, priceId, plan }),
+      });
+
+      const { url } = await res.json();
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert("Failed to create checkout session.");
+      }
+    }
   };
 
   return (
     <>
-      <div className="w-full">
-        <TemBannerSection />
-        <TempPhoneEmailPlanPrice />
-        <TempPhoneEmailPlan
-          plans={plans}
-          currentPlan={currentPlan}
-          handleSubscribe={handleSubscribe}
-        />
-         <TempPhoneNumber/>
-          <FAQSection />
-      </div>
+      <TemBannerSection />
+      <TempPhoneEmailPlanPrice />
+      <AllPlan plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe}/>
+      <TempPhoneNumber/>
+      <FAQSection />
     </>
   );
 }

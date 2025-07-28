@@ -1,14 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient";
+
 export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const pathname = usePathname();
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   // Check auth status
   useEffect(() => {
@@ -43,9 +50,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/"; // redirect to homepage after logout
+    window.location.href = "/";
   };
 
   if (!isMounted) return null;
@@ -63,10 +71,10 @@ export default function Header() {
             <Image src="/ghostible-logo.png" alt="Logo" width={150} height={80} />
           </Link>
           <nav className="hidden md:flex space-x-6 pl-10 text-sm navbar_link">
-            <Link href="/" className="text-teal-400 hover:text-teal-400">Home</Link>
-            <Link href="/temp-mail" className="text-white hover:text-teal-400">Temp Mail</Link>
-            <Link href="/tempnumber" className="text-white hover:text-teal-400">Temp Number</Link>
-            <Link href="/contact" className="text-white hover:text-teal-400">Contact</Link>
+            <Link href="/" className={`hover:text-teal-400 ${pathname === "/" ? "text-teal-400" : "text-white"}`}>Home</Link>
+            <Link href="/temp-mail" className={`hover:text-teal-400 ${pathname === "/temp-mail" ? "text-teal-400" : "text-white"}`}>Temp Mail</Link>
+            <Link href="/tempnumber" className={`hover:text-teal-400 ${pathname === "/tempnumber" ? "text-teal-400" : "text-white"}`}>Temp Number</Link>
+            <Link href="/contact" className={`hover:text-teal-400 ${pathname === "/contact" ? "text-teal-400" : "text-white"}`}>Contact</Link>
           </nav>
         </div>
 
@@ -74,19 +82,19 @@ export default function Header() {
         <div className="hidden md:flex space-x-3">
           {isLoggedIn ? (
             <>
-              <Link href="/dashboard" className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
+              <Link href="/dashboard" className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition cursor-pointer">
                  Account
               </Link>
-              <button onClick={handleLogout} className="px-4 py-1.5 bg-teal-400 text-black rounded-full hover:bg-white transition">
+              <button onClick={handleLogout} className="px-4 py-1.5 bg-teal-400 text-black rounded-full hover:bg-white transition cursor-pointer">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="px-4 py-1.5 bg-teal-400 rounded-full font-medium hover:bg-white transition">
+              <Link href="/login" className="px-4 py-1.5 bg-teal-400 rounded-full font-medium hover:bg-white transition cursor-pointer">
                 Login
               </Link>
-              <Link href="/signup" className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition">
+              <Link href="/signup" className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition cursor-pointer">
                 Sign Up
               </Link>
             </>
@@ -102,19 +110,19 @@ export default function Header() {
         {isOpen && (
           <div className="absolute top-full mt-4 left-0 w-full bg-zinc-900 border border-gray-700 rounded-lg p-6 z-50 text-center md:hidden">
             <nav className="space-y-4 navbar_link">
-              <Link href="/" className="block text-white hover:text-teal-400">Home</Link>
-              <Link href="/temp-mail" className="block text-white hover:text-teal-400">Temp Mail</Link>
-              <Link href="/tempnumber" className="block text-white hover:text-teal-400">Temp Number</Link>
-              <Link href="/contact" className="block text-white hover:text-teal-400">Contact</Link>
+              <Link href="/" className={`block hover:text-teal-400 ${pathname === "/" ? "text-teal-400" : "text-white"}`}>Home</Link>
+              <Link href="/temp-mail" className={`block hover:text-teal-400 ${pathname === "/temp-mail" ? "text-teal-400" : "text-white"}`}>Temp Mail</Link>
+              <Link href="/tempnumber" className={`block hover:text-teal-400 ${pathname === "/tempnumber" ? "text-teal-400" : "text-white"}`}>Temp Number</Link>
+              <Link href="/contact" className={`block hover:text-teal-400 ${pathname === "/contact" ? "text-teal-400" : "text-white"}`}>Contact</Link>
               {isLoggedIn ? (
                 <>
-                  <Link href="/dashboard" className="block text-white hover:text-teal-400">My Account</Link>
+                  <Link href="/dashboard" className={`block hover:text-teal-400 ${pathname === "/dashboard" ? "text-teal-400" : "text-white"}`}>My Account</Link>
                   <button onClick={handleLogout} className="block text-white hover:text-red-400 mt-2">Logout</button>
                 </>
               ) : (
                 <>
-                  <Link href="/login" className="block text-white hover:text-teal-400">Login</Link>
-                  <Link href="/signup" className="block text-white hover:text-teal-400">Sign Up</Link>
+                  <Link href="/login" className={`block hover:text-teal-400 ${pathname === "/login" ? "text-teal-400" : "text-white"}`}>Login</Link>
+                  <Link href="/signup" className={`block hover:text-teal-400 ${pathname === "/signup" ? "text-teal-400" : "text-white"}`}>Sign Up</Link>
                 </>
               )}
             </nav>

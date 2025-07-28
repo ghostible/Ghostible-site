@@ -37,14 +37,14 @@ export default function Login() {
           onChange={e => setPassword(e.target.value)}
           required
         />
-        <button className="w-full bg-white text-black py-3 rounded font-bold hover:bg-gray-200 transition">
+        <button className="w-full bg-teal-400 text-black font-semibold py-3 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
           Login
         </button>
         <p className="text-center mt-2 text-sm">
-            <Link href="/signup" className="text-blue-400 hover:underline">Sign up</Link>
+            <Link href="/signup" className="text-teal-400 hover:underline">Sign up</Link>
         </p>
         <p className="text-center mt-2 text-sm">
-            <Link href="/forgot-password" className="text-blue-400 hover:underline">Forgot Password?</Link>
+            <Link href="/forgot-password" className="text-teal-400 hover:underline">Forgot Password?</Link>
         </p>
 
       </form>

@@ -1,5 +1,5 @@
 // import { useEffect, useState } from 'react'
-// import Link from 'next/link'
+import Link from 'next/link'
 // import Image from "next/image";
 import { Check } from 'lucide-react';
 import FeatureSection from './FeatureSection';
@@ -17,9 +17,9 @@ export default function HeroSection() {
           Get started instantly — no account required.
         </p>
         <div className="mt-6">
-          <button className="bg-teal-400 text-black font-semibold py-4 sm:px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
+          <Link href="/tempnumber" className="bg-teal-400 text-black font-semibold py-4 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
             Get Started
-          </button>
+          </Link>
         </div>
         <div className="mt-6 flex flex-wrap md:justify-center justify-items-start gap-4 text-sm">
           <p className='flex flex-wrap justify-center gap-3 align-center'><Check className='text-[#46edd5]'  size={20} /> No signup for temp mail required</p>

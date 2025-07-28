@@ -31,7 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const sig = req.headers['stripe-signature'] as string
-
   let event: Stripe.Event
 
   try {
@@ -58,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const metadata = session.metadata || {}
     const userId = metadata.user_id
     const feature = metadata.feature
-    const plan = metadata.plan // 'weekly' or 'monthly'
+    const plan = metadata.plan
 
     console.log('🔎 Metadata received:', metadata)
 
@@ -80,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // const number = await twilioClient.incomingPhoneNumbers.create({
       //   phoneNumber: availableNumbers[0].phoneNumber,
-      //   smsUrl: 'https://267f531da82e.ngrok-free.app/api/receive-sms',
+      //   smsUrl: 'http://www.ghostible.io/api/receive-sms',
       // })
       
       const number = await twilioClient.incomingPhoneNumbers.create({
@@ -90,14 +89,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const tempNumber = number.phoneNumber
       const phoneProvider = 'twilio'
+      const phoneSid = number.sid
+      const subscriptionId = session.subscription as string
 
       // 2. Calculate expiry
-      const expiresAt = new Date()
-      if (plan === 'week') {
-        expiresAt.setDate(expiresAt.getDate() + 7)
-      } else if (plan === 'month') {
-        expiresAt.setMonth(expiresAt.getMonth() + 1)
+      const expiresAt = new Date();
+      const [amountStr, unitRaw] = plan.split(' ')
+      const amount = parseInt(amountStr, 10)
+      const unit = unitRaw.toLowerCase()
+
+      if (unit === 'week' || unit === 'weeks') {
+        expiresAt.setDate(expiresAt.getDate() + amount * 7)
+      } else if (unit === 'month' || unit === 'months') {
+        expiresAt.setMonth(expiresAt.getMonth() + amount)
+      } else if (unit === 'year' || unit === 'years') {
+        expiresAt.setFullYear(expiresAt.getFullYear() + amount)
+      } else {
+        console.warn(`⚠️ Unknown plan duration: ${plan}`)
       }
+
 
       // 3. Update Supabase profile
       const { error } = await supabase
@@ -105,8 +115,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .update({
           temp_number: tempNumber,
           phone_provider: phoneProvider,
+          phone_sid: phoneSid,
+          subscription_id: subscriptionId,
           plan: plan,
           expires_at: expiresAt.toISOString(),
+          plan_status: 'Active',
         })
         .eq('id', userId)
 

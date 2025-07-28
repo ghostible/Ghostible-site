@@ -21,10 +21,8 @@ export default function FeatureSection() {
             <p className="mt-4 text-gray-300 text-2xl mb-12 ">
               No sign-up (temp mail only), no hassle. Get your burner phone number or temp email in seconds.
             </p>
-           <Link href="">
-            <button className="mt-6 bg-teal-400 text-black px-6 py-2 rounded-full font-medium hover:bg-teal-300 transition cursor-pointer">
+           <Link href="/temp-mail" className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition cursor-pointer">
               Get Started Email
-            </button>
          </Link>
           </div>
 
@@ -36,10 +34,8 @@ export default function FeatureSection() {
             <p className="mt-4 text-gray-300 text-2xl mb-12">
               Keep your real number and inbox hidden. Ghostible protects your identity from spam, scams, and trackers.
             </p>
-               <Link href="">
-            <button className="mt-6 bg-teal-400 text-black px-6 py-2 rounded-full font-medium hover:bg-teal-300 transition cursor-pointer">
-              Get New Number
-            </button>
+               <Link href="/tempnumber" className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition cursor-pointer">
+                  Get New Number
             </Link>
           </div>
         </div>
