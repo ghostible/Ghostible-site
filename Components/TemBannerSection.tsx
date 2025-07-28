@@ -13,7 +13,7 @@ export default function TemBannerSection() {
             backgroundSize: "cover",
           }}
         >
-          <div className="flex flex-col md:flex-row items-center justify-between p-3 sm:px-8 md:py-16 py-4 w-full lg:max-w-7xl mx-auto ">
+          <div className="flex flex-col md:flex-row items-center justify-between p-3 sm:px-8 md:py-16 py-4 w-full lg:max-w-7xl mx-auto">
             <div className="md:w-3xl space-y-6 image_responsive_mobeile_viwe">
               <Image
                 src="/Ghostible_temp_email.png"

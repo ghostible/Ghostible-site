@@ -184,10 +184,10 @@ const TempMailPage: React.FC = () => {
               Expire in: {String(Math.floor(timeLeft / 60)).padStart(2, '0')}:{String(timeLeft % 60).padStart(2, '0')}
             </p>
             <div className="m-auto">
-              <button onClick={fetchInbox}  className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
+              <button onClick={fetchInbox} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
                 Refresh Inbox
               </button>
-              <button onClick={handleChangeEmail}  className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
+              <button onClick={handleChangeEmail} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
                 Change Email
               </button>
               <button onClick={handlecopyEmail} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
