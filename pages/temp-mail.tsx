@@ -183,7 +183,7 @@ const TempMailPage: React.FC = () => {
             <p className="text-lg font-mono mt-4 mb-6 text-gray-300">
               Expire in: {String(Math.floor(timeLeft / 60)).padStart(2, '0')}:{String(timeLeft % 60).padStart(2, '0')}
             </p>
-            <div className="m-auto">
+            <div className="m-auto gap-2.5 flex justify-center">
               <button onClick={fetchInbox} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
                 Refresh Inbox
               </button>
@@ -193,7 +193,7 @@ const TempMailPage: React.FC = () => {
               <button onClick={handlecopyEmail} className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
                 Copy Email
               </button>
-              {copied && <span className="text-teal-400">Copy to Clipboard</span>}
+              {copied && <span className="text-teal-400 absolute left-6/12 top-4/5 ">Copy to Clipboard</span>}
             </div>
           </div>
         )}
@@ -218,7 +218,7 @@ const TempMailPage: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-8">
+          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-10">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-800 text-white">
                 <tr>

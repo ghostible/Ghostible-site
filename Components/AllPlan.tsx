@@ -63,8 +63,8 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
      <div className="w-full">
         <section className="lg:max-w-7xl w-full mx-auto px-4 text-center price-section">
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full lg:w-5xl mx-auto gap-6 pb-12">
-              <div className="bg-[#111111] rounded-xl card-affter">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full lg:w-5xl mx-auto gap-6 pb-12 postion-relative">
+              <div className="bg-[#111111] rounded-xl card-affter ">
                 <div>
                   <h3 className="text-lg font-medium mb-1 text-white p-8">
                     Forever Free – Temp Mail
@@ -102,8 +102,8 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                     </span>
                   </li>
                 </ul>
-                <div className="sm:px-8 my-7">
-                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">Try Now</Link>
+                <div className="sm:px-8 my-7 w-full absolute bottom-0 h-fit">
+                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300 ">Try Now</Link>
                 </div>
               </div>
               {plans
