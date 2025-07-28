@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react';
 import HeroSection from "@/components/HeroSection"
 import HowWork from "@/components/HowWork"
 import InstantAccess from "@/components/InstantAccess"
-import PrivateAnonymous from "@/components/PrivateAnonymous"
-import SMSVerificationReady from "@/components/SMSVerificationReady"
-import TempEmailAddresses from "@/components/TempEmailAddresses"
 import FAQSection from "@/components/FAQSection"
 import TestimonialSection from "@/components/TestimonialSection"
 import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
@@ -125,9 +122,6 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
     <>
       <HeroSection />
       <InstantAccess />
-      <PrivateAnonymous />
-      <SMSVerificationReady />
-      <TempEmailAddresses />
       <HowWork />
       <TempPhoneEmailPlan />
       <AllPlan

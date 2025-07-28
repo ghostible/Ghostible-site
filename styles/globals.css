@@ -124,3 +124,15 @@ li {
   background-size: 12px;
   padding-right: 30px; /* space for arrow */
 }
+
+
+@media(max-width:767px){
+  .image_responsive_mobeile_viwe img {
+    width: 50%;
+    height: auto;
+}
+  .image_responsive_mobeile_viwe_full img {
+    width: 100%;
+    height: auto;
+}
+}

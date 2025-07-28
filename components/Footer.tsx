@@ -62,9 +62,9 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="max-w-screen-xl mx-auto mt-6 flex flex-col md:flex-row justify-between items-center text-sm text-white space-y-2 md:space-y-0">
+        <div className="max-w-screen-xl mx-auto mt-6 md:flex flex-col md:flex-row justify-between items-center text-sm text-white space-y-2 md:space-y-0">
           <p>© 2025 tanjim. All rights reserved.</p>
-          <div className="flex space-x-4">
+          <div className="md:flex space-x-4">
             <Link href="/privacy-policy" className={`hover:text-teal-400 ${pathname === "/privacy-policy" ? "text-teal-400" : "text-white"}`}>
                 Privacy Policy
             </Link>

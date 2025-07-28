@@ -1,7 +1,5 @@
-// import { useEffect, useState } from 'react'
-// import axios from 'axios'
-import Head from "next/head";
 
+import Head from "next/head";
 const PrivacyPolicyPage: React.FC = ({ }) => {
     return (
     <>
@@ -19,9 +17,8 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
             03-10-2024
           </p>
 
-          {/* Section: Intro */}
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
               Privacy Policy
             </h2>
             <p className="text-gray-300">
@@ -31,9 +28,8 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
             </p>
           </section>
 
-          {/* Section: Information We Collect */}
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
               Information We Collect
             </h2>
             <p className="text-gray-300">
@@ -46,9 +42,8 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
             </p>
           </section>
 
-          {/* Section: How We Use Your Information */}
           <section>
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
               How We Use Your Information
             </h2>
             <h4 className="mb-4 text-gray-300">
@@ -70,18 +65,18 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
               </li>
             </ul>
           </section>
-              {/* Section: Information We Collect */}
+       
           <section className="mb-10 mt-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
               Information Sharing
             </h2>
             <p className="text-gray-300">
               We may collect personal information such as your name, email address, phone number, and postal address when you voluntarily provide it to us. Additionally, we may collect certain non-personal information automatically, including your IP address, browser type, operating system, and website usage data through cookies and other tracking technologies.
             </p>
           </section>
-              {/* Section: Information We Collect */}
+
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
              Data Security
             </h2>
             <p className="text-gray-300">
@@ -93,9 +88,9 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
               cookies and other tracking technologies.
             </p>
           </section>
-              {/* Section: Information We Collect */}
+       
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
             Your Choices
             </h2>
             <p className="text-gray-300">
@@ -107,9 +102,9 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
               cookies and other tracking technologies.
             </p>
           </section>
-              {/* Section: Information We Collect */}
+         
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
           Changes to This Privacy Policy
             </h2>
             <p className="text-gray-300">
@@ -121,9 +116,8 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
               cookies and other tracking technologies.
             </p>
           </section>
-              {/* Section: Information We Collect */}
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">
+            <h2 className="text-2xl md:text-2xl font-semibold mb-2">
              Contact Us
             </h2>
             <p className="text-gray-300">
@@ -137,7 +131,7 @@ const PrivacyPolicyPage: React.FC = ({ }) => {
           </section>
 
           <section className="mb-10">
-            <h2 className="text-5xl md:text-2xl font-semibold mb-2">tanjimislam27@gmail.com</h2>
+            <h2 className="text-sm md:text-2xl font-semibold mb-2">tanjimislam27@gmail.com</h2>
           </section>
         </div>
       </main>
