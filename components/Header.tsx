@@ -117,7 +117,7 @@ export default function Header() {
               {isLoggedIn ? (
                 <>
                   <Link href="/dashboard" className={`block hover:text-teal-400 ${pathname === "/dashboard" ? "text-teal-400" : "text-white"}`}>My Account</Link>
-                  <button onClick={handleLogout} className="text-white hover:text-red-400 mt-2">Logout</button>
+                  <button onClick={handleLogout} className=" text-white hover:text-red-400 mt-2">Logout</button>
                 </>
               ) : (
                 <>

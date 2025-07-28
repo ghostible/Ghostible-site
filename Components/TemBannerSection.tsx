@@ -21,17 +21,17 @@ export default function TemBannerSection() {
                 width={400}
                 height={400}
               />
-              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-8 md:text-left text-center">
                 Temporary Phone
                 <br />
                 Numbers for Verification
               </h1>
-              <p className="text-white text-lg mb-8">
+              <p className="text-white text-lg mb-8 md:text-left text-center">
                 Your privacy is important.
                 <span className="font-semibold">Receive SMS online</span> using
                 the world`&quot;`s most popular temporary phone number platform.
               </p>
-              <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 ">
+              <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
                 <select className="px-4 py-2 border rounded md:w-60 w-full text-white bg-black">
                   <option>Select a Country</option>
                   <option>USA</option>
