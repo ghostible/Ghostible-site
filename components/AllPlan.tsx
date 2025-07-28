@@ -79,40 +79,26 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                 <ul className="text-left space-y-2 text-white sm:px-8">
                   <li className="flex py-1 gap-3">
                     <CircleCheck className="text-teal-300" size={20} />
-                    <span>
-                      <strong className="text-teal-300">1</strong>
-                      <span className="text-gray-300"> Non-VOIP Number</span>
+                    <span className="text-gray-300">
+                      10 Minute Inbox 
                     </span>
                   </li>
                   <li className="flex py-1 gap-3">
                     <CircleCheck className="text-teal-300" size={20} />
                     <span>
-                      <span className="text-gray-300">Register for </span>
-                      <strong className="text-teal-300">
-                        any online platform
-                      </strong>
+                      <span className="text-gray-300">Register for any online platform</span>
                     </span>
                   </li>
                   <li className="flex py-1 gap-3">
                     <CircleCheck className="text-teal-300" size={20} />
                     <span>
-                      <span className="text-gray-300"> Works in</span>
-                      <strong className="text-teal-300"> all countries</strong>
+                      <span className="text-gray-300"> Works in all countries</span>
                     </span>
                   </li>
                   <li className="flex py-1 gap-3">
                     <CircleCheck className="text-teal-300" size={20} />
                     <span>
-                      <span className="text-gray-300">Get</span>
-                      <strong className="text-teal-300"> instant</strong>
-                      <span className="text-gray-300"> SMS 24/7</span>
-                    </span>
-                  </li>
-                  <li className="flex py-1 gap-3">
-                    <CircleCheck className="text-teal-300" size={20} />
-                    <span>
-                      <span className="text-gray-300">Receive unlimited </span>
-                      <strong className="text-teal-300">SMS verifications</strong>
+                      <span className="text-gray-300">Change Email Any Time</span>
                     </span>
                   </li>
                 </ul>
