@@ -13,9 +13,9 @@ export default function HowWorks() {
               How it Works
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto md:px-0 px-3">
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <UserRound className="text-[#48e0d3]" />
               </div>
               <div>
@@ -27,7 +27,7 @@ export default function HowWorks() {
               </div>
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <TicketSlash className="text-[#48e0d3]"  />
               </div>
               <div>
@@ -40,7 +40,7 @@ export default function HowWorks() {
             </div>
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <FolderLock className="text-[#48e0d3]" />
               </div>
               <div>
@@ -52,7 +52,7 @@ export default function HowWorks() {
               </div>
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <Spool className="text-[#48e0d3]" />
               </div>
               <div>
@@ -66,7 +66,7 @@ export default function HowWorks() {
             </div>
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <UserRoundCheck className="text-[#48e0d3]" />
               </div>
               <div>
@@ -79,7 +79,7 @@ export default function HowWorks() {
             </div>
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
-              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 h-12 w-24 flex flex-wrap justify-center gap-3 align-center">
+              <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-24 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                 <RefreshCcwDot className="text-[#48e0d3]" />
               </div>
               <div>

@@ -33,10 +33,10 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="text-white px-6 py-20 frequently-faq">
+    <section className="text-white px-4 py-0 md:py-20 frequently-faq">
       <div className="max-w-4xl mx-auto">
         <h2
-          className="text-3xl md:text-5xl font-bold text-center mb-12"
+          className="text-3xl md:text-5xl font-bold text-center mb-12 mt-12 md:mt-0"
           data-aos="fade-up"
           data-aos-duration="3000"
         >
@@ -51,7 +51,7 @@ export default function FAQSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-gray-700 rounded-lg overflow-hidden"
+              className="border border-gray-700 rounded-lg h-full"
             >
               <button
                 className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
@@ -61,8 +61,8 @@ export default function FAQSection() {
                 <span className="text-2xl">{openIndex === index ? "−" : "+"}</span>
               </button>
               <div
-                className={`px-6 pb-5 text-sm text-gray-400 transition-all duration-300 ease-in-out overflow-hidden ${
-                  openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                className={`px-6 pb-5 text-sm text-gray-400 transition-all duration-300 ease-in-out h-full ${
+                  openIndex === index ? "md:max-h-40 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
                 <p>{faq.answer}</p>

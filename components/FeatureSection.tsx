@@ -9,9 +9,9 @@ export default function FeatureSection() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className=" text-white px-6 mt-28"
+      className=" text-white px-6 md:mt-28 mt-10"
     >
-      <div className="max-w-6xl mx-auto space-y-16 bg-[#0a0a0a] p-20">
+      <div className="max-w-6xl mx-auto space-y-16 bg-[#0a0a0a] md:p-20">
         <div className="grid md:grid-cols-2 gap-8 items-start text-center ">
           {/* Temp Email */}
           <div className="bg-[#111313] border  h-full border-[#383838] rounded-3xl px-9 py-[clamp(60px,5vw,100px)]">

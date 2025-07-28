@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poetsen+One&display=swap");
+
 @import "tailwindcss";
 
 :root {
@@ -9,11 +10,11 @@ body {
   background-color: #070806;
   overflow-x: hidden;
 }
-.w-container{
+.w-container {
   max-width: 1660px;
 }
-.bg-color{
-     backdrop-filter: blur(10px);
+.bg-color {
+  backdrop-filter: blur(10px);
   background-color: rgba(7, 8, 6, 0.6);
 }
 .header_section img {
@@ -115,4 +116,23 @@ li {
 .text-sm {
   font-size: 16px !important;
   line-height: 26px !important;
+}
+.custom-select {
+  appearance: none; /* For most browsers */
+  -webkit-appearance: none; /* Safari */
+  -moz-appearance: none; /* Firefox */
+  background-size: 12px;
+  padding-right: 30px; /* space for arrow */
+}
+
+
+@media(max-width:767px){
+  .image_responsive_mobeile_viwe img {
+    width: 50%;
+    height: auto;
+}
+  .image_responsive_mobeile_viwe_full img {
+    width: 100%;
+    height: auto;
+}
 }
