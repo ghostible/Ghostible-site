@@ -193,7 +193,7 @@ const TempMailPage: React.FC = () => {
               <button onClick={handlecopyEmail} className="inline-block md:ml-0 ml-2 bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition mb-2 cursor-pointer">
                 Copy Email
               </button>
-              <div className='copy_right'>     {copied && <span className="text-teal-400">Copy to Clipboard</span>}</div>
+              <div className='copy_right'>{copied && <span className="text-teal-400">Copy to Clipboard</span>}</div>
             </div>
           </div>
         )}
