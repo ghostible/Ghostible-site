@@ -207,17 +207,7 @@ const TempMailPage: React.FC = () => {
               layout="in-article"
               format="fluid"
             />
-          </div> 
-          <div className="text-center adsbygoogle my-3">
-            <Adsense
-              client="ca-pub-1179093834631168"
-              slot="6886598620"
-              style={{ display: "block" }}
-              layout="in-article"
-              format="fluid"
-            />
           </div>
-
         {/* Inbox or Message Viewer */}
         {selectedMessage ? (
           <div className=" p-6 bg-[#111313] border  h-full border-[#383838] rounded-md">
@@ -282,7 +272,15 @@ const TempMailPage: React.FC = () => {
             </table>
           </div>
         )}
-
+        <div className="text-center adsbygoogle my-3">
+            <Adsense
+              client="ca-pub-1179093834631168"
+              slot="4184746805"
+              style={{ display: "block" }}
+              layout="in-article"
+              format="fluid"
+            />
+          </div>
         {/* Upgrade CTA */}
         {!selectedMessage && (
           <div className="text-center mt-6">

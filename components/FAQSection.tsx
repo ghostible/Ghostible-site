@@ -18,7 +18,7 @@ const faqs = [
       "No — Ghostible temp numbers are rented for a set period (e.g. 7 days or 30 days). During that time, no one else can access it, and you’ll receive all SMS sent to that number securely in your Ghostible inbox.",
   },
   {
-    question: "Is SaaS suitable for startups and small businesses?",
+    question: "Will the number work in my country?",
     answer:
       "Ghostible currently offers U.S. numbers (with more regions coming soon). They work globally for receiving SMS from most apps and services — regardless of where you’re located.",
   },
