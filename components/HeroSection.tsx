@@ -27,7 +27,7 @@ export default function HeroSection() {
                 Get Started
               </Link>
             </div>
-            <div className="mt-6 flex flex-wrap md:justify-center justify-items-start gap-4 text-sm">
+            <div className="mt-6 flex flex-wrap justify-center justify-items-start gap-4 text-sm">
               <p className="flex flex-wrap justify-center gap-3 align-center">
                 <Check className="text-[#46edd5]" size={20} /> No signup for
                 temp mail required

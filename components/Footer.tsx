@@ -7,10 +7,11 @@ export default function Footer() {
   const pathname = usePathname();
   return (
     <>
-      <footer className="bg-black text-white px-6 py-10">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[#1e2939] pb-10">
+      <footer className="bg-black text-white px-6 py-10 md:text-start text-center">
+        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 md:gap-10 gap-5 border-b border-[#1e2939] pb-10">
           <div>
-            <Link href="/" className="hover:text-white">
+           <div className="flex md:justify-start justify-center">
+             <Link href="/" className="hover:text-white">
               <Image
                 src="/ghostible-logo.png"
                 alt="Logo"
@@ -18,10 +19,11 @@ export default function Footer() {
                 height={80}
               />
             </Link>
+           </div>
             <p className="text-[16px] text-gray-300 mb-8 mt-8">
               Ghostible gives you privacy-first tools — no logins, no noise, just freedom.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex md:justify-start justify-center space-x-3">
               <button className="bg-gray-800 p-2 rounded-full text-[#46edd5] hover:bg-[#00d5be] cursor-pointer hover:text-black">
                 <Link2 size={16} />
               </button>

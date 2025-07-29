@@ -102,29 +102,27 @@ export default function TestimonialSection() {
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
               <div
-                className="bg-zinc-900 border h-full border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between cursor-pointer md:max-h-96"
-                onMouseEnter={() => window?.testimonialSwiper?.autoplay?.stop()}
-                onMouseLeave={() =>
-                  window?.testimonialSwiper?.autoplay?.start()
-                }
-              >
-                <p className="text-sm text-gray-300 mb-4">{item.quote}</p>
-                <div className="flex items-center space-x-3 mt-auto">
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    className="w-10 h-10 rounded-full object-cover"
-                    width={50}
-                    height={50}
-                  />
-                  <div>
-                    <p className="font-semibold text-white text-sm">
-                      {item.name}
-                    </p>
-                    <p className="text-xs text-white">{item.role}</p>
-                  </div>
-                </div>
-              </div>
+  className="bg-zinc-900 border border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between h-full min-h-[260px] md:min-h-[300px] cursor-pointer"
+  onMouseEnter={() => window?.testimonialSwiper?.autoplay?.stop()}
+  onMouseLeave={() => window?.testimonialSwiper?.autoplay?.start()}
+>
+  <p className="text-sm text-gray-300 mb-4">{item.quote}</p>
+
+  <div className="flex items-center space-x-3 mt-auto pt-4">
+    <Image
+      src={item.avatar}
+      alt={item.name}
+      className="w-10 h-10 rounded-full object-cover"
+      width={50}
+      height={50}
+    />
+    <div>
+      <p className="font-semibold text-white text-sm">{item.name}</p>
+      <p className="text-xs text-white">{item.role}</p>
+    </div>
+  </div>
+</div>
+
             </SwiperSlide>
           ))}
         </Swiper>
