@@ -16,7 +16,7 @@ export default function TemBannerSection() {
           <div className="flex flex-col md:flex-row items-center justify-between p-3 sm:px-8 md:py-16 py-4 w-full lg:max-w-7xl mx-auto">
             <div className="md:w-3xl space-y-6 image_responsive_mobeile_viwe">
               <Image
-                src="/Ghostible_temp_email.png"
+                src="/Ghostible_temp_number.png"
                 alt="imagetext"
                 width={400}
                 height={400}
@@ -27,9 +27,7 @@ export default function TemBannerSection() {
                 Numbers for Verification
               </h1>
               <p className="text-white text-lg mb-8 md:text-left text-center">
-                Your privacy is important.
-                <span className="font-semibold">Receive SMS online</span> using
-                the world`&quot;`s most popular temporary phone number platform.
+                <span className="font-semibold">Receive SMS online</span> using a private, disposable number — perfect for one-time verifications.
               </p>
               <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
                 <select className="px-4 py-2 border rounded md:w-60 w-full text-white bg-black">

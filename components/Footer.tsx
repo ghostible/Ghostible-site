@@ -19,8 +19,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-[16px] text-gray-300 mb-8 mt-8">
-              Experience fin ancial transformation like never before with
-              Fintec.
+              Ghostible gives you privacy-first tools — no logins, no noise, just freedom.
             </p>
             <div className="flex space-x-3">
               <button className="bg-gray-800 p-2 rounded-full text-[#46edd5] hover:bg-[#00d5be] cursor-pointer hover:text-black">

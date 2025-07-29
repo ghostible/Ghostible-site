@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import { Adsense } from "@ctrl/react-adsense";
 import axios from 'axios';
 import Image from "next/image";
 import Link from 'next/link';
@@ -198,6 +199,25 @@ const TempMailPage: React.FC = () => {
           </div>
         )}
 
+         <div className="text-center adsbygoogle my-3">
+            <Adsense
+              client="ca-pub-1179093834631168"
+              slot="4184746805"
+              style={{ display: "block" }}
+              layout="in-article"
+              format="fluid"
+            />
+          </div> 
+          <div className="text-center adsbygoogle my-3">
+            <Adsense
+              client="ca-pub-1179093834631168"
+              slot="6886598620"
+              style={{ display: "block" }}
+              layout="in-article"
+              format="fluid"
+            />
+          </div>
+
         {/* Inbox or Message Viewer */}
         {selectedMessage ? (
           <div className=" p-6 bg-[#111313] border  h-full border-[#383838] rounded-md">
@@ -218,7 +238,7 @@ const TempMailPage: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="bg-[#111313] border  h-full border-[#383838] rounded-md mt-10">
+          <div className="bg-[#111313] border h-full border-[#383838] rounded-md mt-10">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-800 text-white">
                 <tr>
