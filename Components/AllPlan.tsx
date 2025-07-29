@@ -102,7 +102,7 @@ export default function AllPlan({ plans, currentPlan, handleSubscribe }: TempPho
                     </span>
                   </li>
                 </ul>
-                <div className="sm:px-8 my-7 w-full absolute bottom-0 h-fit">
+                <div className="sm:px-8 my-7 w-full absolute bottom-0">
                   <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300 ">Try Now</Link>
                 </div>
               </div>
