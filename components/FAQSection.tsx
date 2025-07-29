@@ -36,7 +36,7 @@ export default function FAQSection() {
     <section className="text-white px-4 py-0 md:py-20 frequently-faq">
       <div className="max-w-4xl mx-auto">
         <h2
-          className="text-3xl md:text-5xl font-bold text-center mb-12 mt-12 md:mt-0"
+          className="text-3xl md:text-5xl font-bold text-center mb-12 mt-8 md:mt-0"
           data-aos="fade-up"
           data-aos-duration="3000"
         >

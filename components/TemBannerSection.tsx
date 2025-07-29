@@ -15,12 +15,14 @@ export default function TemBannerSection() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between p-3 sm:px-8 md:py-16 py-4 w-full lg:max-w-7xl mx-auto">
             <div className="md:w-3xl space-y-6 image_responsive_mobeile_viwe">
-              <Image
+             <div className="flex md:justify-start text-center w-72">
+               <Image
                 src="/Ghostible_temp_email.png"
                 alt="imagetext"
                 width={400}
                 height={400}
               />
+             </div>
               <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-8 md:text-left text-center">
                 Temporary Phone
                 <br />
@@ -32,7 +34,7 @@ export default function TemBannerSection() {
                 the world`&quot;`s most popular temporary phone number platform.
               </p>
               <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
-                <select className="px-4 py-2 border rounded md:w-60 w-full text-white bg-black">
+                <select className="px-4 py-2 border rounded md:w-60 w-full text-white bg-black custom-select">
                   <option>Select a Country</option>
                   <option>USA</option>
                 </select>
