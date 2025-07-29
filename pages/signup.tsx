@@ -42,7 +42,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+    <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleSignup} className="w-full max-w-md space-y-4 border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-2xl font-bold">Sign Up</h2>
         {error && <p className="text-red-500">{error}</p>}

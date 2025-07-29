@@ -3,29 +3,29 @@ import React, { useState } from "react";
 
 const faqs = [
   {
-    question: "What exactly is project management software, and how can it benefit my team?",
+    question: "What is a Ghostible temporary number?",
     answer:
-      "Project management software is a tool designed to help teams plan, organize, and execute projects efficiently. It benefits your team by providing centralized communication, task management, and progress tracking.",
+      "A Ghostible temp number is a private, one-time-use mobile number you can use to receive SMS verifications online. Unlike free public SMS sites, only you can access the messages — giving you total privacy and security.",
   },
   {
-    question: "Is your project management software suitable for teams of all sizes?",
+    question: "Can I use it for any website or app?",
     answer:
-      "Yes! Our tool scales with your team — from solo freelancers to large enterprises.",
+      "Yes — Ghostible numbers work with most popular platforms like Google, Facebook, Instagram, Telegram, and more. However, some services may block virtual numbers, so we recommend testing with your intended platform before subscribing long-term.",
   },
   {
-    question: "Can I customize and integrate SaaS applications with other tools?",
+    question: "Is the number mine permanently?",
     answer:
-      "Absolutely. Our platform integrates with a wide range of tools like Slack, Zoom, Google Workspace, and more.",
+      "No — Ghostible temp numbers are rented for a set period (e.g. 7 days or 30 days). During that time, no one else can access it, and you’ll receive all SMS sent to that number securely in your Ghostible inbox.",
   },
   {
     question: "Is SaaS suitable for startups and small businesses?",
     answer:
-      "Yes, our pricing and features are tailored to help startups grow without burning budgets.",
+      "Ghostible currently offers U.S. numbers (with more regions coming soon). They work globally for receiving SMS from most apps and services — regardless of where you’re located.",
   },
   {
-    question: "How can SaaS benefit my business?",
+    question: "Is my data and identity safe?",
     answer:
-      "It reduces costs, speeds up workflows, enables remote collaboration, and gives you access to the latest tools automatically.",
+      "Yes. All messages are encrypted and stored securely. No one else can view your messages, and we don’t log or share any personal data. Ghostible is built from the ground up with privacy as the core.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function FAQSection() {
     <section className="text-white px-4 py-0 md:py-20 frequently-faq">
       <div className="max-w-4xl mx-auto">
         <h2
-          className="text-3xl md:text-5xl font-bold text-center mb-12 mt-12 md:mt-0"
+          className="text-3xl md:text-5xl font-bold text-center mb-12 mt-8 md:mt-0"
           data-aos="fade-up"
           data-aos-duration="3000"
         >

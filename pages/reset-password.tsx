@@ -18,7 +18,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+    <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleUpdate} className="w-full max-w-md space-y-4 border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-teal-400 text-2xl font-bold">Reset Password</h2>
         {error && <p className="text-red-500">{error}</p>}
