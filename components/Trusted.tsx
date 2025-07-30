@@ -18,7 +18,7 @@ export default function TrustedSection() {
           <div className="bg-[#070806] rounded-xl shadow-md p-6 w-96 text-center h-64 border border-cyan-950 flex flex-col justify-center">
             <Image src="/google-removebg-preview.png" alt="Google" className="mx-auto" width="200" height="40" />
             <div className="flex justify-center mb-1 text-yellow-400 text-xl">
-              ★★★★★
+              ★★★★☆
             </div>
             <p className="text-sm text-white">4.8 based on 8,435 reviews</p>
           </div>
