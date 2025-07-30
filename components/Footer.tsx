@@ -86,10 +86,9 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link
-                  href="mailto:tanjimislam27@gmail.com"
-                  className="hover:text-teal-400"
-                >
-                  tanjimislam27@gmail.com
+                  href="mailto:team@ghostible.io"
+                  className="hover:text-teal-400">
+                  team@ghostible.io
                 </Link>
               </li>
               <li>
@@ -103,7 +102,7 @@ export default function Footer() {
         </div>
         <div className="max-w-screen-xl mx-auto mt-6 flex flex-col-reverse md:flex-row justify-between items-center text-sm text-white space-y-2 md:space-y-0">
           <div className="md:mt-0 mt-7">
-            <p>© 2025 tanjim. All rights reserved.</p>
+            <p>© 2025 Ghostible. All rights reserved.</p>
           </div>
           <div className="md:flex space-x-4">
             <Link

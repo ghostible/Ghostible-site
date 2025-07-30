@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  UserRound,
-  TicketSlash,
-  FolderLock,
-  Spool,
-  UserRoundCheck,
-  RefreshCcwDot,
-} from "lucide-react";
+import { UserRound, TicketSlash, FolderLock, Spool, UserRoundCheck, RefreshCcwDot } from "lucide-react";
+
 export default function HowWorks() {
   return (
     <>

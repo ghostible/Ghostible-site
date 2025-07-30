@@ -15,49 +15,38 @@ declare global {
 
 const testimonials = [
   {
-    quote:
-      "Saasta has been a game-changer for our team. Its intuitive interface and powerful features have helped us streamline our project management processes and boost productivity. Highly recommended!",
-    name: "Michael Brown",
-    role: "Project Manager at Global Innovations",
+    quote: "❝ I kept getting banned on Hinge and they’d block my number every time. Ghostible let me get a fresh number instantly and I was back swiping within minutes. Total lifesaver.❞ ",
+    name: "Jordan R.",
     avatar:
       "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
-    quote:
-      "As an IT manager, security is a top priority for me. Saasta`&quot;`s robust security measures and compliance standards give me peace of mind knowing that our data is safe and protected.",
-    name: "David Johnson",
-    role: "Marketing Director, Sparkle Brands",
+    quote:"❝ Needed to verify a crypto wallet but didn’t want to give out my real number. Ghostible worked perfectly. Got the SMS, verified it, and moved on. Easy. ❞",
+    name: "Aiden W.",
     avatar:
       "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
-    quote:
-      "Saasta has transformed the way our marketing team operates. Its collaborative features and real-time updates have improved communication and coordination.",
-    name: "Sarah Miller",
-    role: "Marketing Director at Digital Agency",
+    quote: "❝ Tried to sign up for a promo but it required a phone number and I knew it would spam me after. Used Ghostible, got the code instantly, and never got a single follow-up message. Worth every cent. ❞",
+    name: "Emily F.",
     avatar:
       "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
-    quote:
-      "I`&quot;`ve tried many tools, but Saasta stands out for its simplicity and effectiveness. Our projects have never been smoother!",
-    name: "Emily Johnson",
-    role: "Founder of StartUpX",
-    avatar:
-      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
-  },
-  // More duplicates for testing
-  {
-    quote: "Simple and effective!",
-    name: "Emily Johnson",
-    role: "Founder of StartUpX",
+    quote:"❝ Dating apps kept linking my real number even after I deleted the account. Now I just use a burner from Ghostible every time. If I ghost someone, they can’t track me down 😅 ❞",
+    name: "Sophie L.",
     avatar:
       "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
   {
-    quote: "We love Saasta!",
-    name: "Emily Johnson",
-    role: "Founder of StartUpX",
+    quote:"❝ I use Ghostible anytime I need to sign up for a free trial or sketchy site. Burner number + temp email = no spam, no risk. ❞",
+    name: "Matt T.",
+    avatar:
+      "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
+  },
+  {
+    quote: "❝ Tried to sign up for a promo but it required a phone number and I knew it would spam me after. Used Ghostible, got the code instantly, and never got a single follow-up message. Worth every cent. ❞",
+    name: "Emily F.",
     avatar:
       "/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.avif",
   },
@@ -102,27 +91,25 @@ export default function TestimonialSection() {
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
               <div
-  className="bg-zinc-900 border border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between h-full min-h-[260px] md:min-h-[300px] cursor-pointer"
-  onMouseEnter={() => window?.testimonialSwiper?.autoplay?.stop()}
-  onMouseLeave={() => window?.testimonialSwiper?.autoplay?.start()}
->
-  <p className="text-sm text-gray-300 mb-4">{item.quote}</p>
+                className="bg-zinc-900 border border-gray-800 rounded-lg p-6 text-left shadow-md hover:shadow-lg transition flex flex-col justify-between h-full min-h-[260px] md:min-h-[300px] cursor-pointer"
+                onMouseEnter={() => window?.testimonialSwiper?.autoplay?.stop()}
+                onMouseLeave={() => window?.testimonialSwiper?.autoplay?.start()}
+              >
+                <p className="text-sm text-gray-300 mb-4">{item.quote}</p>
 
-  <div className="flex items-center space-x-3 mt-auto pt-4">
-    <Image
-      src={item.avatar}
-      alt={item.name}
-      className="w-10 h-10 rounded-full object-cover"
-      width={50}
-      height={50}
-    />
-    <div>
-      <p className="font-semibold text-white text-sm">{item.name}</p>
-      <p className="text-xs text-white">{item.role}</p>
-    </div>
-  </div>
-</div>
-
+                <div className="flex items-center space-x-3 mt-auto pt-4">
+                  <Image
+                    src={item.avatar}
+                    alt={item.name}
+                    className="w-10 h-10 rounded-full object-cover"
+                    width={50}
+                    height={50}
+                  />
+                  <div>
+                    <p className="font-semibold text-white text-sm">{item.name}</p>
+                  </div>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

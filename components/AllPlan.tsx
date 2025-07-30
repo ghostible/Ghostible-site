@@ -68,7 +68,7 @@ export default function AllPlan({
       <div className="w-full">
         <section className="lg:max-w-7xl w-full mx-auto px-4 text-center price-section">
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full lg:w-5xl mx-auto gap-6 md:pb-12 postion-relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
               <div className="bg-[#111111] rounded-xl card-affter flex flex-col justify-between">
                 <div>
                   <h3 className="text-lg font-medium mb-1 text-white p-8">
