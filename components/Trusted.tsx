@@ -6,10 +6,12 @@ export default function TrustedSection() {
     <>
       <section className="text-white py-3 md:py-20" >
         <div className="text-center mb-12">
-          <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
+          <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4"  data-aos="fade-up"
+                      data-aos-duration="4000">
             * TRUSTED
           </div>
-          <h2 className="text-4xl md:text-5xl font-medium text-teal-300">
+          <h2 className="text-4xl md:text-5xl pt-9 font-medium text-teal-300"  data-aos="fade-up"
+                      data-aos-duration="3000">
             Trsuted by Over 100,000 Americans
           </h2>
         </div>

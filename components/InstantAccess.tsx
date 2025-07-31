@@ -29,7 +29,8 @@ export default function InstantAccess() {
             No sign-up (temp mail only), no hassle. Get your burner phone number
             or temp email in seconds.
           </p>
-          <div className="flex justify-center md:justify-start">
+          <div className="flex justify-center md:justify-start" data-aos="fade-up"
+              data-aos-duration="4000">
             <Link
               href="/temp-mail"
               className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition cursor-pointer"
