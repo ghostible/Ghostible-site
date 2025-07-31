@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 //import twilio from 'twilio'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-06-30.basil'
+  // apiVersion: '2025-06-30.basil'
 })
 
 const supabase = createClient(

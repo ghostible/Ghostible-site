@@ -8,7 +8,7 @@ export default function HowWorks() {
         <section
           className=" text-white py-3 md:py-20 howWorks"
           data-aos="fade-up"
-          data-aos-duration="3000"
+          data-aos-duration="5000"
         >
           <div className="text-center mb-12">
             <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">

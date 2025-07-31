@@ -31,11 +31,11 @@ const ContactPage: React.FC = () => {
     <>
       <section className="text-white px-6 py-5 md:py-16 md:px-20 contact">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 md:gap-10  gap-5 items-start">
-          <div>
+          <div data-aos="fade-right">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 md:text-start text-center">Contact Us</h2>
             <p className="text-gray-300  md:text-start text-center">Need assistance or have questions? Reach out to us.</p>
           </div>
-          <form onSubmit={handleSubmit} className="bg-zinc-900 p-6 md:p-10 rounded-lg space-y-4 ">
+          <form onSubmit={handleSubmit} className="bg-zinc-900 p-6 md:p-10 rounded-lg space-y-4 "  data-aos="fade-up">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="text"
