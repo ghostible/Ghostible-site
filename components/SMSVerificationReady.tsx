@@ -13,7 +13,7 @@ export default function SMSVerificationReady() {
           </h2>
           <p className="text-gray-300 mb-8" data-aos="fade-up" data-aos-duration="5000">
            Keep your real number and inbox hidden. Ghostible protects your identity from spam, scams, and trackers.
-          </p>
+          </p>  
           <div className="mt-10 flex flex-wrap justify-left gap-4 text-sm"  data-aos="fade-up"
               data-aos-duration="5000">
             <ul data-aos="fade-up">
