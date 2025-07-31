@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { useEffect, useState } from "react";
-// import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan";
 import TemBannerSection from "@/components/TemBannerSection";
 import TempPhoneEmailPlanPrice from "@/components/TempPhoneEmailPlanPrice";
 import TempPhoneNumber from "@/components/TempPhoneNumber";
 import FAQSection from "@/components/FAQSection";
 import AllPlan from "@/components/AllPlan";
+import TrustedSection from "@/components/Trusted"
 
 type Plan = {
   id: string;
@@ -125,6 +125,7 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       <TemBannerSection />
       <TempPhoneEmailPlanPrice />
       <AllPlan plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe}/>
+      <TrustedSection />
       <TempPhoneNumber/>
       <FAQSection />
     </>

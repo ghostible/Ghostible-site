@@ -8,6 +8,7 @@ import FAQSection from "@/components/FAQSection"
 import TestimonialSection from "@/components/TestimonialSection"
 import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
 import AllPlan from "@/components/AllPlan"
+import TrustedSection from "@/components/Trusted"
 
 type Plan = {
   id: string;
@@ -129,6 +130,7 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
         currentPlan={currentPlan}
         handleSubscribe={handleSubscribe}
       />
+      <TrustedSection />
       <FAQSection />
       <TestimonialSection />
     </>
