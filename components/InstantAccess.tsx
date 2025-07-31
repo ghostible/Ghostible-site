@@ -6,7 +6,8 @@ import { Check } from "lucide-react";
 export default function InstantAccess() {
   return (
     <>
-      <div className="text-center mb-4 mt-16">
+      <div className="text-center mb-4 mt-16" data-aos="fade-up"
+                 data-aos-duration="5000">
         <div className="inline-block m-auto bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
           * FEATURES
         </div>
@@ -16,19 +17,20 @@ export default function InstantAccess() {
           <h2
             className="text-4xl md:text-5xl font-medium text-teal-300 mb-4 md:text-start text-center"
             data-aos="fade-up"
-            data-aos-duration="3000"
+            data-aos-duration="5000"
           >
             Instant Access
           </h2>
           <p
             className="text-gray-300 mb-8  md:text-start text-center"
             data-aos="fade-up"
-            data-aos-duration="3000"
+            data-aos-duration="5000"
           >
             No sign-up (temp mail only), no hassle. Get your burner phone number
             or temp email in seconds.
           </p>
-          <div className="flex justify-center md:justify-start">
+          <div className="flex justify-center md:justify-start" data-aos="fade-up"
+              data-aos-duration="4000">
             <Link
               href="/temp-mail"
               className="inline-block bg-teal-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-teal-300 transition cursor-pointer"
@@ -39,7 +41,7 @@ export default function InstantAccess() {
         </div>
         <div
           className="lg:w-1/2 flex flex-col items-center justify-center text-center"
-          data-aos="fade-left"
+           data-aos="fade-left"
         >
           <Image
             src="/QXIQIrtD92n6vZe63Q0X1v9Mlhk.png"
@@ -55,19 +57,20 @@ export default function InstantAccess() {
             <h2
               className="text-4xl md:text-5xl font-medium text-teal-300 mb-4 md:text-start text-center"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               Private & <br></br> Anonymous
             </h2>
             <p
               className="text-gray-300 mb-8 md:text-start text-center"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               Keep your real number and inbox hidden. Ghostible protects your
               identity from spam, scams, and trackers.
             </p>
-            <div className="mt-10 flex flex-wrap md:justify-start justify-center gap-4 text-sm">
+            <div className="mt-10 flex flex-wrap md:justify-start justify-center gap-4 text-sm"  data-aos="fade-up"
+              data-aos-duration="5000">
               <ul data-aos="fade-up ">
                 <li className="mt-3">
                   <p className="flex flex-wrap justify-center gap-3 align-center">
@@ -99,7 +102,7 @@ export default function InstantAccess() {
               </ul>
             </div>
           </div>
-          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center">
+          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center"  data-aos="fade-left">
             <Image
               src="/5OWCiwpOVASP7Ha4VVU1HYQw.png"
               alt="imagetext"
@@ -115,14 +118,14 @@ export default function InstantAccess() {
             <h2
               className="text-4xl md:text-5xl font-medium text-teal-300 mb-4 md:text-start text-center"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               SMS Verification Ready
             </h2>
             <p
               className="text-gray-300 mb-8 md:text-start text-center"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               Keep your real number and inbox hidden. Ghostible protects your
               identity from spam, scams, and trackers.
@@ -159,7 +162,7 @@ export default function InstantAccess() {
               </ul>
             </div>
           </div>
-          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center">
+          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center"  data-aos="fade-left">
             <Image
               src="/awDNqzGCeUlaMo4sOglKEKyp6O0.png"
               alt="imagetext"
@@ -174,21 +177,21 @@ export default function InstantAccess() {
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             <h2
               className="text-4xl md:text-5xl font-medium text-teal-300 mb-4 md:text-start text-center"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
               data-aos="fade-up"
             >
               Temp Email Addresses
             </h2>
             <p
               className="text-gray-300 mb-8 md:text-start text-center"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
               data-aos="fade-up"
             >
               Keep your real number and inbox hidden. Ghostible protects your
               identity from spam, scams, and trackers.
             </p>
           </div>
-          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center">
+          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center"  data-aos="fade-left">
             <Image
               src="/hg0aUaY4Of4GIn6vPMX0EH65V5o.png"
               alt="imagetext"

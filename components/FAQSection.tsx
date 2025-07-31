@@ -38,7 +38,7 @@ export default function FAQSection() {
         <h2
           className="text-3xl md:text-5xl font-bold text-center mb-12 mt-8 md:mt-0"
           data-aos="fade-up"
-          data-aos-duration="3000"
+          data-aos-duration="5000"
         >
           Frequently Asked Questions (FAQs)
         </h2>
@@ -46,7 +46,7 @@ export default function FAQSection() {
         <div
           className="space-y-4"
           data-aos="fade-up"
-          data-aos-duration="3000"
+          data-aos-duration="5000"
         >
           {faqs.map((faq, index) => (
             <div
@@ -58,14 +58,14 @@ export default function FAQSection() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 <span>{faq.question}</span>
-                <span className="text-2xl">{openIndex === index ? "−" : "+"}</span>
+                <span className="text-2xl cursor-pointer">{openIndex === index ? "−" : "+"}</span>
               </button>
               <div
-                className={`px-6 pb-5 text-sm text-gray-400 transition-all duration-300 ease-in-out h-full ${
+                className={`px-6 text-sm text-gray-400 transition-all duration-300 ease-in-out h-full  ${
                   openIndex === index ? "md:max-h-40 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <p>{faq.answer}</p>
+                <p className="pb-5">{faq.answer}</p>
               </div>
             </div>
           ))}

@@ -57,7 +57,7 @@ export default function TestimonialSection() {
     <section
       className="text-white px-4 md:py-10 py-6"
       data-aos="fade-up"
-      data-aos-duration="3000"
+      data-aos-duration="5000"
     >
       <div className="max-w-6xl mx-auto text-center">
         <div className="mb-4 text-[#46edd5] text-sm font-semibold uppercase tracking-wider">

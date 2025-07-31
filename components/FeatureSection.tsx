@@ -9,7 +9,8 @@ export default function FeatureSection() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className=" text-white px-6 md:mt-28 mt-10"
+      className=" text-white px-6 md:mt-28 mt-10" data-aos="fade-up"
+                 data-aos-duration="5000"
     >
       <div className="max-w-6xl mx-auto space-y-16 md:bg-[#0a0a0a] md:p-20">
         <div className="grid md:grid-cols-2 gap-8 items-start text-center ">

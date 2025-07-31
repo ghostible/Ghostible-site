@@ -9,7 +9,7 @@ import {
 export default function TempPhoneNumber() {
   return (
     <>
-      <div className="bg-[#111111] text-gray-800 font-sans">
+      <div className="bg-[#111111] text-gray-800 font-sans" >
         <section className="py-16 px-4 lg:w-5xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-semibold mb-3 text-white">
             Why We <span className="text-red-600">❤️</span> Temporary Phone
@@ -20,7 +20,7 @@ export default function TempPhoneNumber() {
             benefits that a temporary phone number offers.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
+            <div data-aos="fade-up" className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
               <div className="mb-4">
                 <div className="mx-auto  flex items-center justify-center">
                   <MessageCircleMore className="text-[#46edd5]" size={50} />
@@ -32,7 +32,7 @@ export default function TempPhoneNumber() {
                 virtual phone numbers.
               </p>
             </div>
-            <div className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
+            <div data-aos="fade-up" className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
               <div className="mb-4">
                 <div className="mx-auto  flex items-center justify-center">
                   <ShieldCheck className="text-[#46edd5]" size={50} />
@@ -46,7 +46,7 @@ export default function TempPhoneNumber() {
                 your real number again online.
               </p>
             </div>
-            <div className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
+            <div data-aos="fade-up" className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
               <div className="mb-4">
                 <div className="mx-auto  flex items-center justify-center">
                   <GlobeLock className="text-[#46edd5]" size={50} />
@@ -60,7 +60,7 @@ export default function TempPhoneNumber() {
                 online companies.
               </p>
             </div>
-            <div className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
+            <div data-aos="fade-up" className="group border rounded-lg p-6 transition-all duration-300 hover:shadow-xl  text-white hover:bg-blue-50 hover:text-[#000] cursor-pointer">
               <div className="mb-4">
                 <div className="mx-auto  flex items-center justify-center">
                   <HousePlug className="text-[#46edd5]" size={50} />

@@ -8,9 +8,10 @@ export default function HowWorks() {
         <section
           className=" text-white py-3 md:py-20 howWorks"
           data-aos="fade-up"
-          data-aos-duration="3000"
+          data-aos-duration="5000"
         >
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-aos="fade-up"
+              data-aos-duration="4000">
             <div className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
               * HOW IT WORKS
             </div>
@@ -18,7 +19,8 @@ export default function HowWorks() {
               How it Works
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto md:px-0 px-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto md:px-0 px-3" data-aos="fade-up"
+              data-aos-duration="3000">
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
                 <div className="bg-[#1e1e1e] p-3 rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 items-center">

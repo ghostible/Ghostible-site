@@ -43,7 +43,7 @@ export default function TemBannerSection() {
                 </div>
               </div>
             </div>
-            <div className="md:w-3xl mt-12 md:mt-0">
+            <div className="md:w-3xl mt-12 md:mt-0"  data-aos="fade-left">
               <Image
                 src="/661-6611451_on-an-ios-or-android-phone-using-the-removebg-preview.png"
                 alt="Google"

@@ -10,14 +10,14 @@ export default function TempEmailAddresses() {
             <div className="lg:w-1/2 mb-10 lg:mb-0">
               <h2
                 className="text-4xl md:text-5xl font-medium text-teal-300 mb-4"
-                data-aos-duration="3000"
+                data-aos-duration="5000"
                 data-aos="fade-up"
               >
                 Temp Email Addresses
               </h2>
               <p
                 className="text-gray-300 mb-8"
-                data-aos-duration="3000"
+                data-aos-duration="5000"
                 data-aos="fade-up"
               >
                 Keep your real number and inbox hidden. Ghostible protects your

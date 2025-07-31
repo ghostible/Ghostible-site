@@ -171,7 +171,7 @@ const TempMailPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#070806] min-h-screen py-8 px-4 text-black">
+    <div className="bg-[#070806]  py-8 px-4 text-black">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold text-center mb-6 w-72 mx-auto"><Image className="m-auto" src="/Ghostible_temp_email.png" alt="imagetext" width={500} height={500} /></h1>
 
@@ -210,7 +210,7 @@ const TempMailPage: React.FC = () => {
           </div>
         {/* Inbox or Message Viewer */}
         {selectedMessage ? (
-          <div className=" p-6 bg-[#111313] border  h-full border-[#383838] rounded-md">
+          <div className=" p-6 bg-[#111313] border  border-[#383838] rounded-md">
             <button  onClick={() => setSelectedMessage(null)} className="mb-4 text-sm text-teal-300 hover:underline">
               ← Back to Inbox
             </button>
@@ -228,20 +228,20 @@ const TempMailPage: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="bg-[#111313] border h-full border-[#383838] rounded-md mt-10">
+          <div className="bg-[#111313] border border-[#383838] rounded-md mt-10 min-h-64 max-h-[600px] overflow-y-auto">
             <table className="w-full text-left text-sm">
               <thead className="bg-gray-800 text-white">
                 <tr>
                   <th className="px-4 py-2 bg-teal-400">Sender</th>
-                  <th className="px-4 py-2 bg-teal-400">Subject</th>
-                  <th className="px-4 py-2 bg-teal-400 text-center">View</th>
+                  <th className="px-4 py-2 bg-teal-400 text-left">Subject</th>
+                  <th className="px-4 py-2 bg-teal-400 text-right">View</th>
                 </tr>
               </thead>
               <tbody>
                 {messages.length === 0 ? (
                   <tr>
                     <td colSpan={3} className="text-center py-16 ">
-                      <div className="flex flex-col items-center text-gray-500">
+                      <div className="flex flex-col items-center text-white">
                         <svg className="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path
                             strokeLinecap="round"
@@ -250,17 +250,17 @@ const TempMailPage: React.FC = () => {
                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 10H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2z"
                           />
                         </svg>
-                        <p className="text-lg font-semibold">Your inbox is empty</p>
-                        <p className="text-sm">Waiting for incoming emails</p>
+                        <p className="text-lg font-semibold text-white">Your inbox is empty</p>
+                        <p className="text-sm text-white">Waiting for incoming emails</p>
                       </div>
                     </td>
                   </tr>
                 ) : (
                   messages.map((msg) => (
                     <tr key={msg.id} className="border-gray-200 hover:bg-gray-50">
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.from?.address}</td>
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.subject}</td>
-                      <td className="px-4 py-2 px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-center">
+                      <td className="px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300">{msg.from?.address}</td>
+                      <td className="px-4 py-2  bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-left">{msg.subject}</td>
+                      <td className="px-4 py-2 bg-[#111313] font-mono mt-4 mb-6 text-gray-300 text-right">
                         <button onClick={() => loadFullMessage(msg.id)} className="text-teal-300 hover:underline">
                           View
                         </button>

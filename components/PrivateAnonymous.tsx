@@ -11,19 +11,20 @@ export default function PrivateAnonymous() {
             <h2
               className="text-4xl md:text-5xl font-medium text-teal-300 mb-4"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               Private & <br></br> Anonymous
             </h2>
             <p
               className="text-gray-300 mb-8"
               data-aos="fade-up"
-              data-aos-duration="3000"
+              data-aos-duration="5000"
             >
               Keep your real number and inbox hidden. Ghostible protects your
               identity from spam, scams, and trackers.
             </p>
-            <div className="mt-10 flex flex-wrap justify-left gap-4 text-sm">
+            <div className="mt-10 flex flex-wrap justify-left gap-4 text-sm"  data-aos="fade-up"
+              data-aos-duration="5000">
               <ul data-aos="fade-up">
                 <li className="mt-3">
                   <p className="flex flex-wrap justify-center gap-3 align-center">
@@ -55,7 +56,7 @@ export default function PrivateAnonymous() {
               </ul>
             </div>
           </div>
-          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center">
+          <div className="lg:w-1/2 flex flex-col items-center justify-center text-center"  data-aos="fade-left">
             <Image
               src="/5OWCiwpOVASP7Ha4VVU1HYQw.png"
               alt="imagetext"

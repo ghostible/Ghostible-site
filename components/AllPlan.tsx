@@ -69,7 +69,8 @@ export default function AllPlan({
         <section className="lg:max-w-7xl w-full mx-auto px-4 text-center price-section">
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
-              <div className="bg-[#111111] rounded-xl card-affter flex flex-col justify-between">
+              <div className="bg-[#111111] rounded-xl card-affter flex flex-col justify-between" data-aos="fade-up"
+                 data-aos-duration="6000">
                 <div>
                   <h3 className="text-lg font-medium mb-1 text-white p-8">
                     Forever Free – Temp Mail
@@ -145,7 +146,8 @@ export default function AllPlan({
                   return (
                     <div
                       key={plan.id}
-                      className="bg-[#111111] rounded-xl card-affter opacity-100"
+                      className="bg-[#111111] rounded-xl card-affter opacity-100" data-aos="fade-up"
+                      data-aos-duration="6000"
                     >
                       <div>
                         <h3 className="text-lg font-medium mb-1 text-white p-8">
