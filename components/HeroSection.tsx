@@ -8,13 +8,15 @@ export default function HeroSection() {
     <>
       <section className="hero-section">
         <div className="flex items-center justify-center  px-4">
-          <div className=" text-center">
-            <h1>
+          <div className="text-center">
+            <h1 data-aos="fade-up" data-aos-easing="linear"
+             data-aos-duration="500">
               Burner Phone Numbers <span className="text-white">& </span>{" "}
               Temporary <br></br> Emails{" "}
               <span className="text-white">- Private. Fast. No Signup.</span>
             </h1>
-            <p className="mt-4 text-gray-300">
+            <p className="mt-4 text-gray-300" data-aos="fade-up" data-aos-easing="linear"
+             data-aos-duration="500">
               Use disposable numbers and temp emails to protect your privacy
               online. <br />
               Get started instantly — no account required.
@@ -28,11 +30,13 @@ export default function HeroSection() {
               </Link>
             </div>
             <div className="mt-6 flex flex-wrap justify-center justify-items-start gap-4 text-sm">
-              <p className="flex flex-wrap justify-center gap-3 align-center">
+              <p className="flex flex-wrap justify-center gap-3 align-center" data-aos="fade-up" data-aos-easing="linear"
+             data-aos-duration="500">
                 <Check className="text-[#46edd5]" size={20} /> No signup for
                 temp mail required
               </p>
-              <p className="flex flex-wrap justify-center gap-3 align-center">
+              <p className="flex flex-wrap justify-center gap-3 align-center" data-aos="fade-up" data-aos-easing="linear"
+             data-aos-duration="500">
                 <Check className="text-[#46edd5]" size={20} /> Instant access
               </p>
             </div>
