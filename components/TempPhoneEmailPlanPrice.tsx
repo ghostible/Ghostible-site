@@ -1,9 +1,5 @@
-// import { CircleCheck } from "lucide-react";
-// import Link from "next/link";
 
 import CustomSelect from "./CustomSelect";
-
-
 export default function TempPhoneEmailPlanPrice() {
   return (
     <>

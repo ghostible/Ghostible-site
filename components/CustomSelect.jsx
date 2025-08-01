@@ -1,10 +1,9 @@
 
 import { useState } from "react";
-
+import { ChevronDown } from 'lucide-react';
 export default function CustomSelect({ options, defaultText }) {
   const [active, setActive] = useState(false);
   const [selected, setSelected] = useState(defaultText || "Select Option");
-
   const handleSelect = (option) => {
     setSelected(option);
     setActive(false);
@@ -17,7 +16,7 @@ export default function CustomSelect({ options, defaultText }) {
         onClick={() => setActive(!active)}
       >
         <span className="sBtn-text">{selected}</span>
-        <span className="arrow">▼</span>
+        <span className="arrow"><ChevronDown /></span>
       </div>
       {active && (
         <ul className="options absolute mt-2 w-full bg-gray-900 rounded-md shadow-md z-10">
