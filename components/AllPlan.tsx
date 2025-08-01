@@ -78,10 +78,10 @@ export default function AllPlan({
               >
                 <div className="left-glow"></div>
                 <div className="right-glow"></div>
-                <div>
+                <div> 
                   <h3 className="text-lg font-medium mb-1 text-white p-8">
                     Forever Free – Temp Mail
-                  </h3>
+                  </h3> 
                   <p className="text-3xl font-bold mb-2 text-white border-t border-[#1e2939] py-5">
                     $0
                   </p>
