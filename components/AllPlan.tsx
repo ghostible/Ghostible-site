@@ -71,13 +71,8 @@ export default function AllPlan({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
               <div
                 className="bg-[#111111] rounded-xl
-<<<<<<< HEAD
-                  hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
-                  transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
-=======
                 shadow-[0_0_20px_rgba(0,255,255,0.1)] 
             transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
->>>>>>> e0b10b7ec0a2e335fa8711bb08adb5cbaf5e47c2
                 data-aos="fade-up"
                 data-aos-duration="6000"
               >
