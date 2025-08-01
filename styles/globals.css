@@ -101,18 +101,50 @@ li {
   color: white;
   overflow: hidden;
 }
+
 .card-affter::before {
   content: "";
+  position: absolute;
+  top: -70px;
+  left: 10%;
+  width: 80%;
+  height: 76px;
   background: linear-gradient(180deg, #a0e00d00, #a0e00d);
   border-radius: 100%;
   filter: blur(45px);
-  flex: none;
-  height: 76px;
-  left: calc(50.135869707409896% - 84.5945945945946% / 2);
-  position: absolute;
-  top: -70px;
-  width: 85%;
 }
+.card-affter::after {
+  content: "";
+  position: absolute;
+  bottom: -70px;
+  left: 10%;
+  width: 80%;
+  height: 76px;
+  background: linear-gradient(0deg, #a0e00d00, #a0e00d);
+  border-radius: 100%;
+  filter: blur(45px);
+}
+.card-affter .left-glow {
+  position: absolute;
+  top: 10%;
+  left: -50px;
+  width: 76px;
+  height: 80%;
+  background: linear-gradient(90deg, #a0e00d00, #a0e00d);
+  border-radius: 100%;
+  filter: blur(45px);
+}
+.card-affter .right-glow {
+  position: absolute;
+  top: 10%;
+  right: -50px;
+  width: 76px;
+  height: 80%;
+  background: linear-gradient(-90deg, #a0e00d00, #a0e00d);
+  border-radius: 100%;
+  filter: blur(45px);
+}
+
 .text-sm {
   font-size: 16px !important;
   line-height: 26px !important;

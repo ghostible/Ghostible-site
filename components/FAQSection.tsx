@@ -48,27 +48,21 @@ export default function FAQSection() {
           data-aos="fade-up"
           data-aos-duration="5000"
         >
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-gray-700 rounded-lg h-full"
-            >
-              <button
-                className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <span>{faq.question}</span>
-                <span className="text-2xl cursor-pointer">{openIndex === index ? "−" : "+"}</span>
-              </button>
-              <div
-                className={`px-6 text-sm text-gray-400 transition-all duration-300 ease-in-out h-full  ${
-                  openIndex === index ? "md:max-h-40 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <p className="pb-5">{faq.answer}</p>
-              </div>
-            </div>
-          ))}
+         {faqs.map((faq, index) => (
+  <div key={index}>
+    <button
+      className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
+      onClick={() => setOpenIndex(openIndex === index ? null : index)}
+    >
+      <span>{faq.question}</span>
+      <span className="text-2xl cursor-pointer">{openIndex === index ? "−" : "+"}</span>
+    </button>
+
+    {openIndex === index && (
+      <div className="px-6 pb-5 text-gray-400">{faq.answer}</div>
+    )}
+  </div>
+))}
         </div>
       </div>
     </section>

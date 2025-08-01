@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import CustomSelect from "@/components/CustomSelect";
 export default function TemBannerSection() {
   return (
     <>
@@ -33,8 +32,10 @@ export default function TemBannerSection() {
                 Never Get Banned Again – Use Private Numbers That Work Everywhere.
               </p>
               <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
-                <CustomSelect options={["Option 1", "Option 2", "Option 3"]}
-                   defaultText="Select First" />
+                <select id="country_dropdown" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
+                  <option>Select a Country</option>
+                  <option value="usa">United States</option>
+                </select>
                 <div className="buy_number md:mt-0 mt-5">
                   <button className="bg-teal-400 md:w-60 w-full text-black font-semibold py-4 sm:px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
                     Buy a Phone Number
