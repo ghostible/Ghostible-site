@@ -7,6 +7,7 @@ import TempPhoneNumber from "@/components/TempPhoneNumber";
 import FAQSection from "@/components/FAQSection";
 import AllPlan from "@/components/AllPlan";
 import TrustedSection from "@/components/Trusted"
+import TestimonialSection from "@/components/TestimonialSection"
 
 type Plan = {
   id: string;
@@ -128,6 +129,7 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       <TrustedSection />
       <TempPhoneNumber/>
       <FAQSection />
+      <TestimonialSection />
     </>
   );
 }
