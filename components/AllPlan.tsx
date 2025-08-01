@@ -71,8 +71,13 @@ export default function AllPlan({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
               <div
                 className="bg-[#111111] rounded-xl
+<<<<<<< HEAD
                   hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
                   transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
+=======
+                shadow-[0_0_20px_rgba(0,255,255,0.1)] 
+            transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
+>>>>>>> e0b10b7ec0a2e335fa8711bb08adb5cbaf5e47c2
                 data-aos="fade-up"
                 data-aos-duration="6000"
               >
@@ -116,7 +121,7 @@ export default function AllPlan({
                 <div className="px-8 mt-6 mb-8">
                   <Link
                     href="/temp-mail"
-                    className="w-max cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
+                    className="w-max cursor-pointer px-8 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
                   >
                     Try Now
                   </Link>
@@ -157,13 +162,13 @@ export default function AllPlan({
                     <div
                       key={plan.id}
                       className="bg-[#111111] rounded-xl
-                      hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
+                      shadow-[0_0_20px_rgba(0,255,255,0.1)] 
                       transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter opacity-100"
                       data-aos="fade-up"
                       data-aos-duration="6000"
-                    >
-                  <div className="left-glow"></div>
-                   <div className="right-glow"></div>
+                    > 
+                     <div className="left-glow"></div>
+                     <div className="right-glow"></div>
                       <div>
                         <h3 className="text-lg font-medium mb-1 text-white p-8">
                           {product?.name}
@@ -191,7 +196,7 @@ export default function AllPlan({
                         {subscriptionId ? (
                           isActive ? (
                             <button
-                              className="w-max px-6 py-3 rounded-full text-center font-medium bg-gray-700 text-white cursor-not-allowed"
+                              className="w-max px-8 py-3 rounded-full text-center font-medium bg-gray-700 text-white cursor-not-allowed"
                               disabled
                             >
                               Current Plan
@@ -201,7 +206,7 @@ export default function AllPlan({
                               onClick={() =>
                                 handleSubscribe(plan.id, planLabel)
                               }
-                              className="w-max cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
+                              className="w-max cursor-pointer px-8 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
                             >
                               Upgrade
                             </button>
@@ -209,7 +214,7 @@ export default function AllPlan({
                         ) : (
                           <button
                             onClick={() => handleSubscribe(plan.id, planLabel)}
-                            className="w-max cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
+                            className="w-max cursor-pointer px-8 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
                           >
                             Buy Now
                           </button>

@@ -1,10 +1,10 @@
+import React from "react";
 
-import CustomSelect from "./CustomSelect";
 export default function TempPhoneEmailPlanPrice() {
   return (
     <>
       <div className="w-full">
-        <section className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
+        <section id="next-section" className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
             Rent private numbers that work with <span className="underline text-white"> all apps and websites</span>.
           </h2>
@@ -16,8 +16,9 @@ export default function TempPhoneEmailPlanPrice() {
             <span className="font-medium text-white">
               Number pricing for:
             </span>
-             <CustomSelect options={["Option 1", "Option 2", "Option 3"]}
-                               defaultText="Select Second" />
+             <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
+              <option value="usa">United States</option>
+            </select>
           </div>
         </section>
       </div>

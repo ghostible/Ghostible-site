@@ -101,7 +101,8 @@ li {
   color: white;
   overflow: hidden;
 }
-
+ 
+/* Top Glow */
 .card-affter::before {
   content: "";
   position: absolute;
@@ -109,11 +110,44 @@ li {
   left: 10%;
   width: 80%;
   height: 76px;
-  background: linear-gradient(180deg, #a0e00d00, #a0e00d);
+  background: linear-gradient(180deg, #a0e00d00, #00d5be);
+ 
+/* Bottom Glow */
+.card-affter::after {
+  content: "";
+  position: absolute;
+  bottom: -70px;
+  left: 10%;
+  width: 80%;
+  height: 76px;
+  background: linear-gradient(0deg, #a0e00d00, #00d5be);
   border-radius: 100%;
   filter: blur(45px);
 }
-.card-affter::after {
+ 
+/* Left Glow */
+.card-affter .left-glow {
+  position: absolute;
+  top: 10%;
+  left: -50px;
+  width: 76px;
+  height: 80%;
+  background: linear-gradient(90deg, #a0e00d00, #00d5be);
+  border-radius: 100%;
+  filter: blur(45px);
+}
+ 
+/* Right Glow */
+.card-affter .right-glow {
+  position: absolute;
+  top: 10%;
+  right: -50px;
+  width: 76px;
+  height: 80%;
+  background: linear-gradient(-90deg, #a0e00d00, #00d5be);
+  border-radius: 100%;
+  filter: blur(45px);
+}
   content: "";
   position: absolute;
   bottom: -70px;
@@ -241,7 +275,7 @@ li {
   color: #fff;
 }
 .select-menu .options .option .option-text:hover {
-  color: #000;
+  color: #fff;
 }
 
 .select-btn i {
