@@ -1,6 +1,24 @@
-import React from "react";
+import { useState } from 'react';
 import Image from "next/image";
+
 export default function TemBannerSection() {
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleScroll = () => {
+    const dropdown = document.getElementById('country_dropdown') as HTMLSelectElement;
+    const selectedValue = dropdown?.value;
+
+    if (!selectedValue || selectedValue === 'Select a Country') {
+      setErrorMessage('Select any country');
+      return;
+    }
+
+    setErrorMessage(''); // Clear error if valid
+    const section = document.getElementById('next-section');
+    section?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <div className="w-full">
@@ -37,10 +55,13 @@ export default function TemBannerSection() {
                   <option value="usa">United States</option>
                 </select>
                 <div className="buy_number md:mt-0 mt-5">
-                  <button className="bg-teal-400 md:w-60 w-full text-black font-semibold py-4 sm:px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
+                  <button onClick={handleScroll} className="bg-teal-400 md:w-60 w-full text-black font-semibold py-4 sm:px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
                     Buy a Phone Number
                   </button>
                 </div>
+                {errorMessage && (
+                  <p className="text-teal-400 text-sm mt-2">{errorMessage}</p>
+                )}
               </div>
             </div>
             <div className="md:w-3xl mt-12 md:mt-0"  data-aos="fade-left">

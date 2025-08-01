@@ -6,7 +6,7 @@ export default function TempPhoneEmailPlanPrice() {
   return (
     <>
       <div className="w-full">
-        <section className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
+        <section id="next-section" className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
             Rent private numbers that work with
             <span className="underline text-white"> all apps and websites</span>.

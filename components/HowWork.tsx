@@ -4,9 +4,8 @@ import { UserRound, TicketSlash, FolderLock, Spool, UserRoundCheck, RefreshCcwDo
 export default function HowWorks() {
   return (
     <>
-      <div>
         <section
-          className=" text-white py-3 md:py-20 howWorks"
+          className="how-work text-white py-3 md:py-20 howWorks"
           data-aos="fade-up"
           data-aos-duration="5000"
         >
@@ -127,7 +126,6 @@ export default function HowWorks() {
             </div>
           </div>
         </section>
-      </div>
     </>
   );
 }
