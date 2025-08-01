@@ -107,7 +107,7 @@ export default function AllPlan({
                   </ul>
                 </div>
                 <div className="px-8 mt-6 mb-8">
-                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">
+                  <Link href="/temp-mail" className="block w-full cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300">
                     Try Now
                   </Link>
                 </div>
@@ -176,7 +176,7 @@ export default function AllPlan({
                         {subscriptionId ? (
                           isActive ? (
                             <button
-                              className="w-full px-6 py-3 rounded-md text-center font-medium bg-gray-700 text-white cursor-not-allowed"
+                              className="w-full px-6 py-3 rounded-full text-center font-medium bg-gray-700 text-white cursor-not-allowed"
                               disabled
                             >
                               Current Plan
@@ -186,7 +186,7 @@ export default function AllPlan({
                               onClick={() =>
                                 handleSubscribe(plan.id, planLabel)
                               }
-                              className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
+                              className="w-full cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
                             >
                               Upgrade
                             </button>
@@ -194,7 +194,7 @@ export default function AllPlan({
                         ) : (
                           <button
                             onClick={() => handleSubscribe(plan.id, planLabel)}
-                            className="w-full cursor-pointer px-6 py-3 rounded-md text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
+                            className="w-full cursor-pointer px-6 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
                           >
                             Buy Now
                           </button>

@@ -12,17 +12,15 @@ export default function TempPhoneEmailPlanPrice() {
             <span className="underline text-white"> all apps and websites</span>.
           </h2>
           <p className="text-white w-full lg:max-w-3xl mx-auto mb-6">
-            Get a new non-voip phone number accessible from anywhere in the
-            world. Perfect for account activation and SMS verification on any
-            platform.
+            Get Verified Instantly on Any App – No VOIP, No Limits.
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-4">
-            <label className="font-medium text-white">
+            <span className="font-medium text-white">
               Number pricing for:
-            </label>
-            <select id="country" className="px-4 py-2 border rounded w-60 text-white bg-[#111111]">
-              <option>United States</option>
+            </span>
+            <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
+              <option value="usa">United States</option>
             </select>
           </div>
         </section>

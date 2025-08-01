@@ -29,12 +29,12 @@ export default function TemBannerSection() {
                 Numbers for Verification
               </h1>
               <p className="text-white text-lg mb-8 md:text-left text-center">
-                <span className="font-semibold">Receive SMS online</span> using a private, disposable number — perfect for one-time verifications.
+                Never Get Banned Again – Use Private Numbers That Work Everywhere.
               </p>
               <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
-                <select className="px-4 py-2 border rounded md:w-60 w-full text-white bg-black custom-select">
+                <select id="country_dropdown" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
                   <option>Select a Country</option>
-                  <option>USA</option>
+                  <option value="usa">United States</option>
                 </select>
                 <div className="buy_number md:mt-0 mt-5">
                   <button className="bg-teal-400 md:w-60 w-full text-black font-semibold py-4 sm:px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">

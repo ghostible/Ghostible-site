@@ -91,12 +91,7 @@ export default function Footer() {
                   team@ghostible.io
                 </Link>
               </li>
-              <li>
-                <Link href="tel:+888 777 222" className="hover:text-teal-400">
-                  +888 777 222
-                </Link>
-              </li>
-              <li>2405 Dhaka, Bangladesh</li>
+              <li>California, United States</li>
             </ul>
           </div>
         </div>

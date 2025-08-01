@@ -16,7 +16,7 @@ export default function TrustedSection() {
           <h2
             className="text-4xl md:text-5xl pt-9 md:px-0 px-3 font-medium text-teal-300"
             data-aos="fade-up"
-            data-aos-duration="3000"
+            data-aos-duration="5000"
           >
             Trsuted by Over 100,000 Americans
           </h2>
