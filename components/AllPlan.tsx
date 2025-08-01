@@ -72,7 +72,7 @@ export default function AllPlan({
               <div
                 className="bg-[#111111] rounded-xl
             hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
-            transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer"
+            transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
                 data-aos="fade-up"
                 data-aos-duration="6000"
               >
