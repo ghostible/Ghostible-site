@@ -6,8 +6,7 @@ export default function TempPhoneEmailPlanPrice() {
       <div className="w-full">
         <section className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-            Rent private numbers that work with
-            <span className="underline text-white"> all apps and websites</span>.
+            Rent private numbers that work with <span className="underline text-white"> all apps and websites</span>.
           </h2>
           <p className="text-white w-full lg:max-w-3xl mx-auto mb-6">
             Get Verified Instantly on Any App – No VOIP, No Limits.
