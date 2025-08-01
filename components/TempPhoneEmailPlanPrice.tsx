@@ -1,6 +1,4 @@
-// import { CircleCheck } from "lucide-react";
-// import Link from "next/link";
-
+import CustomSelect from "./CustomSelect";
 
 export default function TempPhoneEmailPlanPrice() {
   return (
@@ -8,8 +6,7 @@ export default function TempPhoneEmailPlanPrice() {
       <div className="w-full">
         <section id="next-section" className="lg:max-w-7xl w-full mx-auto px-4 lg:py-16 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
-            Rent private numbers that work with
-            <span className="underline text-white"> all apps and websites</span>.
+            Rent private numbers that work with <span className="underline text-white"> all apps and websites</span>.
           </h2>
           <p className="text-white w-full lg:max-w-3xl mx-auto mb-6">
             Get Verified Instantly on Any App – No VOIP, No Limits.
@@ -19,7 +16,7 @@ export default function TempPhoneEmailPlanPrice() {
             <span className="font-medium text-white">
               Number pricing for:
             </span>
-            <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
+             <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
               <option value="usa">United States</option>
             </select>
           </div>

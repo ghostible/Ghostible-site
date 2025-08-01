@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from "next/image";
-
 export default function TemBannerSection() {
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -9,7 +8,7 @@ export default function TemBannerSection() {
     const dropdown = document.getElementById('country_dropdown') as HTMLSelectElement;
     const selectedValue = dropdown?.value;
 
-    if (!selectedValue || selectedValue === 'Select a Country') {
+    if (!selectedValue || selectedValue === 'Please Select a Country') {
       setErrorMessage('Select any country');
       return;
     }
@@ -50,7 +49,7 @@ export default function TemBannerSection() {
                 Never Get Banned Again – Use Private Numbers That Work Everywhere.
               </p>
               <div className="flex flex-col md:flex-row space-y-3 sm:space-y-0 sm:space-x-4 md:text-left text-center ">
-                <select id="country_dropdown" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
+               <select id="country_dropdown" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
                   <option>Select a Country</option>
                   <option value="usa">United States</option>
                 </select>
@@ -59,8 +58,10 @@ export default function TemBannerSection() {
                     Buy a Phone Number
                   </button>
                 </div>
-                {errorMessage && (
-                  <p className="text-teal-400 text-sm mt-2">{errorMessage}</p>
+              </div>
+              <div className='error_message'>
+                  {errorMessage && (
+                  <p className="text-teal-400 px-4 text-sm mt-2">{errorMessage}</p>
                 )}
               </div>
             </div>
