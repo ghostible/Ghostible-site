@@ -1,6 +1,8 @@
 // import { CircleCheck } from "lucide-react";
 // import Link from "next/link";
 
+import CustomSelect from "./CustomSelect";
+
 
 export default function TempPhoneEmailPlanPrice() {
   return (
@@ -19,9 +21,8 @@ export default function TempPhoneEmailPlanPrice() {
             <span className="font-medium text-white">
               Number pricing for:
             </span>
-            <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
-              <option value="usa">United States</option>
-            </select>
+             <CustomSelect options={["Option 1", "Option 2", "Option 3"]}
+                               defaultText="Select Second" />
           </div>
         </section>
       </div>
