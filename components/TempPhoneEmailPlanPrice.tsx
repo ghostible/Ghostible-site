@@ -1,4 +1,4 @@
-import CustomSelect from "./CustomSelect";
+import React from "react";
 
 export default function TempPhoneEmailPlanPrice() {
   return (
