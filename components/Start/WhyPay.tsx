@@ -5,14 +5,14 @@ export default function WhyPay() {
   return (
     <div>
       
-      <section className="bg-black py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
+      <section className=" py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Why Pay When Free Sites Exist?
           </h2>
           <p className="text-gray-400 mb-10 max-w-2xl mx-auto text-1xl">
-            Free temp number sites are broken, unreliable, and don't work with
-            the apps you need. Here's why Ghostible actually works:
+            Free temp number sites are broken, unreliable, and don `&apos;`t work with
+            the apps you need. Here`&apos;`s why Ghostible actually works:
           </p>
           <div className="overflow-x-auto border border-white rounded-xl">
             <table className="w-full border border-gray-700 rounded-lg overflow-hidden text-left text-white">

@@ -3,7 +3,7 @@ export default function HowItWorks() {
   return (
     <div>
       
-      <section className="bg-black py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
+      <section className=" py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-7xl mx-auto text-center relative">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             How It Works

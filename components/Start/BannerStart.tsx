@@ -5,7 +5,7 @@ import { Check } from 'lucide-react';
 export default function BannerStart() {
   return (
     <div>
-         <section className="bg-black text-white">
+         <section className=" text-white">
         <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div data-aos="fade-right" data-aos-duration="5000">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
