@@ -22,7 +22,7 @@ export default function HowWorks() {
               data-aos-duration="3000">
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3 rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 items-center">
+                <div className="bg-[#1e1e1e] p-3 rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 items-center">
                   <UserRound className="text-[#48e0d3]" />
                 </div>
               </div>
@@ -38,7 +38,7 @@ export default function HowWorks() {
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
+                <div className="bg-[#1e1e1e] p-3  rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                   <TicketSlash className="text-[#48e0d3]" />
                 </div>
               </div>
@@ -56,7 +56,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
+                <div className="bg-[#1e1e1e] p-3  rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                   <FolderLock className="text-[#48e0d3]" />
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function HowWorks() {
             </div>
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
+                <div className="bg-[#1e1e1e] p-3  rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                   <Spool className="text-[#48e0d3]" />
                 </div>
               </div>
@@ -91,7 +91,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
+                <div className="bg-[#1e1e1e] p-3  rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                   <UserRoundCheck className="text-[#48e0d3]" />
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function HowWorks() {
 
             <div className="bg-[#111111] p-6 rounded-xl md:flex d-block gap-4">
               <div className="flex justify-center">
-                <div className="bg-[#1e1e1e] p-3  rounded-lg text-cyan-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
+                <div className="bg-[#1e1e1e] p-3  rounded-lg text-teal-400 md:h-12 md:w-12 w-12 h-12 flex flex-wrap justify-center gap-3 align-center">
                   <RefreshCcwDot className="text-[#48e0d3]" />
                 </div>
               </div>

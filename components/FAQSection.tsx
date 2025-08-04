@@ -1,5 +1,9 @@
 "use client";
+import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
+import { ChevronUp } from "lucide-react";
+// ✅ Next.js 13+ ke liye hook
+import { usePathname } from "next/navigation";
 
 const faqs = [
   {
@@ -32,8 +36,11 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  // ✅ Current page ka path
+  const pathname = usePathname();
+
   return (
-    <section className="text-white px-4 py-0 md:py-20 frequently-faq">
+    <section className="text-white px-4 py-0 md:py-20 frequently-faq bg-black">
       <div className="max-w-4xl mx-auto">
         <h2
           className="text-3xl md:text-5xl font-bold text-center mb-12 mt-8 md:mt-0"
@@ -43,26 +50,47 @@ export default function FAQSection() {
           Frequently Asked Questions (FAQs)
         </h2>
 
-        <div
-          className="space-y-4"
-          data-aos="fade-up"
-          data-aos-duration="5000"
-        >
-         {faqs.map((faq, index) => (
-  <div key={index}>
-    <button
-      className="w-full flex justify-between items-center px-6 py-5 text-left text-white font-semibold focus:outline-none"
-      onClick={() => setOpenIndex(openIndex === index ? null : index)}
-    >
-      <span>{faq.question}</span>
-      <span className="text-2xl cursor-pointer">{openIndex === index ? "−" : "+"}</span>
-    </button>
+        <div className="space-y-3" data-aos="fade-up" data-aos-duration="5000">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="border border-gray-600 rounded-md overflow-hidden"
+            >
+              {/* FAQ Button */}
+              <button
+                className="w-full flex justify-between items-center px-6 py-4 bg-black hover:text-teal-400 hover:bg-gray-900 text-left font-semibold focus:outline-none transition-colors"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              >
+                <span>{faq.question}</span>
 
-    {openIndex === index && (
-      <div className="px-6 pb-5 text-gray-400">{faq.answer}</div>
-    )}
-  </div>
-))}
+                {/* ✅ Conditional Icon */}
+                <span className="text-2xl cursor-pointer">
+                  <span className="text-2xl cursor-pointer">
+                    {pathname === "/start" ? ( // ✅ Agar current page `/start` hai
+                      openIndex === index ? (
+                        <ChevronUp />
+                      ) : (
+                        <ChevronDown />
+                      )
+                    ) : openIndex === index ? (
+                      "−"
+                    ) : (
+                      "+"
+                    )}
+                  </span>
+                </span>
+              </button>
+
+              {/* Answer Section with Smooth Transition */}
+              <div
+                className={`px-6 text-gray-400 overflow-hidden transition-all duration-300 ${
+                  openIndex === index ? "max-h-40 py-4" : "max-h-0 py-0"
+                }`}
+              >
+                {faq.answer}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

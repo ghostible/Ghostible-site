@@ -109,6 +109,14 @@ export default function Header() {
               >
                 Contact
               </Link>
+               <Link
+                href="/start"
+                className={`hover:text-teal-400 ${
+                  pathname === "/start" ? "text-teal-400" : "text-white"
+                }`}
+              >
+                Start
+              </Link>
             </nav>
           </div>
 
