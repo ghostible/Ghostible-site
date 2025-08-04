@@ -18,11 +18,11 @@ export default function PhoneVerification() {
           </p>
           <div className="bg-black border border-gray-700 rounded-lg py-10 px-4 mb-6">
             <p className="text-teal-400 text-2xl font-bold">
-              $2.99 <span className="text-white text-base font-normal">
+              $2.99 <span className="text-[#a6a6a6] text-base font-normal">
                  gets you started
                 </span>
             </p>
-            <p className="text-gray-400 text-xs mt-2">
+            <p className="text-gray-400 text-xs mt-3.5">
               No monthly commitments • Instant access • Money-back guarantee
             </p>
           </div>

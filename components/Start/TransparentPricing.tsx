@@ -15,7 +15,7 @@ export default function TransparentPricing() {
             you need.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-black/40 border border-gray-700 hover:border-teal-400 rounded-lg p-8 flex flex-col items-center">
+            <div className="bg-[#080808] border border-gray-700 hover:border-teal-400 rounded-lg p-8 flex flex-col items-center">
               <h3 className="text-2xl font-bold text-white mb-1 mt-2.5">
                 One-Time Use
               </h3>
@@ -37,11 +37,11 @@ export default function TransparentPricing() {
                   <Check className='text-[#16a249]' size={20}/> All major apps supported
                 </li>
               </ul>
-              <button className="bg-black text-white w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md hover:bg-teal-400 transition">
+              <button className="bg-black hover:text-black text-white w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md hover:bg-teal-400 transition">
                 Get Number Now
               </button>
             </div>
-            <div className="bg-black/40 border-2 hover:border-teal-400 border-gray-700 rounded-lg p-8 flex flex-col items-center relative">
+            <div className="bg-[#080808] border-2 hover:border-teal-400 border-teal-400 rounded-lg p-8 flex flex-col items-center relative">
               <span className="absolute -top-6 bg-teal-400 text-black text-md font-bold px-4 py-2.5  rounded-full">
                 Most Popular
               </span>
@@ -64,11 +64,11 @@ export default function TransparentPricing() {
                 </li>
                 <li className="flex items-center gap-2"><Check className='text-[#16a249]' size={20}/> Priority support</li>
               </ul>
-              <button className="bg-black text-white w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md hover:bg-teal-400 transition">
+              <button className=" text-black w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md bg-teal-400 transition">
                 Start Weekly Pass
               </button>
             </div>
-            <div className="bg-black/40 border border-gray-700 hover:border-teal-400 rounded-lg p-8 flex flex-col items-center">
+            <div className="bg-[#080808] border border-gray-700 hover:border-teal-400 rounded-lg p-8 flex flex-col items-center">
               <h3 className="text-2xl font-bold text-white mb-1 mt-2.5">
                 Monthly Plan
               </h3>
@@ -90,7 +90,7 @@ export default function TransparentPricing() {
                   <Check className='text-[#16a249]' size={20}/> Dedicated phone line
                 </li>
               </ul>
-              <button className="bg-black text-white border cursor-pointer w-full border-gray-700 px-6 py-2 rounded-md hover:bg-teal-400 transition">
+              <button className="bg-black hover:text-black text-white border cursor-pointer w-full border-gray-700 px-6 py-2 rounded-md hover:bg-teal-400 transition">
                 Go Monthly
               </button>
             </div>

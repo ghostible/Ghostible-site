@@ -2,7 +2,6 @@
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 import { ChevronUp } from "lucide-react";
-// ✅ Next.js 13+ ke liye hook
 import { usePathname } from "next/navigation";
 
 const faqs = [
@@ -35,8 +34,6 @@ const faqs = [
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  // ✅ Current page ka path
   const pathname = usePathname();
 
   return (
@@ -56,17 +53,14 @@ export default function FAQSection() {
               key={index}
               className="border border-gray-600 rounded-md overflow-hidden"
             >
-              {/* FAQ Button */}
               <button
                 className="w-full flex justify-between items-center px-6 py-4 bg-black hover:text-teal-400 hover:bg-gray-900 text-left font-semibold focus:outline-none transition-colors"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 <span>{faq.question}</span>
-
-                {/* ✅ Conditional Icon */}
                 <span className="text-2xl cursor-pointer">
                   <span className="text-2xl cursor-pointer">
-                    {pathname === "/start" ? ( // ✅ Agar current page `/start` hai
+                    {pathname === "/start" ? ( 
                       openIndex === index ? (
                         <ChevronUp />
                       ) : (
@@ -80,8 +74,6 @@ export default function FAQSection() {
                   </span>
                 </span>
               </button>
-
-              {/* Answer Section with Smooth Transition */}
               <div
                 className={`px-6 text-gray-400 overflow-hidden transition-all duration-300 ${
                   openIndex === index ? "max-h-40 py-4" : "max-h-0 py-0"

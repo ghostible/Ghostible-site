@@ -29,42 +29,42 @@ export default function WhyPay() {
                     Works with Tinder &amp; dating apps
                   </td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Guaranteed SMS delivery</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Real U.S. phone numbers</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">No ads or delays</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Customer support</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Refund guarantee</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Works with Uber/DoorDash</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4">Private inbox</td>
                   <td className="px-6 py-4 text-green-500 text-center"><Check className='mx-auto'/></td>
-                  <td className="px-6 py-4 text-red-500 text-center"><X className='mx-auto'/></td>
+                  <td className="px-6 py-4 text-[#811d1d] text-center"><X className='mx-auto'/></td>
                 </tr>
               </tbody>
             </table>

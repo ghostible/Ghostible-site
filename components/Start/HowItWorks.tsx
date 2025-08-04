@@ -13,7 +13,7 @@ export default function HowItWorks() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative ">
             <div className="flex flex-col items-center text-center relative">
-              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10">
+              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10 text-2xl">
                 01
               </div>
               <h3 className="text-white font-semibold mt-4 mb-2">
@@ -25,7 +25,7 @@ export default function HowItWorks() {
               </p>
             </div>
             <div className="flex flex-col items-center text-center relative">
-              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10">
+              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10 text-2xl">
                 02
               </div>
               <h3 className="text-white font-semibold mt-4 mb-2">
@@ -36,7 +36,7 @@ export default function HowItWorks() {
               </p>
             </div>
             <div className="flex flex-col items-center text-center relative">
-              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10">
+              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10 text-2xl">
                 03
               </div>
               <h3 className="text-white font-semibold mt-4 mb-2">
@@ -48,7 +48,7 @@ export default function HowItWorks() {
               </p>
             </div>
             <div className="flex flex-col items-center text-center relative">
-              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10">
+              <div className="w-16 h-16 bg-[#00ffff1a] rounded-full flex items-center justify-center text-[#00ffff] font-bold relative z-10 text-2xl">
                 04
               </div>
               <h3 className="text-white font-semibold mt-4 mb-2">
@@ -61,9 +61,9 @@ export default function HowItWorks() {
             </div>
           </div>
           <div className="hidden md:flex absolute left-0 right-0 top-40 mx-auto w-full justify-around px-12">
-            <div className="flex-1 border-t-2 border-dashed border-cyan-600" />
-            <div className="flex-1 border-t-2 border-dashed border-cyan-600" />
-            <div className="flex-1 border-t-2 border-dashed border-cyan-600" />
+            <div className="flex-1 translate-x-56 border-t-2 border-dashed border-[#00ffff4d]" />
+            <div className="flex-1 translate-x-2 border-t-2 border-dashed border-[#00ffff4d]" />
+            <div className="flex-1 translate-x-2 border-t-2 border-dashed border-[#00ffff4d]" />
           </div>
         </div>
       </section>
