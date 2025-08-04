@@ -71,8 +71,8 @@ export default function AllPlan({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
               <div
                 className="bg-[#111111] rounded-xl
-                shadow-[0_0_20px_rgba(0,255,255,0.1)] 
-            transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
+                  hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
+                  transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
                 data-aos="fade-up"
                 data-aos-duration="6000"
               >
@@ -161,9 +161,9 @@ export default function AllPlan({
                       transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter opacity-100"
                       data-aos="fade-up"
                       data-aos-duration="6000"
-                    > 
-                     <div className="left-glow"></div>
-                     <div className="right-glow"></div>
+                    >
+                  <div className="left-glow"></div>
+                   <div className="right-glow"></div>
                       <div>
                         <h3 className="text-lg font-medium mb-1 text-white p-8">
                           {product?.name}
