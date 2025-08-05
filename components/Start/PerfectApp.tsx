@@ -1,7 +1,5 @@
 import React from 'react'
-import { Heart } from 'lucide-react';
-import { Car } from 'lucide-react';
-import { Users } from 'lucide-react';
+import { Heart, Car, Users, ShoppingBag } from 'lucide-react';
 export default function PerfectApp() {
   return (
     <div>
@@ -12,7 +10,7 @@ export default function PerfectApp() {
             Perfect for Every App You Use
           </h2>
           <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
-            Whether you're dating, working, or shopping online – Ghostible works
+            Whether you&apos;re dating, working, or shopping online – Ghostible works
             with 200+ apps
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -53,7 +51,7 @@ export default function PerfectApp() {
               </p>
             </div>
             <div className="bg-black/40 border border-gray-700 rounded-lg p-6 text-left hover:border-teal-400  transition">
-              <div className="text-teal-400 text-3xl mb-4">🛍️</div>
+              <div className="text-teal-400 text-3xl mb-4"><ShoppingBag size="40" /></div>
               <h3 className="text-xl font-semibold text-white mb-1">
                 Marketplaces
               </h3>

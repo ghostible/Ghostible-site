@@ -29,16 +29,6 @@ const faqs = [
     answer:
       "Yes. All messages are encrypted and stored securely. No one else can view your messages, and we don’t log or share any personal data. Ghostible is built from the ground up with privacy as the core.",
   },
-   {
-    question: "How long do I have to use the number?",
-    answer:
-      "One-time use lasts 30 minutes, weekly passes last 7 days, and monthly plans last 30 days. You can receive unlimited SMS codes during your access period.",
-  },
-   {
-    question: "What apps does this work with?",
-    answer:
-      "Works with 200+ apps including Tinder, Instagram, Uber, DoorDash, WhatsApp, Telegram, Facebook Marketplace, and virtually any app requiring U.S. phone verification.",
-  },
 ];
 
 export default function FAQSection() {

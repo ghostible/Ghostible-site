@@ -1,4 +1,5 @@
 import React from "react";
+
 const Star = ({ filled }: { filled: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +30,8 @@ export default function Review({ rating }: { rating: number }) {
               ))}
             </div>
             <p className="italic mb-4">
-              "Finally got back on dating apps without using my real number.
-              Works perfectly with Tinder!"
+              &ldquo;Finally got back on dating apps without using my real number.
+              Works perfectly with Tinder!&ldquo;
             </p>
             <p className="text-gray-400">— Sarah M.</p>
           </div>
@@ -41,8 +42,8 @@ export default function Review({ rating }: { rating: number }) {
               ))}
             </div>
             <p className="italic mb-4">
-              "Saved my main number from spam. Used it for Uber and DoorDash
-              verification - instant delivery."
+              &ldquo;Saved my main number from spam. Used it for Uber and DoorDash
+              verification - instant delivery.&ldquo;
             </p>
             <p className="text-gray-400">— Mike R.</p>
           </div>
@@ -53,8 +54,8 @@ export default function Review({ rating }: { rating: number }) {
               ))}
             </div>
             <p className="italic mb-4">
-              "No signup hassle, just pay and get the number. Used it for
-              Instagram verification in seconds."
+              &ldquo;No signup hassle, just pay and get the number. Used it for
+              Instagram verification in seconds.&ldquo;
             </p>
             <p className="text-gray-400">— Jessica L.</p>
           </div>

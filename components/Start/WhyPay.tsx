@@ -1,6 +1,6 @@
 import React from 'react'
-import { Check } from 'lucide-react';
-import { X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
+
 export default function WhyPay() {
   return (
     <div>
@@ -11,8 +11,8 @@ export default function WhyPay() {
             Why Pay When Free Sites Exist?
           </h2>
           <p className="text-gray-400 mb-10 max-w-2xl mx-auto text-1xl">
-            Free temp number sites are broken, unreliable, and don `&apos;`t work with
-            the apps you need. Here`&apos;`s why Ghostible actually works:
+            Free temp number sites are broken, unreliable, and don &apos;t work with
+            the apps you need. Here&apos;s why Ghostible actually works:
           </p>
           <div className="overflow-x-auto border border-white rounded-xl">
             <table className="w-full border border-gray-700 rounded-lg overflow-hidden text-left text-white">
