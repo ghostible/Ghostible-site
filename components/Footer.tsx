@@ -109,14 +109,6 @@ export default function Footer() {
               Privacy Policy
             </Link>
             <Link
-              href="/cookies-policy"
-              className={`hover:text-teal-400 ${
-                pathname === "/cookies-policy" ? "text-teal-400" : "text-white"
-              }`}
-            >
-              Cookies Policy
-            </Link>
-            <Link
               href="/terms-conditions"
               className={`hover:text-teal-400 ${
                 pathname === "/terms-conditions"

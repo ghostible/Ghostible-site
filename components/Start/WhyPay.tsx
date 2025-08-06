@@ -3,9 +3,8 @@ import { Check, X } from 'lucide-react';
 
 export default function WhyPay() {
   return (
-    <div>
-      
-      <section className=" py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
+    <>
+      <section className=" py-16 px-6 WhyPaysection" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Why Pay When Free Sites Exist?
@@ -71,6 +70,6 @@ export default function WhyPay() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }

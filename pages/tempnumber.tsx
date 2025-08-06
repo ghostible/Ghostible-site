@@ -5,7 +5,8 @@ import TemBannerSection from "@/components/TemBannerSection";
 import TempPhoneEmailPlanPrice from "@/components/TempPhoneEmailPlanPrice";
 import TempPhoneNumber from "@/components/TempPhoneNumber";
 import FAQSection from "@/components/FAQSection";
-import AllPlan from "@/components/AllPlan";
+// import AllPlan from "@/components/AllPlan";
+import TransparentPricing from "@/components/Start/TransparentPricing";
 import TrustedSection from "@/components/Trusted"
 import TestimonialSection from "@/components/TestimonialSection"
 
@@ -125,7 +126,7 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
     <>
       <TemBannerSection />
       <TempPhoneEmailPlanPrice />
-      <AllPlan plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe}/>
+      <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe}/>
       <TrustedSection />
       <TempPhoneNumber/>
       <FAQSection />

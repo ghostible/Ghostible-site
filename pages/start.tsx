@@ -7,6 +7,7 @@ import HowItWorks from "@/components/Start/HowItWorks";
 import PerfectApp from "@/components/Start/PerfectApp";
 import PhoneVerification from "@/components/Start/PhoneVerification";
 import Review from "@/components/Start/Review";
+import Topplancontent from "@/components/Start/topplancontent";
 import TransparentPricing from "@/components/Start/TransparentPricing";
 import TrustGhostible from "@/components/Start/TrustGhostible";
 import WhyPay from "@/components/Start/WhyPay";
@@ -137,6 +138,7 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
         <WhyPay />
         <PerfectApp/>
         <TrustGhostible/>
+        <Topplancontent />
         <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe} />
         <HowItWorks/>
         <FAQSection/>

@@ -42,10 +42,10 @@ export default function TrustGhostible() {
                 <Shield size="30"/>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">
-                No Signup Required
+                Easy Signup
               </h3>
               <p className="text-gray-400 text-sm">
-                Get your temp number instantly without creating accounts
+                Get your temp number instantly
               </p>
             </div>
             <div className="flex flex-col items-center">
