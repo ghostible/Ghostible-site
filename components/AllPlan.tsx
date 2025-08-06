@@ -2,9 +2,6 @@
 import { useEffect, useState } from "react";
 import { CircleCheck } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient";
-import Link from "next/link";
-//import useAuthRedirect from '@/hooks/useAuthRedirect'
-// import { Check } from 'lucide-react';
 
 interface TempPhoneEmailPlanProps {
   plans: StripePlan[];
@@ -68,61 +65,7 @@ export default function AllPlan({
       <div className="w-full">
         <section className="lg:max-w-7xl w-full mx-auto px-4 text-center price-section">
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
-              <div
-                className="bg-[#111111] rounded-xl
-                  hover:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
-                  transition-all duration-300 p-6 flex flex-col justify-between cursor-pointer card-affter"
-                data-aos="fade-up"
-                data-aos-duration="6000"
-              >
-                <div className="left-glow"></div>
-                <div className="right-glow"></div>
-                <div>
-                  <h3 className="text-lg font-medium mb-1 text-white p-8">
-                    Forever Free – Temp Mail
-                  </h3>
-                  <p className="text-3xl font-bold mb-2 text-white border-t border-[#1e2939] py-5">
-                    $0
-                  </p>
-                  <p className="text-sm text-white mb-4 mt-4 bg-[#16181c] py-3.5">
-                    Awesome Free Temp Mail.
-                  </p>
-                  <ul className="text-left space-y-2 text-white px-8">
-                    <li className="flex py-1 gap-3">
-                      <CircleCheck className="text-teal-300" size={20} />
-                      <span className="text-gray-300">10 Minute Inbox</span>
-                    </li>
-                    <li className="flex py-1 gap-3">
-                      <CircleCheck className="text-teal-300" size={20} />
-                      <span className="text-gray-300">
-                        Register for any online platform
-                      </span>
-                    </li>
-                    <li className="flex py-1 gap-3">
-                      <CircleCheck className="text-teal-300" size={20} />
-                      <span className="text-gray-300">
-                        Works in all countries
-                      </span>
-                    </li>
-                    <li className="flex py-1 gap-3">
-                      <CircleCheck className="text-teal-300" size={20} />
-                      <span className="text-gray-300">
-                        Change Email Any Time
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="px-8 mt-6 mb-8">
-                  <Link
-                    href="/temp-mail"
-                    className="w-max cursor-pointer px-8 py-3 rounded-full text-center font-medium transition border bg-teal-400 text-black hover:bg-teal-300"
-                  >
-                    Try Now
-                  </Link>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full lg:w-5xl mx-auto gap-8 md:pb-12 postion-relative">
               {plans
                 .sort((a, b) => {
                   const getDays = (plan: StripePlan) => {
