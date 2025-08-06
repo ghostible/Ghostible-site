@@ -57,7 +57,7 @@ export default function TransparentPricing({plans, currentPlan, handleSubscribe,
   }, []);
 
   return (
-      <section id="price_sec" className="py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
+      <section id="price_sec" className="pt-16 px-6" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-16">
             <h2 className="text-white text-3xl lg:text-4xl font-bold mb-4">
@@ -157,7 +157,7 @@ export default function TransparentPricing({plans, currentPlan, handleSubscribe,
                 );
               })}
           </div>
-          <div className="mt-10">
+          <div className="mt-20">
             <button className="bg-teal-400 flex group gap-2.5  cursor-pointer mx-auto justify-center text-black font-medium px-8 py-3 rounded-md hover:bg-teal-300 transition">
               <span>Get a Temp Number Now</span>  <MoveRight className="transition-transform duration-300 group-hover:translate-x-1" />
             </button>

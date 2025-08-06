@@ -6,14 +6,14 @@ import { Check } from "lucide-react";
 export default function InstantAccess() {
   return (
     <>
-      <section className="Feature_section">
-        <div className="text-center mb-4 mt-16" data-aos="fade-up"
+      <section className="Feature_section overflow-hidden">
+        <div className="text-center mb-4 mt-16 overflow-hidden" data-aos="fade-up"
                   data-aos-duration="5000">
           <div className="inline-block m-auto bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4">
             * FEATURES
           </div>
         </div>
-        <div className=" max-w-screen-xl mx-auto text-white px-6 py-5 md:py-16 lg:flex items-center md:justify-between gap-16 instantAccess">
+        <div className="overflow-hidden max-w-screen-xl mx-auto text-white px-6 py-5 md:py-16 lg:flex items-center md:justify-between gap-16 instantAccess">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             <h2
               className="text-4xl md:text-5xl font-medium text-teal-300 mb-4 md:text-start text-center"
@@ -52,7 +52,7 @@ export default function InstantAccess() {
             />
           </div>
         </div>
-        <div className="privateAnonymous">
+        <div className="privateAnonymous overflow-hidden">
           <div className=" max-w-screen-xl mx-auto text-white px-6 py-5 md:py-16 lg:flex items-center justify-between gap-16">
             <div className="lg:w-1/2 mb-10 lg:mb-0">
               <h2
@@ -113,7 +113,7 @@ export default function InstantAccess() {
             </div>
           </div>
         </div>
-        <div className="sMSVerificationReady">
+        <div className="sMSVerificationReady overflow-hidden">
           <div className=" max-w-screen-xl mx-auto text-white px-6 py-5 md:py-16 lg:flex items-center justify-between gap-16">
             <div className="lg:w-1/2 mb-10 lg:mb-0">
               <h2
@@ -173,7 +173,7 @@ export default function InstantAccess() {
             </div>
           </div>
         </div>
-        <div className="sMSVerificationReady">
+        <div className="sMSVerificationReady overflow-hidden">
           <div className=" max-w-screen-xl mx-auto  text-white  px-6 py-5 md:py-16 lg:flex items-center justify-between gap-16">
             <div className="lg:w-1/2 mb-10 lg:mb-0">
               <h2

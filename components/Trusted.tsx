@@ -5,7 +5,7 @@ export default function TrustedSection() {
   return (
     <>
       <section className="text-white py-3 md:pt-20">
-        <div className="text-center mb-2 md:mb-12">
+        <div className="text-center mb-2 md:mb-12 md:mt-0 mt-10">
           <div
             className="inline-block bg-[#1d1e1f] text-[#46edd5] text-sm font-semibold px-3 py-1 rounded-full mb-4"
             data-aos="fade-up"

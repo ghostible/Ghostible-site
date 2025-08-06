@@ -5,7 +5,7 @@ export default function TrustGhostible() {
   return (
     <div>
       
-      <section className=" py-16 px-6" data-aos="fade-up" data-aos-duration="5000">
+      <section className=" pt-16 px-6" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Why Americans Trust Ghostible
