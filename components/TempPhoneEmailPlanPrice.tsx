@@ -12,14 +12,14 @@ export default function TempPhoneEmailPlanPrice() {
             Get Verified Instantly on Any App – No VOIP, No Limits.
           </p>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-4">
+          {/* <div className="flex flex-col md:flex-row justify-center items-center gap-2 mb-4">
             <span className="font-medium text-white">
               Number pricing for:
             </span>
              <select id="country_dropdowns" className="px-4 py-4 border rounded-full md:w-60 w-full text-white bg-black custom-select">
               <option value="usa">United States</option>
             </select>
-          </div>
+          </div> */}
         </section>
       </div>
     </>

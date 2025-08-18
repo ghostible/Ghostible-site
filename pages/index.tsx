@@ -9,6 +9,8 @@ import TestimonialSection from "@/components/TestimonialSection"
 import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
 // import AllPlan from "@/components/AllPlan"
 import TransparentPricing from "@/components/Start/TransparentPricing";
+import { NumberGeneratorModal } from "@/components/SmsActivate";
+import { toast } from "@/hooks/use-toast";
 import TrustedSection from "@/components/Trusted"
 
 type Plan = {
@@ -33,6 +35,7 @@ interface TempphonePageProps {
   plans: Plan[];
   currentPlan: string | null;
   handleSubscribe: (priceId: string, planLabel: string, mode: "payment" | "subscription") => Promise<void>;
+  ShowselectedCountry: (selectedCountry: string) => Promise<void>;
 }
 
 export async function getServerSideProps() {
@@ -45,6 +48,8 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
 
   const router = useRouter();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+  const [selectedTier, setSelectedTier] = useState("");
+  const [showNumberModal, setShowNumberModal] = useState(false);
 
   useEffect(() => {
     const fetchUserPlan = async () => {
@@ -76,6 +81,23 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
       router.push("/login");
       return;
     }
+
+    toast({
+      title: "Proceeding to checkout...",
+      description: `Selected:  - `,
+    });
+
+    // For demo: simulate purchase and open number generator
+    setTimeout(() => {
+      setSelectedTier(planLabel);
+      setShowNumberModal(true);
+      console.log('toast', toast);
+      
+      toast({
+        title: "Purchase completed!",
+        description: "You can now generate temporary numbers.",
+      });
+    }, 1000);
 
     // Fetch the user's current subscription from Supabase
     const { data: profile, error } = await supabase
@@ -117,9 +139,9 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
 
       const { url } = await res.json();
       if (url) {
-        window.location.href = url;
+        //window.location.href = url;
       } else {
-        alert("Failed to create checkout session.");
+        //alert("Failed to create checkout session.");
       }
     }
   };
@@ -135,6 +157,7 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
         currentPlan={currentPlan}
         handleSubscribe={handleSubscribe}
       />
+      <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} />
       <TrustedSection />
       <FAQSection />
       <TestimonialSection />
