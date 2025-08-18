@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { MoveRight, Check } from 'lucide-react';
+import { CountrySelector } from "@/components/CountrySelector";
 
 interface TempPhoneEmailPlanProps {
   plans: StripePlan[];
@@ -28,9 +29,10 @@ type marketing_features = {
   name: string;
 };
 
-export default function TransparentPricing({plans, currentPlan, handleSubscribe,}: TempPhoneEmailPlanProps) {
+export default function TransparentPricing({plans, currentPlan, handleSubscribe}: TempPhoneEmailPlanProps) {
 
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState("0");
 
   useEffect(() => {
     const fetchSubscription = async () => {
@@ -59,6 +61,10 @@ export default function TransparentPricing({plans, currentPlan, handleSubscribe,
   return (
       <section id="price_sec" className="pt-8 pb-16 pl-6 pr-6" data-aos="fade-up" data-aos-duration="5000">
         <div className="max-w-6xl mx-auto text-center">
+          <CountrySelector 
+            value={selectedCountry} 
+            onValueChange={setSelectedCountry}
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {plans
               .sort((a, b) => {

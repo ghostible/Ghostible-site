@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import TemBannerSection from "@/components/TemBannerSection";
 import TempPhoneEmailPlanPrice from "@/components/TempPhoneEmailPlanPrice";
 import TempPhoneNumber from "@/components/TempPhoneNumber";
+import { NumberGeneratorModal } from "@/components/SmsActivate";
 import FAQSection from "@/components/FAQSection";
 // import AllPlan from "@/components/AllPlan";
+import { toast } from "@/hooks/use-toast";
 import TransparentPricing from "@/components/Start/TransparentPricing";
 import TrustedSection from "@/components/Trusted"
 import TestimonialSection from "@/components/TestimonialSection"
@@ -34,6 +36,8 @@ interface TempphonePageProps {
   plans: Plan[];
   currentPlan: string | null;
   handleSubscribe: (priceId: string, planLabel: string, mode: "payment" | "subscription") => Promise<void>;
+  ShowselectedCountry: (selectedCountry: string) => Promise<void>;
+  
 }
 
 export async function getServerSideProps() {
@@ -45,6 +49,8 @@ export async function getServerSideProps() {
 export default function TempphonePage({ plans }: TempphonePageProps) {
   const router = useRouter();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+  const [selectedTier, setSelectedTier] = useState("");
+  const [showNumberModal, setShowNumberModal] = useState(false);
 
   useEffect(() => {
     const fetchUserPlan = async () => {
@@ -78,6 +84,23 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       router.push("/login");
       return;
     }
+
+    toast({
+      title: "Proceeding to checkout...",
+      description: `Selected:  - `,
+    });
+
+    // For demo: simulate purchase and open number generator
+    setTimeout(() => {
+      setSelectedTier(planLabel);
+      setShowNumberModal(true);
+      console.log('toast', toast);
+      
+      toast({
+        title: "Purchase completed!",
+        description: "You can now generate temporary numbers.",
+      });
+    }, 1000);
 
     // Fetch the user's current subscription from Supabase
     const { data: profile, error } = await supabase
@@ -119,9 +142,9 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
 
       const { url } = await res.json();
       if (url) {
-        window.location.href = url;
+        //window.location.href = url;
       } else {
-        alert("Failed to create checkout session.");
+        //alert("Failed to create checkout session.");
       }
     }
   };
@@ -131,6 +154,7 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       <TemBannerSection />
       <TempPhoneEmailPlanPrice />
       <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe}/>
+      <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} />
       <TrustedSection />
       <TempPhoneNumber/>
       <FAQSection />
