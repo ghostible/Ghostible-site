@@ -66,10 +66,10 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
   }, []);
 
   const handleSubscribe = async (
-  priceId: string,
-  planLabel: string,
-  mode: "payment" | "subscription"
-) => {
+    priceId: string,
+    planLabel: string,
+    mode: "payment" | "subscription"
+  ) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();

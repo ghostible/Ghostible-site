@@ -7,7 +7,8 @@ import InstantAccess from "@/components/InstantAccess"
 import FAQSection from "@/components/FAQSection"
 import TestimonialSection from "@/components/TestimonialSection"
 import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
-import AllPlan from "@/components/AllPlan"
+// import AllPlan from "@/components/AllPlan"
+import TransparentPricing from "@/components/Start/TransparentPricing";
 import TrustedSection from "@/components/Trusted"
 
 type Plan = {
@@ -31,7 +32,7 @@ type marketing_features = {
 interface TempphonePageProps {
   plans: Plan[];
   currentPlan: string | null;
-  handleSubscribes: (priceId: string, plan: string) => Promise<void>;
+  handleSubscribe: (priceId: string, planLabel: string, mode: "payment" | "subscription") => Promise<void>;
 }
 
 export async function getServerSideProps() {
@@ -62,62 +63,66 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
     fetchUserPlan();
   }, []);
 
-  const handleSubscribe = async (priceId: string, plan: string) => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-  
-      if (!user) {
-        router.push("/login");
-        return;
-      }
-  
-      // Fetch the user's current subscription from Supabase
-      const { data: profile, error } = await supabase
-        .from("profiles")
-        .select("subscription_id")
-        .eq("id", user.id)
-        .single();
-  
-      if (error) {
-        console.error("Error fetching profile:", error);
-        return;
-      }
-  
-      if (profile?.subscription_id) {
-        // User already has a subscription, so this is an upgrade
-        const res = await fetch("/api/upgrade-subscription", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user.id,
-            planId: priceId,
-          }),
-        });
-  
-        const data = await res.json();
-        if (data.success) {
-          alert("Plan upgraded successfully.");
-        } else {
-          alert("Failed to upgrade plan.");
-        }
-  
+  const handleSubscribe = async (
+    priceId: string,
+    planLabel: string,
+    mode: "payment" | "subscription"
+  ) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    // Fetch the user's current subscription from Supabase
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("subscription_id")
+      .eq("id", user.id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching profile:", error);
+      return;
+    }
+
+    if (profile?.subscription_id && mode === "subscription") {
+      // User already has a subscription, so this is an upgrade
+      const res = await fetch("/api/upgrade-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.id,
+          planId: priceId,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Plan upgraded successfully.");
       } else {
-        // New purchase flow
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: user.id, priceId, plan }),
-        });
-  
-        const { url } = await res.json();
-        if (url) {
-          window.location.href = url;
-        } else {
-          alert("Failed to create checkout session.");
-        }
+        alert("Failed to upgrade plan.");
       }
-    };
+
+    } else {
+      // New purchase flow
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, priceId, mode }),  // 👈 pass mode here
+      });
+
+      const { url } = await res.json();
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert("Failed to create checkout session.");
+      }
+    }
+  };
 
   return (
     <>
@@ -125,7 +130,7 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
       <InstantAccess />
       <HowWork />
       <TempPhoneEmailPlan />
-      <AllPlan
+      <TransparentPricing
         plans={plans}
         currentPlan={currentPlan}
         handleSubscribe={handleSubscribe}

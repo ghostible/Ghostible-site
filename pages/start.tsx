@@ -36,7 +36,7 @@ type marketing_features = {
 interface TempphonePageProps {
   plans: Plan[];
   currentPlan: string | null;
-  handleSubscribes: (priceId: string, plan: string) => Promise<void>;
+  handleSubscribe: (priceId: string, planLabel: string, mode: "payment" | "subscription") => Promise<void>;
 }
 
 export async function getServerSideProps() {
@@ -69,7 +69,11 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
     fetchUserPlan();
   }, []);
   
-  const handleSubscribe = async (priceId: string, plan: string) => {
+  const handleSubscribe = async (
+    priceId: string,
+    planLabel: string,
+    mode: "payment" | "subscription"
+  ) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -91,7 +95,7 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       return;
     }
 
-    if (profile?.subscription_id) {
+    if (profile?.subscription_id && mode === "subscription") {
       // User already has a subscription, so this is an upgrade
       const res = await fetch("/api/upgrade-subscription", {
         method: "POST",
@@ -114,7 +118,7 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id, priceId, plan }),
+        body: JSON.stringify({ userId: user.id, priceId, mode }),  // 👈 pass mode here
       });
 
       const { url } = await res.json();
