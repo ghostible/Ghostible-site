@@ -1,169 +1,486 @@
-import { useEffect, useState } from 'react'
-import { supabase } from '@/utils/supabaseClient'
-import useAuthRedirect from '@/hooks/useAuthRedirect'
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+import useAuthRedirect from "@/hooks/useAuthRedirect";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Calendar, CreditCard, MessageSquare, Copy, Trash2,ChevronUp } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import CountdownTimer from "@/components/CountDownTimer";
+import { formatPhoneNumber } from "@/utils/formatPhone";
+import MessageBox, { ApiResponse } from "@/components/MessageBox";
+
 
 type Profile = {
-  id: string
-  email:string
-  full_name: string
-  temp_number: string
-  expires_at: string
-}
+  id: string;
+  email: string;
+  full_name: string;
+  plan: string;
+  expires_at: string;
+  subscription_credit: number;
+  subscription_status: string;
+  subscription_TotalCredit:number;
+};
 
-type Message = {
-  id: string
-  from_number: string
-  message: string
-  received_at: string
-}
+type AssignedNumber = {
+  id: string;
+  number: string;
+  service: string;
+  rent_id: number;
+  service_name: string;
+  country: string;
+  country_name:string;
+  status: string;
+  createdAt:  string;
+  messages: number;
+  calls: number;
+  messageData?: ApiResponse[];
+};
 
-export default function Dashboard() {
-  const { user, loading } = useAuthRedirect()
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [messages, setMessages] = useState<Message[]>([])
-  const [successmessage, setsuccessmessage] = useState('')
+type Country = { code: string; name: string; flag: string };
+type Service = { code: string; name: string };
 
+const mockCountries = [
+  { code: "187", name: "United States", flag: "🇺🇸" },
+  { code: "16", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "36", name: "Canada", flag: "🇨🇦" },
+  { code: "175", name: "Australia", flag: "🇦🇺" },
+];
+
+const Dashboard = () => {
+  const { toast } = useToast();
+  const { user } = useAuthRedirect();
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [services, setServices] = useState<{ code: string; name: string }[]>([]);
+  const [assignedNumbers, setAssignedNumbers] = useState<AssignedNumber[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [loadingServices, setLoadingServices] = useState(false);
+  //const [expandedNumbers, setExpandedNumbers] = useState<string[]>([]);
+  const [openMessageBox, setOpenMessageBox] = useState<string | null>(null);
+
+  // const toggleExpanded = (numberId: string) => {
+  //   setExpandedNumbers(prev => 
+  //     prev.includes(numberId) 
+  //       ? prev.filter(id => id !== numberId)
+  //       : [...prev, numberId]
+  //   );
+  // };
+
+  // Fetch profile + subscription + assigned numbers
   useEffect(() => {
-    if (!user) return
+    if (!user) return;
 
     const fetchProfile = async () => {
       const { data, error } = await supabase
-        .from('profiles')
-        .select('id, email, full_name, temp_number, expires_at')
-        .eq('id', user.id)
-        .single()
+        .from("profiles")
+        .select("id, email, full_name, plan, expires_at, subscription_credit, subscription_TotalCredit, subscription_status")
+        .eq("id", user.id)
+        .single();
 
       if (!error && data) {
-        setProfile(data)
+        setProfile(data);
 
-        // ✅ Use user_id filter (this must match exactly!)
-        const { data: smsData, error: smsError } = await supabase
-          .from('sms_messages')
-          .select('id, from_number, message, received_at')
-          .eq('user_id', data.id)
-          .order('received_at', { ascending: false })
+        const { data: numbers, error: numError } = await supabase
+          .from("rented_numbers")
+          .select("*")
+          .eq("user_id", data.id)
+          .order("created_at", { ascending: false });
 
-        if (smsError) {
-          console.error('SMS fetch error:', smsError)
+        if (!numError && numbers) {
+          setAssignedNumbers(
+            numbers.map((n) => {
+              const createdISO = n.created_at
+                ? n.created_at.replace(" ", "T").split(".")[0] + "Z" // add Z = UTC
+                : new Date().toISOString();
+
+              return {
+                id: n.id,
+                number: n.number,
+                rent_id:n.rent_id,
+                service: n.service,
+                service_name: n.service_name,
+                country: n.country,
+                country_name: n.country_name,
+                status: n.status,
+                createdAt: createdISO, 
+                messages: 0,
+                calls: 0,
+                messageData: []
+              };
+            })
+          );
         }
-
-        setMessages(smsData || [])
       }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  // Fetch available services from API
+  useEffect(() => {
+    const fetchServices = async () => {
+      setLoadingServices(true);
+      try {
+        const res = await fetch("/api/sms/get-services");
+        const data = await res.json();
+
+        if (data.status === "success" && Array.isArray(data.services)) {
+          setServices(data.services);
+        } else {
+          console.error("Unexpected response:", data);
+        }
+      }  catch (err: unknown) {
+        console.error("Service fetch error:", err);
+      }
+      finally {
+        setLoadingServices(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  const handleAssignNumber = async () => {
+    if (!selectedCountry || !selectedService) {
+      toast({
+        title: "Selection Required",
+        description: "Please select both country and service.",
+        variant: "destructive",
+      });
+      return;
     }
 
-    fetchProfile()
+    if (profile && profile.subscription_credit <= 0) {
+      toast({
+        title: "Insufficient Credits",
+        description: "You don't have enough credits.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  }, [user])
+    try {
+      const res = await fetch("/api/sms/rent-number", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: profile?.id,
+          country: {
+            code: selectedCountry.code,
+            name: selectedCountry.name,
+          },
+          service: {
+            code: selectedService.code,
+            name: selectedService.name,
+          },
+          time: "20Minutes",
+        }),
+      });
 
-  const handleCancel = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
-      if (!user) return
+      const data = await res.json();
+      if (data.error) {
+        toast({ title: "Failed", description: data.error, variant: "destructive" });
+        return;
+      }
 
-      const res = await fetch('/api/cancel-subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: user.id }),
-      })
+      setAssignedNumbers([data.number, ...assignedNumbers]);
 
-      const data = await res.json()
-      if (data.success) {
-         setsuccessmessage('You Subscriptins is successfully cancel.');
+      toast({
+        title: "Number Assigned",
+        description: `New number: ${data.number.number}`,
+      });
+
+      setSelectedCountry(null);
+      setSelectedService(null);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast({ title: "Error", description: err.message, variant: "destructive" });
       } else {
-        setsuccessmessage('Error canceling subscription.');
+        toast({ title: "Error", description: "Something went wrong", variant: "destructive" });
       }
     }
+  };
 
-  if (loading) {
-    return (
-      <>
-        <div className="text-white bg-black min-h-screen flex justify-center items-center">
-          Loading...
-        </div>
-      </>
-    )
-  }
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied",
+      description: "Number copied successfully",
+    });
+  };
 
-  if (!user || !profile) return null
+  const deleteNumber = async (id: string) => {
+    setAssignedNumbers(assignedNumbers.filter((n) => n.id !== id));
+    //await supabase.from("rented_numbers").delete().eq("id", id);
+    toast({ title: "Deleted", description: "Number removed" });
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "waiting":
+        return "bg-yellow-500";
+      case "active":
+        return "bg-green-500";
+      case "completed":
+        return "bg-blue-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
+  const handleFetchMessages = async (num: AssignedNumber) => {
+    try {
+      const resp = await fetch(`/api/sms/get-message?id=${num.rent_id}`);
+      const data = await resp.json();
+      console.log('dataddd', data);
+      console.log('resp', resp);
+      setAssignedNumbers(prev =>
+        prev.map(n =>
+          n.rent_id === num.rent_id
+            ? {
+                ...n,
+                messages: 1,
+                messageData: [data], // 👈 attach latest sms/call data
+              }
+            : n
+        )
+      );
+
+      // Optionally auto-open the MessageBox
+      setOpenMessageBox(num.id);
+    } catch (err) {
+      console.error("Fetch message error", err);
+    }
+  };
+
+  if (!user || !profile) return null;
 
   return (
-    <>
-      <div className="min-h-screen bg-black text-white px-6 py-10">
-        <h1 className="text-4xl font-bold text-center text-teal-400 mb-10">Ghostible Dashboard</h1>
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          {/* 🔢 Burner Number Card */}
-          <div className="bg-[#111313] border border-[#383838] rounded-xl p-6">
-            <div className="profiledetails">
-              <h2 className="text-xl font-semibold mb-4">Profile Details</h2>
-              <p className="text-teal-300 font-mono text-lg"><span>Name : </span>{profile.full_name}</p>
-              <p className="text-teal-300 font-mono text-lg"><span>Email : </span>{profile.email}</p>
-            </div>
-            <div className="tempdetails mt-8">
-              <h2 className="text-xl font-semibold mb-4">Ghostible Burner Number</h2>
-              {profile.temp_number && profile.expires_at ? (
-                <>
-                  <p className="text-teal-300 font-mono text-lg"><span>Number : </span>{profile.temp_number}</p>
-                  <p className="text-sm text-teal-300 mt-1">
-                    <span>Plan Expires : </span>{new Date(profile.expires_at).toLocaleDateString()}
-                  </p>
-                  <div className="mt-4 space-x-2">
-                    <button
-                      onClick={() => handleCancel()}
-                      className="px-4 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-black transition cursor-pointer"
-                    >
-                      Cancel Subscription
-                    </button>
-                  </div>
-                  {successmessage && (
-                    <div className="text-teal-400 mt-4">
-                      <p className="text-sm">{successmessage}</p>
-                    </div>
+    <div className="min-h-screen p-4">
+      <div className="mx-auto max-w-7xl space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+          <Button variant="outline" className="text-white">
+            <CreditCard className="mr-2 h-4 w-4" />
+            Manage Subscription
+          </Button>
+        </div>
+
+        {/* Customer & Subscription Info */}
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                Customer Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-teal-300">Name</label>
+                <p className="text-lg font-semibold">{profile.full_name}</p>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-teal-300">Email</label>
+                <p className="text-lg font-semibold">{profile.email}</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5" />
+                Subscription Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium text-teal-300">Current Plan</label>
+                  <p className="text-lg font-semibold">{profile.plan}</p>
+                </div>
+                <Badge variant="secondary">{profile.subscription_status}</Badge>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-teal-300">Plan Period</label>
+                <p className="text-sm">
+                  {new Date(profile.expires_at).toISOString().split("T")[0]}
+                </p>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-teal-300">Available Credits</label>
+                <p className="text-2xl font-bold text-primary">
+                  {profile.subscription_credit} / {profile.subscription_TotalCredit}
+                </p>
+              </div>
+              <Button variant="destructive" className="w-full text-white">
+                Cancel Subscription
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Number Assignment */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Assign New Number</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-3">
+              <Select
+                value={selectedCountry?.code}
+                onValueChange={(val) => {
+                  const country = mockCountries.find((c) => c.code === val);
+                  if (country) setSelectedCountry(country);
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose country" />
+                </SelectTrigger>
+                <SelectContent>
+                  {mockCountries.map((c) => (
+                    <SelectItem key={c.code} value={c.code}>
+                      {c.flag} {c.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select
+                value={selectedService?.code}
+                onValueChange={(val) => {
+                  const service = services.find((s) => s.code === val);
+                  if (service) setSelectedService(service);
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose service" />
+                </SelectTrigger>
+                <SelectContent>
+                  {loadingServices ? (
+                    <SelectItem value="loading">Loading...</SelectItem>
+                  ) : (
+                    services.map((s) => (
+                      <SelectItem key={s.code} value={s.code}>
+                        {s.name}
+                      </SelectItem>
+                    ))
                   )}
-                </>
+                </SelectContent>
+              </Select>
+
+              <Button variant="default" onClick={handleAssignNumber}>Assign Number (1 Credit)</Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Assigned Numbers */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MessageSquare className="h-5 w-5" />
+              Your Numbers ({assignedNumbers.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {assignedNumbers.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  No numbers assigned yet. Assign your first number above.
+                </div>
               ) : (
-                <>
-                  <p className="text-red-400 text-sm mb-4">You don`&quot;`t have any burner number assigned.</p>
-                  <Link href="/tempnumber" className="bg-teal-400 text-black font-semibold py-3 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">Purchase a Number</Link>
-                </>
+                assignedNumbers.map((number, index) => (
+                  <div key={number.id}>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-3">
+                          <div className="font-mono font-bold text-lg">
+                            {formatPhoneNumber(number.number, number.country_name)}
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => copyToClipboard(number.number)}
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span>{number.service_name}</span>
+                          <span>{number.country_name}</span>
+                          <CountdownTimer createdAt={number.createdAt ?? new Date().toISOString()} />
+
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="default" className={`${getStatusColor(number.status)} text-white`}>
+                            <span className="ml-1 capitalize">{number.status}</span>
+                          </Badge>
+                        </div>
+                        
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="flex items-center gap-1">
+                            <MessageSquare className="h-4 w-4" />
+                              <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleFetchMessages(number)}
+                            >
+                              <ChevronUp className="h-4 w-4" />
+                              {/* {expandedNumbers.includes(number.id) ? (
+                                
+                              ) : (
+                                <ChevronDown className="h-4 w-4" />
+                              )} */}
+                            </Button>
+
+                          </div>
+                        </div>
+
+                        {/* <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleExpanded(number.id)}
+                        >
+                          {expandedNumbers.includes(number.id) ? (
+                            <ChevronUp className="h-4 w-4" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4" />
+                          )}
+                        </Button> */}
+
+                        
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => deleteNumber(number.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    {openMessageBox && (
+                      <MessageBox
+                        messages={assignedNumbers.find(n => n.id === openMessageBox)?.messageData ?? []}
+                        numberId={openMessageBox}
+                      />
+                    )}
+                    {index < assignedNumbers.length - 1 && <Separator className="mt-4" />}
+                  </div>
+                ))
               )}
             </div>
-          </div>
-
-          {/* 💬 Message Inbox */}
-          <div className="bg-[#111313] border border-[#383838] rounded-xl p-6">
-            <h2 className="text-xl font-semibold mb-4">Inbox</h2>
-            {messages.length === 0 ? (
-              <p className="text-gray-500">No messages received yet.</p>
-            ) : (
-              <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-                {messages.map((msg) => (
-                  <div key={msg.id} className="bg-[#181a1b] p-4 rounded border border-gray-700">
-                    <p className="text-sm text-gray-400">From: {msg.from_number}</p>
-                    <p className="text-white mt-1">{msg.message}</p>
-                    <p className="text-xs text-gray-500 mt-2">
-                      {new Date(msg.received_at).toLocaleString()}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* 🚪 Logout */}
-        <div className="text-center mt-10">
-          <button
-            onClick={async () => {
-              await supabase.auth.signOut()
-              window.location.href = '/login'
-            }}
-            className="bg-teal-400 text-black font-semibold py-3 px-8 rounded-full hover:bg-teal-300 transition cursor-pointer">
-            Logout
-          </button>
-        </div>
+          </CardContent>
+        </Card>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
+
+export default Dashboard;

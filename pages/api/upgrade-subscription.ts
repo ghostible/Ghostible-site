@@ -2,9 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  //apiVersion: '2025-06-30.basil'
-})
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {})
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -42,11 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Fetch the new price details
     const newPrice = await stripe.prices.retrieve(planId)
-    // const product = typeof newPrice.product === 'string'
-    //   ? await stripe.products.retrieve(newPrice.product)
-    //   : newPrice.product
-
-    // Format plan label (like "1 month", "3 months", etc.)
     const interval = newPrice.recurring?.interval || 'month'
     const count = newPrice.recurring?.interval_count || 1
     const planLabel = `${count} ${interval}${count > 1 ? 's' : ''}` // e.g., "3 months"

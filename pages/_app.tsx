@@ -5,6 +5,8 @@ import Layout from "@/components/layout";
 import 'aos/dist/aos.css'; // Import AOS styles
 import AOS from 'aos';
 import { useEffect } from 'react';
+import { Toaster } from "@/components/ui/toaster";
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     AOS.init({
@@ -18,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider>
       <Layout>
         <Component {...pageProps} />
+        <Toaster />
       </Layout>
     </ThemeProvider>
   );

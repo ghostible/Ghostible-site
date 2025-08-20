@@ -2,27 +2,16 @@ import { buffer } from 'micro'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
-import twilio from 'twilio'
 
-// ⚠️ Ensure bodyParser is disabled
 export const config = {
   api: { bodyParser: false }
 }
 
-// ✅ Initialize Stripe with correct API version
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  //apiVersion: '2025-06-30.basil'
-})
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {})
 
-// ✅ Supabase & Twilio setup
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
-
-const twilioClient = twilio(
-  process.env.TWILIO_ACCOUNT_SID!,
-  process.env.TWILIO_AUTH_TOKEN!
 )
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -35,11 +24,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const buf = await buffer(req)
-
-    // 🛑 DO NOT USE .toString() here!
     event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!)
 
-    console.log('✅ Event received:', event.type)
   } catch (err) {
     if (err instanceof Error) {
       console.error('❌ Webhook verification failed:', err.message)
@@ -50,7 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).send('Unknown error')
   }
 
-  // ✅ Process successful checkout
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
 
@@ -58,68 +43,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userId = metadata.user_id
     const feature = metadata.feature
     const plan = metadata.plan
-
-    console.log('🔎 Metadata received:', metadata)
-
+    
+    console.log('metadatasss', metadata);
     if (!userId || feature !== 'temp_number' || !plan) {
       console.warn('⚠️ Missing or invalid metadata. Skipping.')
       return res.status(200).end()
     }
 
     try {
-      // 1. Buy a real Twilio number
-      // const availableNumbers = await twilioClient
-      //   .availablePhoneNumbers('US')
-      //   .local.list({ smsEnabled: true, limit: 1 })
 
-      // if (availableNumbers.length === 0) {
-      //   console.error('❌ No available Twilio numbers')
-      //   return res.status(500).send('No numbers available')
-      // }
-
-      // const number = await twilioClient.incomingPhoneNumbers.create({
-      //   phoneNumber: availableNumbers[0].phoneNumber,
-      //   smsUrl: 'http://www.ghostible.io/api/receive-sms',
-      // })
-      
-      const number = await twilioClient.incomingPhoneNumbers.create({
-        phoneNumber: '+15005550006',
-        smsUrl: 'https://yourdomain.com/api/receive-sms',
-      })
-
-      const tempNumber = number.phoneNumber
-      const phoneProvider = 'twilio'
-      const phoneSid = number.sid
-      const subscriptionId = session.subscription as string
-
-      // 2. Calculate expiry
+      const subscriptionId = session.subscription as string;
       const expiresAt = new Date();
-      const [amountStr, unitRaw] = plan.split(' ')
-      const amount = parseInt(amountStr, 10)
-      const unit = unitRaw.toLowerCase()
+      
+      let subscriptionCredit = '';
 
-      if (unit === 'week' || unit === 'weeks') {
-        expiresAt.setDate(expiresAt.getDate() + amount * 7)
-      } else if (unit === 'month' || unit === 'months') {
-        expiresAt.setMonth(expiresAt.getMonth() + amount)
-      } else if (unit === 'year' || unit === 'years') {
-        expiresAt.setFullYear(expiresAt.getFullYear() + amount)
+      if (plan === 'Weekly Pass') {
+        expiresAt.setDate(expiresAt.getDate() + 7)
+        subscriptionCredit = '7';
+      } else if (plan === 'Monthly Pass') {
+        expiresAt.setMonth(expiresAt.getMonth() + 1)
+        subscriptionCredit = '30';
+      } else if (plan === 'One-Time Pass') {
+        expiresAt.setMinutes(expiresAt.getMinutes() + 20)
+        subscriptionCredit = '1';
       } else {
         console.warn(`⚠️ Unknown plan duration: ${plan}`)
       }
-
 
       // 3. Update Supabase profile
       const { error } = await supabase
         .from('profiles')
         .update({
-          temp_number: tempNumber,
-          phone_provider: phoneProvider,
-          phone_sid: phoneSid,
           subscription_id: subscriptionId,
           plan: plan,
           expires_at: expiresAt.toISOString(),
-          plan_status: 'Active',
+          subscription_status: 'Active',
+          subscription_credit: subscriptionCredit,
+          subscription_TotalCredit:subscriptionCredit,
         })
         .eq('id', userId)
 

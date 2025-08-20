@@ -8,6 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
   const { userId, priceId, mode, planLabel } = req.body
 
+  console.log('planLabel', req.body);
+
   if (!userId || !priceId || !mode) {
     return res.status(400).json({ error: 'Missing or invalid required fields' })
   }
@@ -22,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           quantity: 1,
         },
       ],
-      success_url: `${process.env.SITE_URL}/tempnumber?success=true`,
+      success_url: `${process.env.SITE_URL}/dashboard?success=true`,
       cancel_url: `${process.env.SITE_URL}/tempnumber?canceled=true`,
       metadata: {
         user_id: String(userId),
@@ -30,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         plan: String(planLabel ?? ''),
       },
     })
-
+   
     return res.status(200).json({ url: session.url })
   } catch (error) {
     console.error('Checkout Error:', error)
