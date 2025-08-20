@@ -9,8 +9,7 @@ import PhoneVerification from "@/components/Start/PhoneVerification";
 import Review from "@/components/Start/Review";
 import Topplancontent from "@/components/Start/topplancontent";
 import TransparentPricing from "@/components/Start/TransparentPricing";
-import { NumberGeneratorModal } from "@/components/SmsActivate";
-import { toast } from "@/hooks/use-toast";
+// import { NumberGeneratorModal } from "@/components/SmsActivate";
 import TrustGhostible from "@/components/Start/TrustGhostible";
 import WhyPay from "@/components/Start/WhyPay";
 import Head from "next/head";
@@ -52,8 +51,8 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
 
   const router = useRouter();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
-  const [selectedTier, setSelectedTier] = useState("");
-  const [showNumberModal, setShowNumberModal] = useState(false);
+  // const [selectedTier, setSelectedTier] = useState("");
+  // const [showNumberModal, setShowNumberModal] = useState(false);
   
   useEffect(() => {
     const fetchUserPlan = async () => {
@@ -87,23 +86,6 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       router.push("/login");
       return;
     }
-
-    toast({
-      title: "Proceeding to checkout...",
-      description: `Selected:  - `,
-    });
-
-    // For demo: simulate purchase and open number generator
-    setTimeout(() => {
-      setSelectedTier(planLabel);
-      setShowNumberModal(true);
-      console.log('toast', toast);
-      
-      toast({
-        title: "Purchase completed!",
-        description: "You can now generate temporary numbers.",
-      });
-    }, 1000);
 
     // Fetch the user's current subscription from Supabase
     const { data: profile, error } = await supabase
@@ -140,14 +122,14 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id, priceId, mode }),  // 👈 pass mode here
+        body: JSON.stringify({ userId: user.id, priceId, mode, planLabel }),
       });
 
       const { url } = await res.json();
       if (url) {
-        //window.location.href = url;
+        window.location.href = url;
       } else {
-        //alert("Failed to create checkout session.");
+        alert("Failed to create checkout session.");
       }
     }
   };
@@ -166,7 +148,7 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
         <TrustGhostible/>
         <Topplancontent />
         <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe} />
-        <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} />
+        {/* <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} /> */}
         <HowItWorks/>
         <FAQSection/>
         <PhoneVerification/>
