@@ -42,7 +42,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const newPrice = await stripe.prices.retrieve(planId)
     const interval = newPrice.recurring?.interval || 'month'
     const count = newPrice.recurring?.interval_count || 1
-    const planLabel = `${count} ${interval}${count > 1 ? 's' : ''}` // e.g., "3 months"
+    //const planLabel = `${count} ${interval}${count > 1 ? 's' : ''}`
+    let planLabel: string;
+    if (!newPrice.recurring) {
+      planLabel = "One-Time Pass";
+    } else if (newPrice.recurring.interval === "week") {
+      planLabel = "Weekly Pass";
+    } else if (newPrice.recurring.interval === "month") {
+      planLabel = "Monthly Pass";
+    } else {
+      planLabel = `${count} ${interval}${count > 1 ? "s" : ""}`;
+    }
 
     const currentPeriodEnd = updated.items.data[0].current_period_end
       ? new Date(updated.items.data[0].current_period_end * 1000).toISOString()

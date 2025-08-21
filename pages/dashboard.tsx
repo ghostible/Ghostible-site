@@ -4,13 +4,14 @@ import useAuthRedirect from "@/hooks/useAuthRedirect";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, CreditCard, MessageSquare, Copy, Trash2,ChevronUp } from "lucide-react";
+import { Calendar, CreditCard, Phone, MessageSquare, Copy, Trash2,ChevronUp, ChevronDown, Plus, Minus, Zap, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CountdownTimer from "@/components/CountDownTimer";
 import { formatPhoneNumber } from "@/utils/formatPhone";
 import MessageBox, { ApiResponse } from "@/components/MessageBox";
+import { SearchableCountrySelect } from "@/components/SearchableCountrySelect";
+import { SearchableServiceSelect } from "@/components/SearchableServiceSelect";
 
 
 type Profile = {
@@ -49,25 +50,53 @@ const mockCountries = [
   { code: "175", name: "Australia", flag: "🇦🇺" },
 ];
 
-const Dashboard = () => {
+type Plan = {
+  id: string;
+  unit_amount: number;
+  recurring?: {
+    interval: 'week' | 'month' ;
+    interval_count: '1' | '1';
+  };
+  product:
+    | {
+        name: string;
+        description: string;
+        marketing_features: marketing_features[];
+      }
+    | string;
+};
+
+type marketing_features = {
+  name: string;
+};
+
+interface TempphonePageProps {
+  plans: Plan[];
+  currentPlan: string | null;
+  handleSubscribe: (priceId: string, planLabel: string, mode: "payment" | "subscription") => Promise<void>;
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`${process.env.SITE_URL}/api/prices`);
+  const data = await res.json();
+  return { props: { plans: data } };
+}
+
+export default function Dashboard({ plans }: TempphonePageProps) {
   const { toast } = useToast();
+  
+  //const [currentPlan, setCurrentPlan] = useState<string | null>(null);
   const { user } = useAuthRedirect();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [services, setServices] = useState<{ code: string; name: string }[]>([]);
   const [assignedNumbers, setAssignedNumbers] = useState<AssignedNumber[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [loadingServices, setLoadingServices] = useState(false);
-  //const [expandedNumbers, setExpandedNumbers] = useState<string[]>([]);
-  const [openMessageBox, setOpenMessageBox] = useState<string | null>(null);
+  const [expandedNumbers, setExpandedNumbers] = useState<string[]>([]);
 
-  // const toggleExpanded = (numberId: string) => {
-  //   setExpandedNumbers(prev => 
-  //     prev.includes(numberId) 
-  //       ? prev.filter(id => id !== numberId)
-  //       : [...prev, numberId]
-  //   );
-  // };
+  const [addonQuantities, setAddonQuantities] = useState<{ [key: string]: number }>({
+    pack1: 1,
+  });
 
   // Fetch profile + subscription + assigned numbers
   useEffect(() => {
@@ -122,7 +151,7 @@ const Dashboard = () => {
   // Fetch available services from API
   useEffect(() => {
     const fetchServices = async () => {
-      setLoadingServices(true);
+      //setLoadingServices(true);
       try {
         const res = await fetch("/api/sms/get-services");
         const data = await res.json();
@@ -136,7 +165,7 @@ const Dashboard = () => {
         console.error("Service fetch error:", err);
       }
       finally {
-        setLoadingServices(false);
+        //setLoadingServices(false);
       }
     };
 
@@ -214,7 +243,6 @@ const Dashboard = () => {
 
   const deleteNumber = async (id: string) => {
     setAssignedNumbers(assignedNumbers.filter((n) => n.id !== id));
-    //await supabase.from("rented_numbers").delete().eq("id", id);
     toast({ title: "Deleted", description: "Number removed" });
   };
 
@@ -235,26 +263,83 @@ const Dashboard = () => {
     try {
       const resp = await fetch(`/api/sms/get-message?id=${num.rent_id}`);
       const data = await resp.json();
-      console.log('dataddd', data);
-      console.log('resp', resp);
+
       setAssignedNumbers(prev =>
         prev.map(n =>
           n.rent_id === num.rent_id
             ? {
                 ...n,
                 messages: 1,
-                messageData: [data], // 👈 attach latest sms/call data
+                messageData: [data],
               }
             : n
         )
       );
 
-      // Optionally auto-open the MessageBox
-      setOpenMessageBox(num.id);
+      // Toggle expand instead of forcing open
+      setExpandedNumbers(prev =>
+        prev.includes(num.id)
+          ? prev.filter(id => id !== num.id)
+          : [...prev, num.id]
+      );
     } catch (err) {
       console.error("Fetch message error", err);
     }
   };
+
+  const handleCancel = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      if (!user) return
+
+      const res = await fetch('/api/cancel-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id }),
+      })
+
+      const data = await res.json()
+      if (data.success) {
+          toast({
+            title: "Subscriptions Cancel",
+            description: "You Subscriptions is successfully cancel.",
+          });
+      } else {
+          toast({
+            title: "Subscriptions Cancel",
+            description: "Error canceling subscription.",
+          });
+      }
+    }
+    const updateAddonQuantity = (pack: string, change: number) => {
+      setAddonQuantities((prev) => ({
+        ...prev,
+        [pack]: Math.max(1, (prev[pack] || 1) + change),
+      }));
+    };
+    
+    const handlePurchaseAddon = async (userId: string, priceId: string, creditsPerPack: number, quantity: number) => {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          priceId,
+          mode: "payment",       // important! one-time
+          planLabel: "Add-On Credits",
+          quantity,
+          creditsPerPack,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Error:", data.error);
+      }
+    };
 
   if (!user || !profile) return null;
 
@@ -265,7 +350,7 @@ const Dashboard = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-white">Dashboard</h1>
           <Button variant="outline" className="text-white">
-            <CreditCard className="mr-2 h-4 w-4" />
+            <CreditCard className="mr-2 h-4 w-4 text-teal-400" />
             Manage Subscription
           </Button>
         </div>
@@ -275,7 +360,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
+                <Calendar className="h-5 w-5 text-teal-400" />
                 Customer Details
               </CardTitle>
             </CardHeader>
@@ -294,7 +379,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5" />
+                <CreditCard className="h-5 w-5 text-teal-400" />
                 Subscription Details
               </CardTitle>
             </CardHeader>
@@ -302,25 +387,138 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium text-teal-300">Current Plan</label>
-                  <p className="text-lg font-semibold">{profile.plan}</p>
+                  <p className="text-lg font-semibold">
+                    {profile.plan ? (
+                      profile.plan
+                    ):( 
+                      'No Plan active' 
+                    )}</p>
                 </div>
-                <Badge variant="secondary">{profile.subscription_status}</Badge>
+                {profile.subscription_status && (
+                  <>
+                  <Badge variant="secondary">{ profile.subscription_status }</Badge>
+                  </>
+                )}
               </div>
-              <div>
-                <label className="text-sm font-medium text-teal-300">Plan Period</label>
-                <p className="text-sm">
-                  {new Date(profile.expires_at).toISOString().split("T")[0]}
-                </p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-teal-300">Available Credits</label>
-                <p className="text-2xl font-bold text-primary">
-                  {profile.subscription_credit} / {profile.subscription_TotalCredit}
-                </p>
-              </div>
-              <Button variant="destructive" className="w-full text-white">
-                Cancel Subscription
-              </Button>
+              {profile.expires_at && (
+                <>
+                  <div>
+                    <label className="text-sm font-medium text-teal-300">Plan Period</label>
+                    <p className="text-sm">
+                      {new Date(profile.expires_at).toISOString().split("T")[0]}
+                    </p>
+                  </div>
+                </>
+              )}
+              {profile.subscription_TotalCredit && (
+                <>
+                  <div>
+                    <label className="text-sm font-medium text-teal-300">Available Credits</label>
+                    <p className="text-2xl font-bold text-primary">
+                      {profile.subscription_credit} / {profile.subscription_TotalCredit}
+                    </p>
+                  </div>
+                </>
+              )}
+              
+              {/* Upsell Add-on Section for One-Time Subscriptions */}
+              <Separator />
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-primary" />
+                  <h4 className="font-semibold text-foreground">Need More Credits?</h4>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-3">
+                  {/* Add on Credits Pack */}
+                  <div className="border rounded-lg p-3 bg-gradient-to-r from-primary/5 to-primary/10">
+                    {plans
+                      .filter((plan) => {
+                        const recurring = plan.recurring;
+                        const productname = typeof plan.product === "string" ? null : plan.product;
+                        if (productname?.name === "Add-On Upsells") return true;
+                        if (!recurring) return false;
+                        if (recurring.interval === "week") return false;
+                        if (recurring.interval === "month") return false; 
+                        return false;
+                      })
+                      .map((plan) => {
+                        const product = typeof plan.product === "string" ? null : plan.product;
+                        const price = (plan.unit_amount / 100).toFixed(2);
+                        return(
+                          <>
+                            <div className="flex items-center justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-xl font-bold text-white mb-1 mt-2.5">{product?.name}</h3>
+                                <ul className="text-gray-300 text-sm space-y-2 mb-6 text-left w-full">
+                                  {product?.marketing_features.map((features) => (
+                                    <li className="flex items-center gap-2" key={features?.name}>
+                                      <Check className="text-teal-300 h-5 w-5 flex-shrink-0" size={20} /> {features?.name}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div>
+                                  <div className="flex items-center gap-2">
+                                    <Button
+                                      variant="outline"
+                                      size="icon"
+                                      className="h-8 w-8"
+                                      onClick={() => updateAddonQuantity('pack1', -1)}
+                                      disabled={addonQuantities.pack1 <= 1}
+                                    >
+                                      <Minus className="h-3 w-3" />
+                                    </Button>
+                                    <span className="w-8 text-center font-medium">{addonQuantities.pack1}</span>
+                                    <Button
+                                      variant="outline"
+                                      size="icon"
+                                      className="h-8 w-8"
+                                      onClick={() => updateAddonQuantity('pack1', 1)}
+                                    >
+                                      <Plus className="h-3 w-3" />
+                                    </Button>
+                                    <p className="text-lg font-bold text-primary">
+                                      ${(Number(price) * addonQuantities.pack1).toFixed(2)}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <Button
+                                    size="lg"
+                                    onClick={() =>
+                                      handlePurchaseAddon(
+                                        profile?.id,
+                                        plan.id,
+                                        addonQuantities.pack1,
+                                        addonQuantities.pack1
+                                      )
+                                    }
+                                    className="w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md hover:bg-teal-300 transition"
+                                  >
+                                    Buy
+                                  </Button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })
+                    }
+                  </div>
+                </div>
+              </div> 
+              {(profile.plan === "Weekly Pass" || profile.plan === "Monthly Pass") && (
+                <Button
+                  onClick={() => handleCancel()}
+                  variant="destructive"
+                  className="w-full text-white"
+                >
+                  Cancel Subscription
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -328,51 +526,37 @@ const Dashboard = () => {
         {/* Number Assignment */}
         <Card>
           <CardHeader>
-            <CardTitle>Assign New Number</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Phone className="h-5 w-5 text-teal-400" />
+              Assign New Number
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-3">
-              <Select
-                value={selectedCountry?.code}
-                onValueChange={(val) => {
+              <div>
+                <label className="text-sm font-medium text-muted-foreground">Select Country</label>
+                <SearchableCountrySelect 
+                  countries={mockCountries}
+                  value={selectedCountry?.code ?? ""}
+                  onValueChange={(val) => {
                   const country = mockCountries.find((c) => c.code === val);
                   if (country) setSelectedCountry(country);
                 }}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Choose country" />
-                </SelectTrigger>
-                <SelectContent>
-                  {mockCountries.map((c) => (
-                    <SelectItem key={c.code} value={c.code}>
-                      {c.flag} {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                value={selectedService?.code}
-                onValueChange={(val) => {
+                  placeholder="Choose country"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-muted-foreground">Select Service</label>
+                <SearchableServiceSelect 
+                  services={services}
+                  value={selectedService?.code ?? ""}
+                  onValueChange={(val) => {
                   const service = services.find((s) => s.code === val);
                   if (service) setSelectedService(service);
                 }}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Choose service" />
-                </SelectTrigger>
-                <SelectContent>
-                  {loadingServices ? (
-                    <SelectItem value="loading">Loading...</SelectItem>
-                  ) : (
-                    services.map((s) => (
-                      <SelectItem key={s.code} value={s.code}>
-                        {s.name}
-                      </SelectItem>
-                    ))
-                  )}
-                </SelectContent>
-              </Select>
-
+                  placeholder="Choose service"
+                />
+              </div>
               <Button variant="default" onClick={handleAssignNumber}>Assign Number (1 Credit)</Button>
             </div>
           </CardContent>
@@ -382,7 +566,7 @@ const Dashboard = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5" />
+              <MessageSquare className="h-5 w-5 text-teal-400" />
               Your Numbers ({assignedNumbers.length})
             </CardTitle>
           </CardHeader>
@@ -427,35 +611,19 @@ const Dashboard = () => {
                         <div className="flex items-center gap-4 text-sm">
                           <div className="flex items-center gap-1">
                             <MessageSquare className="h-4 w-4" />
-                              <Button
+                            <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleFetchMessages(number)}
                             >
-                              <ChevronUp className="h-4 w-4" />
-                              {/* {expandedNumbers.includes(number.id) ? (
-                                
+                              {expandedNumbers.includes(number.id) ? (
+                                <ChevronUp className="h-4 w-4" />
                               ) : (
                                 <ChevronDown className="h-4 w-4" />
-                              )} */}
+                              )}
                             </Button>
-
                           </div>
                         </div>
-
-                        {/* <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => toggleExpanded(number.id)}
-                        >
-                          {expandedNumbers.includes(number.id) ? (
-                            <ChevronUp className="h-4 w-4" />
-                          ) : (
-                            <ChevronDown className="h-4 w-4" />
-                          )}
-                        </Button> */}
-
-                        
                         <Button
                           variant="ghost"
                           size="sm"
@@ -465,10 +633,10 @@ const Dashboard = () => {
                         </Button>
                       </div>
                     </div>
-                    {openMessageBox && (
+                    {expandedNumbers.includes(number.id) && (
                       <MessageBox
-                        messages={assignedNumbers.find(n => n.id === openMessageBox)?.messageData ?? []}
-                        numberId={openMessageBox}
+                        messages={number.messageData ?? []}
+                        numberId={number.id}
                       />
                     )}
                     {index < assignedNumbers.length - 1 && <Separator className="mt-4" />}
@@ -482,5 +650,3 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;

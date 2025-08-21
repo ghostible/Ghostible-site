@@ -7,17 +7,16 @@ import InstantAccess from "@/components/InstantAccess"
 import FAQSection from "@/components/FAQSection"
 import TestimonialSection from "@/components/TestimonialSection"
 import TempPhoneEmailPlan from "@/components/TempPhoneEmailPlan"
-// import AllPlan from "@/components/AllPlan"
+import { useToast } from "@/hooks/use-toast";
 import TransparentPricing from "@/components/Start/TransparentPricing";
-// import { NumberGeneratorModal } from "@/components/SmsActivate";
 import TrustedSection from "@/components/Trusted"
 
 type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: 'week' | 'month' | 'year';
-    interval_count: '1' | '3' | '6';
+    interval: 'week' | 'month';
+    interval_count: '1' | '1';
   };
   product: {
     name: string;
@@ -46,6 +45,7 @@ export async function getServerSideProps() {
 const Home: React.FC<TempphonePageProps> = ({ plans}) => {
 
   const router = useRouter();
+  const { toast } = useToast();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
   // const [selectedTier, setSelectedTier] = useState("");
   // const [showNumberModal, setShowNumberModal] = useState(false);
@@ -106,9 +106,16 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
 
       const data = await res.json();
       if (data.success) {
-        alert("Plan upgraded successfully.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Plan Upgraded Successfully.",
+        });
       } else {
-        alert("Failed to upgrade plan.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Failed to upgrade plan.",
+          variant: "destructive",
+        });
       }
 
     } else {
@@ -123,7 +130,11 @@ const Home: React.FC<TempphonePageProps> = ({ plans}) => {
       if (url) {
         window.location.href = url;
       } else {
-        alert("Failed to create checkout session.");
+        toast({
+          title: "Plan Purchase",
+          description: "Failed to create checkout session.",
+          variant: "destructive",
+        });
       }
     }
   };

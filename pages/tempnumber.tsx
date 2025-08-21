@@ -5,17 +5,17 @@ import TemBannerSection from "@/components/TemBannerSection";
 import TempPhoneEmailPlanPrice from "@/components/TempPhoneEmailPlanPrice";
 import TempPhoneNumber from "@/components/TempPhoneNumber";
 import FAQSection from "@/components/FAQSection";
-// import AllPlan from "@/components/AllPlan";
 import TransparentPricing from "@/components/Start/TransparentPricing";
-import TrustedSection from "@/components/Trusted"
-import TestimonialSection from "@/components/TestimonialSection"
+import TrustedSection from "@/components/Trusted";
+import TestimonialSection from "@/components/TestimonialSection";
+import { useToast } from "@/hooks/use-toast";
 
 type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
     interval: 'week' | 'month' ;
-    interval_count: '1' | '3';
+    interval_count: '1' | '1';
   };
   product:
     | {
@@ -44,6 +44,7 @@ export async function getServerSideProps() {
 
 export default function TempphonePage({ plans }: TempphonePageProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       return;
     }
 
-    if (profile?.subscription_id && mode === "subscription") {
+    if (profile?.subscription_id) {
       // User already has a subscription, so this is an upgrade
       const res = await fetch("/api/upgrade-subscription", {
         method: "POST",
@@ -104,9 +105,16 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
 
       const data = await res.json();
       if (data.success) {
-        alert("Plan upgraded successfully.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Plan Upgraded Successfully.",
+        });
       } else {
-        alert("Failed to upgrade plan.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Failed to upgrade plan.",
+          variant: "destructive",
+        });
       }
 
     } else {
@@ -121,7 +129,11 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       if (url) {
         window.location.href = url;
       } else {
-        alert("Failed to create checkout session.");
+        toast({
+          title: "Plan Purchase",
+          description: "Failed to create checkout session.",
+          variant: "destructive",
+        });
       }
     }
   };
@@ -131,7 +143,6 @@ export default function TempphonePage({ plans }: TempphonePageProps) {
       <TemBannerSection />
       <TempPhoneEmailPlanPrice />
       <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe} />
-      {/* <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} /> */}
       <TrustedSection />
       <TempPhoneNumber/>
       <FAQSection />

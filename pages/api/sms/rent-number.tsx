@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Step 2: Call sms-activate API (getNumber)
     const apiKey = process.env.SMS_ACTIVATE_API_KEY!;
-    const url = `https://api.sms-activate.ae/stubs/handler_api.php?api_key=${apiKey}&action=getNumber&service=${service.code}&country=${country.code}&activationType=1`;
+    const url = `https://api.sms-activate.ae/stubs/handler_api.php?api_key=${apiKey}&action=getNumber&service=${service.code}&country=${country.code}&activationType=0`;
 
     const resp = await fetch(url);
     const text = await resp.text();
