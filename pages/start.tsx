@@ -9,7 +9,7 @@ import PhoneVerification from "@/components/Start/PhoneVerification";
 import Review from "@/components/Start/Review";
 import Topplancontent from "@/components/Start/topplancontent";
 import TransparentPricing from "@/components/Start/TransparentPricing";
-// import { NumberGeneratorModal } from "@/components/SmsActivate";
+import { useToast } from "@/hooks/use-toast";
 import TrustGhostible from "@/components/Start/TrustGhostible";
 import WhyPay from "@/components/Start/WhyPay";
 import Head from "next/head";
@@ -18,8 +18,8 @@ type Plan = {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: 'week' | 'month' | 'year';
-    interval_count: '1' | '3' | '6';
+    interval: 'week' | 'month';
+    interval_count: '1' | '1';
   };
   product:
     | {
@@ -50,6 +50,7 @@ export async function getServerSideProps() {
 const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
 
   const router = useRouter();
+  const { toast } = useToast();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
   // const [selectedTier, setSelectedTier] = useState("");
   // const [showNumberModal, setShowNumberModal] = useState(false);
@@ -112,9 +113,16 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
 
       const data = await res.json();
       if (data.success) {
-        alert("Plan upgraded successfully.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Plan Upgraded Successfully.",
+        });
       } else {
-        alert("Failed to upgrade plan.");
+        toast({
+          title: "Plan Upgrade",
+          description: "Failed to upgrade plan.",
+          variant: "destructive",
+        });
       }
 
     } else {
@@ -129,7 +137,11 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       if (url) {
         window.location.href = url;
       } else {
-        alert("Failed to create checkout session.");
+        toast({
+          title: "Plan Purchase",
+          description: "Failed to create checkout session.",
+          variant: "destructive",
+        });
       }
     }
   };

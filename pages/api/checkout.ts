@@ -6,9 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {})
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
   
-  const { userId, priceId, mode, planLabel } = req.body
-
-  console.log('planLabel', req.body);
+  const { userId, priceId, mode, planLabel, quantity } = req.body
 
   if (!userId || !priceId || !mode) {
     return res.status(400).json({ error: 'Missing or invalid required fields' })
@@ -21,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       line_items: [
         {
           price: priceId,
-          quantity: 1,
+          quantity: quantity || 1,
         },
       ],
       success_url: `${process.env.SITE_URL}/dashboard?success=true`,
@@ -30,6 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         user_id: String(userId),
         feature: 'temp_number',
         plan: String(planLabel ?? ''),
+        credits: String(quantity || 1),
       },
     })
    

@@ -12,8 +12,8 @@ interface StripePlan {
   id: string;
   unit_amount: number;
   recurring?: {
-    interval: "day" | "week" | "month" | "year";
-    interval_count: "1" | "3" | "6";
+    interval: "week" | "month";
+    interval_count: "1" | "1" ;
   };
   product:
     | {
@@ -63,6 +63,15 @@ export default function TransparentPricing({plans, currentPlan, handleSubscribe}
         
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {plans
+                .filter((plan) => {
+                  const recurring = plan.recurring;
+                  const productname = typeof plan.product === "string" ? null : plan.product;
+                  if (productname?.name === "Add-On Upsells") return false;
+                  if (!recurring) return true;
+                  if (recurring.interval === "week") return true;
+                  if (recurring.interval === "month") return true; 
+                  return false;
+                })
                 .sort((a, b) => {
                   const getPriority = (plan: StripePlan) => {
                     if (!plan.recurring) return 0;
