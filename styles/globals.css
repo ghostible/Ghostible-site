@@ -290,3 +290,11 @@ li {
     opacity: 0;
   }
 }
+
+@layer base {
+  body[data-scroll-locked] {
+    overflow: auto !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+}

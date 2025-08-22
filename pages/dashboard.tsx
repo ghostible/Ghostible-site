@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, CreditCard, Phone, MessageSquare, Copy, Trash2,ChevronUp, ChevronDown, Plus, Minus, Zap, Check } from "lucide-react";
+import { Calendar, CreditCard, Phone, MessageSquare, Copy, Trash2,ChevronUp, ChevronDown, Plus, Minus, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CountdownTimer from "@/components/CountDownTimer";
 import { formatPhoneNumber } from "@/utils/formatPhone";
@@ -20,6 +20,7 @@ type Profile = {
   full_name: string;
   plan: string;
   expires_at: string;
+  start_at: string;
   subscription_credit: number;
   subscription_status: string;
   subscription_TotalCredit:number;
@@ -105,7 +106,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
     const fetchProfile = async () => {
       const { data, error } = await supabase
         .from("profiles")
-        .select("id, email, full_name, plan, expires_at, subscription_credit, subscription_TotalCredit, subscription_status")
+        .select("id, email, full_name, plan, start_at, expires_at, subscription_credit, subscription_TotalCredit, subscription_status")
         .eq("id", user.id)
         .single();
 
@@ -182,7 +183,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
       return;
     }
 
-    if (profile && profile.subscription_credit <= 0) {
+    if (profile && profile.subscription_TotalCredit == 0) {
       toast({
         title: "Insufficient Credits",
         description: "You don't have enough credits.",
@@ -219,7 +220,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
 
       toast({
         title: "Number Assigned",
-        description: `New number: ${data.number.number}`,
+        description: `New number: ${formatPhoneNumber(data.number.number, data.number.country_name)}`, 
       });
 
       setSelectedCountry(null);
@@ -241,9 +242,50 @@ export default function Dashboard({ plans }: TempphonePageProps) {
     });
   };
 
-  const deleteNumber = async (id: string) => {
-    setAssignedNumbers(assignedNumbers.filter((n) => n.id !== id));
-    toast({ title: "Deleted", description: "Number removed" });
+  // const deleteNumber = async (id: string) => {
+  //   setAssignedNumbers(assignedNumbers.filter((n) => n.id !== id));
+  //   toast({ title: "Deleted", description: "Number removed" });
+  // };
+  const deleteNumber = async (rentId: string, dbId: string) => {
+    try {
+      const resp = await fetch("/api/sms/cancel-activations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rentId, dbId }),
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        if (data.error === "EARLY_CANCEL_DENIED") {
+          toast({
+            title: "Too Early",
+            description: "You cannot cancel a number within the first 2 minutes.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: data.error || "Failed to delete number",
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+
+      // ✅ Success
+      setAssignedNumbers((prev) => prev.filter((n) => n.id !== dbId));
+      toast({
+        title: "Deleted",
+        description: "Number removed successfully.",
+      });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast({ title: "Error", description: err.message, variant: "destructive" });
+      } else {
+        toast({ title: "Error", description: "Something went wrong", variant: "destructive" });
+      }
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -377,60 +419,111 @@ export default function Dashboard({ plans }: TempphonePageProps) {
           </Card>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-teal-400" />
-                Subscription Details
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+            <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <div>
-                  <label className="text-sm font-medium text-teal-300">Current Plan</label>
-                  <p className="text-lg font-semibold">
-                    {profile.plan ? (
-                      profile.plan
-                    ):( 
-                      'No Plan active' 
-                    )}</p>
-                </div>
-                {profile.subscription_status && (
-                  <>
-                  <Badge variant="secondary">{ profile.subscription_status }</Badge>
-                  </>
+                <CardTitle className="flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-teal-400" />
+                  Subscription Details
+                </CardTitle>
+
+                {/* Desktop Cancel Button */}
+                {( (profile.plan === "Weekly Pass" || profile.plan === "Monthly Pass") 
+                    && profile.subscription_status === 'Active') && (
+                  <Button
+                    onClick={handleCancel}
+                    variant="default"
+                    className="hidden sm:flex"
+                  >
+                    Cancel Subscription
+                  </Button>
                 )}
               </div>
-              {profile.expires_at && (
-                <>
-                  <div>
-                    <label className="text-sm font-medium text-teal-300">Plan Period</label>
-                    <p className="text-sm">
-                      {new Date(profile.expires_at).toISOString().split("T")[0]}
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+              {/* Current Plan + Badge */}
+              <div>
+                <label className="text-sm font-medium text-teal-300 block">
+                  Current Plan
+                </label>
+
+                <div className="flex items-center gap-8">
+                  <p className="text-lg font-semibold">
+                    {profile.plan ? profile.plan : "No Plan active"}
+                  </p>
+
+                  {profile.subscription_status && (
+                    <Badge variant="secondary">
+                      {profile.subscription_status}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+
+              {/* Plan Period */}
+              {profile.plan !== "One-Time Pass" ? (
+                <div>
+                  {profile.expires_at && profile.start_at && (
+                    <>
+                      <label className="text-sm font-medium text-teal-300">Plan Period</label>
+                      <p className="text-sm">
+                        {new Date(profile.start_at).toISOString().split("T")[0]} - 
+                        {new Date(profile.expires_at).toISOString().split("T")[0]}
+                      </p>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <label className="text-sm font-medium text-teal-300">Purchased On</label>
+                  <p className="text-sm">
+                    {new Date(profile.expires_at).toISOString().split("T")[0]}
+                  </p>
+                </div>
+              )}
+
+              {/* Credits */}
+              <div className="grid grid-cols-2 gap-4">
+                {profile.subscription_credit !== null && (
+                  <div className="text-center p-3 bg-black rounded-lg">
+                    <label className="text-sm font-medium text-teal-300 block">Used Credits</label>
+                    <p className="text-2xl font-bold text-white">
+                      {profile.subscription_credit}
                     </p>
                   </div>
-                </>
-              )}
-              {profile.subscription_TotalCredit && (
-                <>
-                  <div>
-                    <label className="text-sm font-medium text-teal-300">Available Credits</label>
-                    <p className="text-2xl font-bold text-primary">
-                      {profile.subscription_credit} / {profile.subscription_TotalCredit}
+                )}
+
+                {profile.subscription_TotalCredit !== null && (
+                  <div className="text-center p-3 bg-black rounded-lg">
+                    <label className="text-sm font-medium text-teal-300 block">Available Credits</label>
+                    <p className="text-2xl font-bold text-white">
+                      {profile.subscription_TotalCredit}
                     </p>
                   </div>
-                </>
+                )}
+              </div>
+
+              {/* Mobile Cancel Button */}
+              {( (profile.plan === "Weekly Pass" || profile.plan === "Monthly Pass") 
+                  && profile.subscription_status === 'Active') && (
+                <Button
+                  onClick={handleCancel}
+                  variant="default"
+                  className="sm:hidden w-full"
+                >
+                  Cancel Subscription
+                </Button>
               )}
-              
+
               {/* Upsell Add-on Section for One-Time Subscriptions */}
               <Separator />
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-primary" />
+                  <Zap className="h-4 w-4 text-teal-400" />
                   <h4 className="font-semibold text-foreground">Need More Credits?</h4>
                 </div>
-                
+
                 <div className="grid grid-cols-1 gap-3">
-                  {/* Add on Credits Pack */}
                   <div className="border rounded-lg p-3 bg-gradient-to-r from-primary/5 to-primary/10">
                     {plans
                       .filter((plan) => {
@@ -439,86 +532,73 @@ export default function Dashboard({ plans }: TempphonePageProps) {
                         if (productname?.name === "Add-On Upsells") return true;
                         if (!recurring) return false;
                         if (recurring.interval === "week") return false;
-                        if (recurring.interval === "month") return false; 
+                        if (recurring.interval === "month") return false;
                         return false;
                       })
-                      .map((plan) => {
+                      .map((plan, index) => {
                         const product = typeof plan.product === "string" ? null : plan.product;
                         const price = (plan.unit_amount / 100).toFixed(2);
-                        return(
-                          <>
-                            <div className="flex items-center justify-between">
-                              <div className="flex-1">
-                                <h3 className="text-xl font-bold text-white mb-1 mt-2.5">{product?.name}</h3>
-                                <ul className="text-gray-300 text-sm space-y-2 mb-6 text-left w-full">
-                                  {product?.marketing_features.map((features) => (
-                                    <li className="flex items-center gap-2" key={features?.name}>
-                                      <Check className="text-teal-300 h-5 w-5 flex-shrink-0" size={20} /> {features?.name}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <Button
-                                      variant="outline"
-                                      size="icon"
-                                      className="h-8 w-8"
-                                      onClick={() => updateAddonQuantity('pack1', -1)}
-                                      disabled={addonQuantities.pack1 <= 1}
-                                    >
-                                      <Minus className="h-3 w-3" />
-                                    </Button>
-                                    <span className="w-8 text-center font-medium">{addonQuantities.pack1}</span>
-                                    <Button
-                                      variant="outline"
-                                      size="icon"
-                                      className="h-8 w-8"
-                                      onClick={() => updateAddonQuantity('pack1', 1)}
-                                    >
-                                      <Plus className="h-3 w-3" />
-                                    </Button>
-                                    <p className="text-lg font-bold text-primary">
-                                      ${(Number(price) * addonQuantities.pack1).toFixed(2)}
-                                    </p>
-                                  </div>
-                                </div>
-                                <div>
-                                  <Button
-                                    size="lg"
-                                    onClick={() =>
-                                      handlePurchaseAddon(
-                                        profile?.id,
-                                        plan.id,
-                                        addonQuantities.pack1,
-                                        addonQuantities.pack1
-                                      )
-                                    }
-                                    className="w-full cursor-pointer border border-gray-700 px-6 py-2 rounded-md hover:bg-teal-300 transition"
-                                  >
-                                    Buy
-                                  </Button>
-
-                                </div>
-                              </div>
+                        return (
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" key={index}>
+                            {/* Left side */}
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-white mb-2">{product?.name}</h3>
+                              <ul className="text-gray-300 text-sm space-y-2">
+                                {product?.marketing_features.map((features, idx) => (
+                                  <li className="flex items-center gap-2" key={features?.name ?? idx}>
+                                    <p>{features?.name}</p>
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
-                          </>
+
+                            {/* Right side */}
+                            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  onClick={() => updateAddonQuantity("pack1", -1)}
+                                  disabled={addonQuantities.pack1 <= 1}
+                                >
+                                  <Minus className="h-3 w-3" />
+                                </Button>
+                                <span className="w-8 text-center font-medium">{addonQuantities.pack1}</span>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  onClick={() => updateAddonQuantity("pack1", 1)}
+                                >
+                                  <Plus className="h-3 w-3" />
+                                </Button>
+                                <p className="text-lg font-bold text-primary">
+                                  ${(Number(price) * addonQuantities.pack1).toFixed(2)}
+                                </p>
+                              </div>
+
+                              <Button
+                                onClick={() =>
+                                  handlePurchaseAddon(
+                                    profile?.id,
+                                    plan.id,
+                                    addonQuantities.pack1,
+                                    addonQuantities.pack1
+                                  )
+                                }
+                                className="w-full"
+                                variant="default"
+                              >
+                                Buy Add-On Upsell
+                              </Button>
+                            </div>
+                          </div>
                         );
-                      })
-                    }
+                      })}
                   </div>
                 </div>
-              </div> 
-              {(profile.plan === "Weekly Pass" || profile.plan === "Monthly Pass") && (
-                <Button
-                  onClick={() => handleCancel()}
-                  variant="destructive"
-                  className="w-full text-white"
-                >
-                  Cancel Subscription
-                </Button>
-              )}
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -532,32 +612,50 @@ export default function Dashboard({ plans }: TempphonePageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-3 items-end">
+              {/* Country Select */}
               <div>
-                <label className="text-sm font-medium text-muted-foreground">Select Country</label>
-                <SearchableCountrySelect 
+                <label className="text-sm font-medium text-muted-foreground">
+                  Select Country
+                </label>
+                <SearchableCountrySelect
                   countries={mockCountries}
                   value={selectedCountry?.code ?? ""}
                   onValueChange={(val) => {
-                  const country = mockCountries.find((c) => c.code === val);
-                  if (country) setSelectedCountry(country);
-                }}
+                    const country = mockCountries.find((c) => c.code === val);
+                    if (country) setSelectedCountry(country);
+                  }}
                   placeholder="Choose country"
                 />
               </div>
+
+              {/* Service Select */}
               <div>
-                <label className="text-sm font-medium text-muted-foreground">Select Service</label>
-                <SearchableServiceSelect 
+                <label className="text-sm font-medium text-muted-foreground">
+                  Select Service
+                </label>
+                <SearchableServiceSelect
                   services={services}
                   value={selectedService?.code ?? ""}
                   onValueChange={(val) => {
-                  const service = services.find((s) => s.code === val);
-                  if (service) setSelectedService(service);
-                }}
+                    const service = services.find((s) => s.code === val);
+                    if (service) setSelectedService(service);
+                  }}
                   placeholder="Choose service"
                 />
               </div>
-              <Button variant="default" onClick={handleAssignNumber}>Assign Number (1 Credit)</Button>
+
+              {/* Button aligned with inputs */}
+              <div className="flex flex-col">
+                <label className="invisible text-sm font-medium">Assign</label>
+                <Button
+                  variant="default"
+                  onClick={handleAssignNumber}
+                  className="w-full"
+                >
+                  Assign Number (1 Credit)
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -603,7 +701,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
                       
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
-                          <Badge variant="default" className={`${getStatusColor(number.status)} text-white`}>
+                          <Badge variant="default" className={`${getStatusColor(number.status)} bg-teal-300 text-black`}>
                             <span className="ml-1 capitalize">{number.status}</span>
                           </Badge>
                         </div>
@@ -627,7 +725,12 @@ export default function Dashboard({ plans }: TempphonePageProps) {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => deleteNumber(number.id)}
+                          onClick={() =>
+                            deleteNumber(
+                              String(number.rent_id),
+                              String(number.id)
+                            )
+                          }
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -639,7 +742,10 @@ export default function Dashboard({ plans }: TempphonePageProps) {
                         numberId={number.id}
                       />
                     )}
-                    {index < assignedNumbers.length - 1 && <Separator className="mt-4" />}
+                    {index < assignedNumbers.length - 1 && (
+                      <Separator className="mt-4" key={`separator-${index}`} />
+                    )}
+                    
                   </div>
                 ))
               )}

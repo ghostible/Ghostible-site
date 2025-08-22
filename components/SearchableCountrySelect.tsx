@@ -36,15 +36,17 @@ export const SearchableCountrySelect = ({
       <SelectTrigger className="bg-card border-border">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className="bg-[#0e0f11] border-border z-50">
-        <div className="flex items-center px-3 pb-2">
-          <Search className="mr-2 h-4 w-4 shrink-0 opacity-50 text-teal-300" />
-          <Input
-            placeholder="Search countries..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="text-teal-300 h-8 w-full border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-          />
+      <SelectContent className="bg-[#0e0f11]">
+        <div className="sticky top-0 bg-black px-3 pb-2 pt-2 z-10">
+          <div className="flex items-center">
+            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50 text-teal-300" />
+            <Input
+              placeholder="Search countries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="text-teal-300 h-8 w-full border-0 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
+          </div>
         </div>
         {filteredCountries.length === 0 ? (
           <div className="py-2 px-3 text-sm text-teal-300">No countries found</div>

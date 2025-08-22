@@ -35,8 +35,8 @@ export const SearchableServiceSelect = ({
       <SelectTrigger className="bg-card border-border">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className="bg-[#0e0f11] border-border max-h-80">
-        <div className="sticky top-0 bg-card border-b border-border px-3 pb-2 pt-2 z-10">
+      <SelectContent className="bg-[#0e0f11]">
+        <div className="sticky top-0 bg-black px-3 pb-2 pt-2 z-10 rounded-md">
           <div className="flex items-center">
             <Search className="mr-2 h-4 w-4 shrink-0 opacity-50 text-teal-300" />
             <Input

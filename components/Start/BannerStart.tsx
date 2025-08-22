@@ -43,7 +43,7 @@ export default function BannerStart() {
                 </li>
               </ul>
               <div className="flex flex-wrap gap-4">
-                <button onClick={handlepriceScroll} className="bg-teal-400 group flex w-full md:w-72 justify-center align-middle gap-2.5 text-black px-6 py-3 rounded-md font-semibold hover:bg-teal-300 transition cursor-pointer"><span>Get Started for $9.99 </span>  <MoveRight className="transition-transform duration-300 group-hover:translate-x-1" /></button>
+                <button onClick={handlepriceScroll} className="bg-teal-400 group flex w-full md:w-72 justify-center align-middle gap-2.5 text-black px-6 py-3 rounded-md font-semibold hover:bg-teal-300 transition cursor-pointer"><span>Get Started for $7.99 </span>  <MoveRight className="transition-transform duration-300 group-hover:translate-x-1" /></button>
                 <button onClick={handleworkScroll} className="bg-black border w-full md:w-56 border-gray-700 px-8 py-3 text-white hover:text-black rounded-md font-semibold hover:bg-teal-400 transition start-howwork transition cursor-pointer">See How It Works</button>
               </div>
             </div>
