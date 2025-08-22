@@ -265,7 +265,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
           });
         } else {
           toast({
-            title: "Error",
+            title: "Remove Number",
             description: data.error || "Failed to delete number",
             variant: "destructive",
           });
