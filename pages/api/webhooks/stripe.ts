@@ -63,40 +63,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // 👉 CASE 2: Subscription / One-Time Pass
       const subscriptionId = session.subscription as string | null
       const expiresAt = new Date()
-      let subscriptionCredit = '0'
+      const startAt = new Date()
+      let subscriptionCredit = 0
 
       if (plan === 'Weekly Pass') {
         expiresAt.setDate(expiresAt.getDate() + 7)
-        subscriptionCredit = '7'
+        subscriptionCredit = 7
       } else if (plan === 'Monthly Pass') {
         expiresAt.setMonth(expiresAt.getMonth() + 1)
-        subscriptionCredit = '30'
+        subscriptionCredit = 30
       } else if (plan === 'One-Time Pass') {
         expiresAt.setMinutes(expiresAt.getMinutes() + 20)
-        subscriptionCredit = '1'
-
-        // increment 1 credit for one-time plan
-        const { error } = await supabase.rpc('increment_credits', {
-          uid: userId,
-          amount: 1,
-        })
-        if (error) {
-          console.error('❌ Supabase increment_credits (One-Time Pass) error:', error)
-        }
+        subscriptionCredit = 1
       } else {
         console.warn(`⚠️ Unknown plan duration: ${plan}`)
       }
 
-      // update profile row
+      // increment credits for Weekly / Monthly / One-Time
+      if (subscriptionCredit > 0) {
+        const { error: creditError } = await supabase.rpc('increment_credits', {
+          uid: userId,
+          amount: subscriptionCredit,
+        })
+        if (creditError) {
+          console.error('❌ Supabase increment_credits error:', creditError)
+        } else {
+          console.log(`✅ Added ${subscriptionCredit} credits to user ${userId}`)
+        }
+      }
+
+      // update profile row (subscription info only)
       const { error } = await supabase
         .from('profiles')
         .update({
           subscription_id: subscriptionId,
           plan,
           expires_at: expiresAt.toISOString(),
+          start_at: startAt.toISOString(),
           subscription_status: 'Active',
-          subscription_credit: subscriptionCredit,
-          subscription_TotalCredit: subscriptionCredit,
         })
         .eq('id', userId)
 

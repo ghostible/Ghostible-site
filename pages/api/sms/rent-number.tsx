@@ -22,12 +22,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Step 1: Check credits first
     const { data: profile, error: profileErr } = await supabase
       .from("profiles")
-      .select("subscription_credit")
+      .select("subscription_TotalCredit")
       .eq("id", userId)
       .single();
 
     if (profileErr) throw profileErr;
-    if (!profile || profile.subscription_credit <= 0) {
+    if (!profile || profile.subscription_TotalCredit == 0) {
       return res.status(400).json({ error: "Insufficient credits" });
     }
 
@@ -64,12 +64,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (insertErr) throw insertErr;
 
-    // Step 4: Decrement credits
-    const { error: decrementErr } = await supabase.rpc("decrement_credits", {
+    // Step 4: Decrement total credits
+    const { error: creditdecrease } = await supabase.rpc("decrement_credits", {
       user_id: userId,
     });
-    if (decrementErr) {
-      console.error("Decrement credits failed:", decrementErr);
+    if (creditdecrease) {
+      console.error("Decrement total credits failed:", creditdecrease);
+    }
+
+    // Step 4: incremental used credits
+    const { error: creditincrease } = await supabase.rpc("used_credits", {
+      user_id: userId,
+    });
+    if (creditincrease) {
+      console.error("increment used credits failed:", creditincrease);
     }
 
     return res.status(200).json({
