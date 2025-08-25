@@ -6,12 +6,14 @@ import Link from 'next/link'
 export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
   const { toast } = useToast();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    toast({
+        title: "🔐 Signup",
+        description: `Please wait while we sign you in...`,
+    });
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -19,7 +21,11 @@ export default function Signup() {
     })
 
     if (error) {
-      setError(error.message)
+        toast({
+          title: "❌ Signup Failed",
+          description: error.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
       return
     }
 
@@ -45,7 +51,6 @@ export default function Signup() {
     <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleSignup} className="w-full max-w-md space-y-4 border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-2xl font-bold">Sign Up</h2>
-        {error && <p className="text-red-500">{error}</p>}
         <input
           type="email"
           placeholder="Email"
