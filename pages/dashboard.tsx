@@ -269,7 +269,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
             description: data.error || "Failed to delete number",
             variant: "destructive",
           });
-        }
+        } 
         return;
       }
 
