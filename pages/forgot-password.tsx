@@ -1,26 +1,36 @@
 import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
+import { useToast } from "@/hooks/use-toast";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [error, setError] = useState('')
+  const { toast } = useToast();
 
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`
     })
-    if (error) return setError(error.message)
-    setMessage('Password reset link sent! Check your email.')
+    if (error) {
+      //return setError(error.message)
+      toast({
+        title: "Password reset",
+        description: error.message || "Failed to send email", 
+        variant: "destructive",
+      });
+    }else{
+      toast({
+        title: "Password reset",
+        description: `Password reset link sent! Check your email.`, 
+      });
+    }
+    
   }
 
   return (
     <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleReset} className="w-full max-w-md space-y-4 border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-teal-400 text-2xl font-bold">Forgot Password</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        {message && <p className="text-teal-400">{message}</p>}
         <input
           type="email"
           placeholder="Enter your email"

@@ -1,28 +1,36 @@
 import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
+import { useToast } from "@/hooks/use-toast";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState('')
-  const [success, setSuccess] = useState('')
-  const [error, setError] = useState('')
   const router = useRouter()
+  const { toast } = useToast();
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
-    //const { data, error } = await supabase.auth.updateUser({ password })
     const { error } = await supabase.auth.updateUser({ password })
-    if (error) return setError(error.message)
-    setSuccess('Password updated! Redirecting to login...')
-    setTimeout(() => router.push('/login'), 2000)
+    if (error) {
+      toast({
+        title: "Password updated",
+        description: error.message || "Failed to Password update", 
+        variant: "destructive",
+      });
+    }
+    else{
+        toast({
+          title: "Password reset",
+          description: `Password updated! Redirecting to login...`, 
+      });
+      setTimeout(() => router.push('/login'), 2000)
+    }
   }
 
   return (
     <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleUpdate} className="w-full max-w-md space-y-4 border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-teal-400 text-2xl font-bold">Reset Password</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        {success && <p className="text-green-500">{success}</p>}
         <input
           type="password"
           placeholder="New Password"
