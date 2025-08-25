@@ -58,7 +58,7 @@ export default function TransparentPricing({plans, currentPlan, handleSubscribe}
 
   return (
       <>
-        <section id="price_sec" className="pt-8 pb-16 pl-6 pr-6" data-aos="fade-up" data-aos-duration="5000">
+        <section id="main_price_sec" className="pt-8 pb-16 pl-6 pr-6" data-aos="fade-up" data-aos-duration="5000">
           <div className="max-w-6xl mx-auto text-center">
         
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

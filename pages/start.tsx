@@ -72,7 +72,19 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
     };
 
     fetchUserPlan();
+    
   }, []);
+
+   useEffect(() => {
+    if (router.query.redirect) {
+      const el = document.getElementById(router.query.redirect as string);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 600);
+      }
+    }
+  }, [router.query]);
   
   const handleSubscribe = async (
     priceId: string,
