@@ -37,7 +37,7 @@ export const SearchableCountrySelect = ({
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="bg-[#0e0f11]">
-        <div className="sticky top-0 bg-black px-3 pb-2 pt-2 z-10">
+        <div className="sticky top-0 bg-black px-3 pb-2 pt-2 z-10 rounded-md border border-border/50">
           <div className="flex items-center">
             <Search className="mr-2 h-4 w-4 shrink-0 opacity-50 text-teal-300" />
             <Input
