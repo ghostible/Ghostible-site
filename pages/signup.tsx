@@ -8,7 +8,6 @@ export default function Signup() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const { toast } = useToast();
-  //const [successmessage, setsuccessmessage] = useState('')
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,13 +23,11 @@ export default function Signup() {
       return
     }
 
-    // Insert into `profiles` table
     if (data.user) {
       const email = data.user.email || ''
       const nickname = email.split('@')[0];
       await supabase.from('profiles').insert({
         id: data.user.id,
-        plan: 'free',
         full_name: nickname,
         email: data.user.email
       })
@@ -41,8 +38,7 @@ export default function Signup() {
       title: "Confirmations Email",
       description: `You have recieve a email, please Varify the emails for Create Account.`, 
     });
-    //setsuccessmessage('You have recieve a email, please Varify the emails for Create Account.'); 
-    //router.push('/dashboard')
+
   }
 
   return (
@@ -73,9 +69,6 @@ export default function Signup() {
             Already have an account? <Link href="/login" className="text-teal-400 hover:underline">Login</Link>
         </p>
 
-        {/* <div className='text-teal-400'>
-          <p className='text-center text-sm'>{successmessage}</p>
-        </div> */}
       </form>
     </div>
   )

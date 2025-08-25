@@ -52,8 +52,6 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
   const router = useRouter();
   const { toast } = useToast();
   const [currentPlan, setCurrentPlan] = useState<string | null>(null);
-  // const [selectedTier, setSelectedTier] = useState("");
-  // const [showNumberModal, setShowNumberModal] = useState(false);
   
   useEffect(() => {
     const fetchUserPlan = async () => {
@@ -96,6 +94,10 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
     } = await supabase.auth.getUser();
 
     if (!user) {
+      toast({
+        title: "🔐 Login/Signup",
+        description: "Please 🔐 login/Signup for proceedings to checkout.",
+      });
       router.push("/login");
       return;
     }
@@ -108,12 +110,20 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       .single();
 
     if (error) {
-      console.error("Error fetching profile:", error);
+      toast({
+        title: "❌ Error profile",
+        description: error.message || "Error fetching profile..",
+        variant: "destructive",
+      });
       return;
     }
 
     if (profile?.subscription_id && mode === "subscription") {
-      // User already has a subscription, so this is an upgrade
+      toast({
+        title: "🛒 Proceedings to Upgrade",
+        description: `You Selected: ${planLabel} for Upgrade`,
+      });
+
       const res = await fetch("/api/upgrade-subscription", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -127,18 +137,22 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
       if (data.success) {
         toast({
           title: "Plan Upgrade",
-          description: "Plan Upgraded Successfully.",
+          description: "🎉 Plan Upgraded Successfully.",
         });
       } else {
         toast({
-          title: "Plan Upgrade",
-          description: "Failed to upgrade plan.",
+          title: "⚠️ Plan Upgrade",
+          description: "Failed to upgrade plan. Please try again.",
           variant: "destructive",
         });
       }
 
     } else {
-      // New purchase flow
+      toast({
+        title: "🛒 Processing Checkout",
+        description: `Redirecting you to payment page with selected: ${planLabel}`,
+      });
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -150,8 +164,8 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
         window.location.href = url;
       } else {
         toast({
-          title: "Plan Purchase",
-          description: "Failed to create checkout session.",
+          title: "⚠️ Payment Error",
+          description: "We couldn't process your payment. Please try again.",
           variant: "destructive",
         });
       }
@@ -172,7 +186,6 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
         <TrustGhostible/>
         <Topplancontent />
         <TransparentPricing plans={plans} currentPlan={currentPlan} handleSubscribe={handleSubscribe} />
-        {/* <NumberGeneratorModal isOpen={showNumberModal} onClose={() => setShowNumberModal(false)} selectedTier={selectedTier} countryCode={'0'} /> */}
         <HowItWorks/>
         <FAQSection/>
         <PhoneVerification/>

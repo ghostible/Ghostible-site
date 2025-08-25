@@ -2,25 +2,41 @@ import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/router'
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
   const router = useRouter()
+  const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
+    toast({
+        title: "🔐 Logging In",
+        description: `Please wait while we sign you in...`,
+    });
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) return setError(error.message)
-    router.push('/dashboard') // or homepage after login
+    if (error) {
+      toast({
+        title: "❌ Login Failed",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
+    else{
+      router.push('/dashboard')
+      toast({
+          title: "✅ Login Successful",
+          description: `Welcome back! 🎉`,
+      });
+    }
   }
 
   return (
     <div className="md:min-h-screen bg-black text-white flex items-center justify-center p-4">
       <form onSubmit={handleLogin} className="w-full max-w-md space-y-4  border border-neutral-800 p-4 rounded-2xl">
         <h2 className="text-3xl font-bold">Login</h2>
-        {error && <p className="text-red-500">{error}</p>}
         <input
           type="email"
           placeholder="Email"
