@@ -73,16 +73,16 @@ const StartPage: React.FC<TempphonePageProps> = ({ plans }) => {
     
   }, []);
 
-  //  useEffect(() => {
-  //   if (router.query.redirect) {
-  //     const el = document.getElementById(router.query.redirect as string);
-  //     if (el) {
-  //       setTimeout(() => {
-  //         el.scrollIntoView({ behavior: "smooth" });
-  //       }, 600);
-  //     }
-  //   }
-  // }, [router.query]);
+   useEffect(() => {
+    if (router.query.redirect) {
+      const el = document.getElementById(router.query.redirect as string);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 600);
+      }
+    }
+  }, [router.query]);
   
   const handleSubscribe = async (
     priceId: string,

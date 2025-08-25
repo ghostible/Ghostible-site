@@ -18,6 +18,9 @@ export default function Signup() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: "https://ghostible.io/start?redirect=price_sec",
+      }
     })
 
     if (error) {
