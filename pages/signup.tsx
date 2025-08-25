@@ -45,7 +45,7 @@ export default function Signup() {
     setPassword('');
     toast({
       title: "Confirmations Email",
-      description: `You have recieve a email, please Varify the emails for Create Account.`, 
+      description: `You have recieve a email, please Verify the emails for Create Account.`, 
     });
 
   }
