@@ -219,7 +219,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
       setAssignedNumbers([data.number, ...assignedNumbers]);
 
       toast({
-        title: "Number Assigned",
+        title: "📱 Number Assigned",
         description: `New number: ${formatPhoneNumber(data.number.number, data.number.country_name)}`, 
       });
 
@@ -242,10 +242,6 @@ export default function Dashboard({ plans }: TempphonePageProps) {
     });
   };
 
-  // const deleteNumber = async (id: string) => {
-  //   setAssignedNumbers(assignedNumbers.filter((n) => n.id !== id));
-  //   toast({ title: "Deleted", description: "Number removed" });
-  // };
   const deleteNumber = async (rentId: string, dbId: string) => {
     try {
       const resp = await fetch("/api/sms/cancel-activations", {
@@ -265,7 +261,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
           });
         } else {
           toast({
-            title: "Remove Number",
+            title: "🗑️ Remove Number",
             description: data.error || "Failed to delete number",
             variant: "destructive",
           });
@@ -276,7 +272,7 @@ export default function Dashboard({ plans }: TempphonePageProps) {
       // ✅ Success
       setAssignedNumbers((prev) => prev.filter((n) => n.id !== dbId));
       toast({
-        title: "Deleted",
+        title: "🗑️ Number Deleted",
         description: "Number removed successfully.",
       });
     } catch (err: unknown) {
@@ -334,6 +330,11 @@ export default function Dashboard({ plans }: TempphonePageProps) {
         data: { user },
       } = await supabase.auth.getUser()
       if (!user) return
+        toast({
+          title: "❌ Error subscription",
+          description: "User not found or missing subscription info",
+          variant: "destructive",
+        });
 
       const res = await fetch('/api/cancel-subscription', {
         method: 'POST',
@@ -343,14 +344,15 @@ export default function Dashboard({ plans }: TempphonePageProps) {
 
       const data = await res.json()
       if (data.success) {
-          toast({
-            title: "Subscriptions Cancel",
-            description: "You Subscriptions is successfully cancel.",
-          });
+         toast({
+          title: "✂️ Subscription Cancelled",
+          description: "Your plan has been cancelled successfully.",
+        });
       } else {
           toast({
-            title: "Subscriptions Cancel",
-            description: "Error canceling subscription.",
+            title: "❌ Error subscription",
+            description: "Failed to cancel subscription",
+            variant: "destructive",
           });
       }
     }
@@ -362,6 +364,12 @@ export default function Dashboard({ plans }: TempphonePageProps) {
     };
     
     const handlePurchaseAddon = async (userId: string, priceId: string, creditsPerPack: number, quantity: number) => {
+
+      toast({
+        title: "🛒 Processing Checkout",
+        description: `Redirecting you to payment page with selected: Add-on Upsell`,
+      });
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

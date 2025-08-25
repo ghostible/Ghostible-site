@@ -10,6 +10,7 @@ const supabase = createClient(
 )
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed')
 
   const { userId } = req.body
@@ -21,6 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     .single()
 
   if (error || !data) return res.status(404).json({ error: 'User not found or missing subscription info' })
+      
 
   try {
     if (data.subscription_id) {
@@ -43,6 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .eq('id', userId)
 
     return res.status(200).json({ success: true })
+    
   } catch (err) {
     console.error('Cancel error:', err)
     return res.status(500).json({ error: 'Failed to cancel subscription' })
