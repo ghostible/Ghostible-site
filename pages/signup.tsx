@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
-//import { useRouter } from 'next/router'
+import { useToast } from "@/hooks/use-toast";
 import Link from 'next/link'
 
 export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  //const router = useRouter()
-  const [successmessage, setsuccessmessage] = useState('')
+  const { toast } = useToast();
+  //const [successmessage, setsuccessmessage] = useState('')
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,7 +37,11 @@ export default function Signup() {
     }
     setEmail('');
     setPassword('');
-    setsuccessmessage('You have recieve a email, please Varify the emails for Create Account.'); 
+    toast({
+      title: "Confirmations Email",
+      description: `You have recieve a email, please Varify the emails for Create Account.`, 
+    });
+    //setsuccessmessage('You have recieve a email, please Varify the emails for Create Account.'); 
     //router.push('/dashboard')
   }
 
@@ -69,9 +73,9 @@ export default function Signup() {
             Already have an account? <Link href="/login" className="text-teal-400 hover:underline">Login</Link>
         </p>
 
-        <div className='text-teal-400'>
+        {/* <div className='text-teal-400'>
           <p className='text-center text-sm'>{successmessage}</p>
-        </div>
+        </div> */}
       </form>
     </div>
   )
