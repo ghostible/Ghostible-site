@@ -68,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (plan === 'Weekly Pass') {
         expiresAt.setDate(expiresAt.getDate() + 7)
-        subscriptionCredit = 7
+        subscriptionCredit = 5
       } else if (plan === 'Monthly Pass') {
         expiresAt.setMonth(expiresAt.getMonth() + 1)
         subscriptionCredit = 30
